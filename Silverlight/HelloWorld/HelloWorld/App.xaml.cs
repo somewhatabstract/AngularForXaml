@@ -1,18 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Shapes;
-
-namespace HelloWorld
+﻿namespace HelloWorld
 {
-	public partial class App : Application
+	public partial class App : System.Windows.Application
 	{
 
 		public App()
@@ -22,7 +10,7 @@ namespace HelloWorld
 			InitializeComponent();
 		}
 
-		private void Application_Startup( object sender, StartupEventArgs e )
+		private void Application_Startup( object sender, System.Windows.StartupEventArgs e )
 		{
 			this.RootVisual = new MainPage();
 		}

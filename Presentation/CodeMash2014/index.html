@@ -7,11 +7,11 @@
     <meta name="author" content="Jeff Yates">
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <link rel="stylesheet" href="/css/reveal.min.css">
-    <link rel="stylesheet" href="/css/theme/default.css" id="theme">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link rel="stylesheet" href="/css/reveal.min.css" />
+    <link rel="stylesheet" href="/css/theme/default.css" id="theme" />
     <!-- For syntax highlighting -->
-    <link rel="stylesheet" href="/lib/css/zenburn.css">
+    <link rel="stylesheet" href="/lib/css/zenburn.css" />
     <!-- If the query includes 'print-pdf', use the PDF print sheet -->
     <script>
         document.write('<link rel="stylesheet" href="/css/print/' + (window.location.search.match(/print-pdf/gi) ? 'pdf' : 'paper') + '.css" type="text/css" media="print">');
@@ -19,6 +19,7 @@
     <!--[if lt IE 9]>
     <script src="lib/js/html5shiv.js"></script>
     <![endif]-->
+    <link rel="stylesheet" href="codemash.css" />
 </head>
 <body>
     <div class="reveal">
@@ -69,7 +70,7 @@
 
             <section>
                 <section data-transition="linear">
-                    <img src="assets/silverlight-logo.png" style="min-width: 100%; border: none; box-shadow: none; background: transparent; " />
+                    <img src="assets/silverlight-logo.png" class="noborder" style="min-width: 100%;" />
                     <aside class="notes">
                         <p>What I knew of web development was a handful of JAvaScript, some HTML and a bit of CSS, and Silverlight.</p>
                         <p>Silverlight (originally code-named WPF Everywhere) is a .NET runtime that runs in and out of the browser on both PC and Mac. It requires a plugin but allows you to write rich web apps using C#/VB and XAML.</p>
@@ -77,7 +78,7 @@
                 </section>
 
                 <section data-transition="linear">
-                    <img src="assets/angularjs.jpeg" style="min-width: 100%; border: none; background: transparent; box-shadow: none; " />
+                    <img src="assets/angularjs.jpeg" class="noborder" style="min-width: 100%;" />
                     <aside class="notes">
                         <p>If into acronyms, it's a MVW framework (Model-View-Widget). Unlike jQuery, a utility library, Angular is a platform on which to build client-side applications. Angular is to jQuery as the Silverlight runtime is to the System.Collections namespace.</p>
                         <ul>
@@ -99,9 +100,13 @@
 
             <section>
                 <section data-transition="linear">
-                    <h1>Application</h1>
+                    <h1>Hello World</h1>
                 </section>
                 <section data-transition="linear">
+                    <h2>Silverlight</h2>
+                    <object class="silverlight" data="data:application/x-silverlight-2," type="application/x-silverlight-2">
+                        <param name="source" value="silverlight/HelloWorld.xap" />
+                    </object>
                 </section>
                 <section data-transition="linear">
                     <h1>ng-app</h1>
@@ -120,9 +125,9 @@
 
 
             <section>
-                <img src="assets/silverlight-logo.png" style="min-width: 75%; border: none; background: transparent;box-shadow:none;" />
+                <img src="assets/silverlight-logo.png" class="noborder" style="min-width: 75%;" />
                 <h1>VS</h1>
-                <img src="assets/angularjs.jpeg" style="min-width: 75%; border: none; background: transparent; box-shadow: none; " />
+                <img src="assets/angularjs.jpeg" class="noborder" style="min-width: 75%;" />
 
                 <aside class="notes">
                     <p>I knew good reasons to use a framework like Angular over Silverlight</p>

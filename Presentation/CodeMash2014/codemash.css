@@ -1,0 +1,18 @@
+.present object.silverlight
+{
+    margin-top: 110px;
+    display: inline-block;
+}
+
+object.silverlight
+{
+    display: none;
+}
+
+section img.noborder {
+    border: none;
+    -webkit-box-shadow: none;
+    -ms-box-shadow: none;
+    box-shadow: none;
+    background: transparent;
+}
