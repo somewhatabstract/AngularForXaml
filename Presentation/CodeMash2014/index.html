@@ -25,7 +25,7 @@
         <!-- Any section element inside of this container is displayed as a slide -->
         <div class="slides">
             <section>
-                <section>
+                <section data-transition="linear">
                     <h1>Windows to Web</h1>
                     <h3>AngularJS for XAML developers</h3>
                     <p>
@@ -41,7 +41,7 @@
                         </ul>
                     </aside>
                 </section>
-                <section>
+                <section data-transition="linear">
                     <div>
                         <div style="width:100%;background-color:darkslategray"><p>12 years</p></div>
                         <div class='fragment roll-in' style='float: left; width: 92%; background-color: #4B95FF; margin-right: 1%'><p style='padding: 2em 0 2em 0; -webkit-transform: rotate(-90deg); '>Windows</p></div>
@@ -59,7 +59,7 @@
                         <p>Spent 12 years doing Windows. Mastered the domain. I've been doing web development for almost a whole year.</p>
                     </aside>
                 </section>
-                <section>
+                <section data-transition="linear">
                     <img src='assets/rv-f1.jpg' style="width:100%" />
                     <aside class="notes">
                         <p>When I changed jobs, I felt like I showed up to an event with the wrong kit. Lots to learn. Where to get started. Time to find similarities.</p>
@@ -68,7 +68,7 @@
             </section>
 
             <section>
-                <section>
+                <section data-transition="linear">
                     <img src="assets/silverlight-logo.png" style="min-width: 100%; border: none; box-shadow: none; background: transparent; " />
                     <aside class="notes">
                         <p>What I knew of web development was a handful of JAvaScript, some HTML and a bit of CSS, and Silverlight.</p>
@@ -76,7 +76,7 @@
                     </aside>
                 </section>
 
-                <section>
+                <section data-transition="linear">
                     <img src="assets/angularjs.jpeg" style="min-width: 100%; border: none; background: transparent; box-shadow: none; " />
                     <aside class="notes">
                         <p>If into acronyms, it's a MVW framework (Model-View-Widget). Unlike jQuery, a utility library, Angular is a platform on which to build client-side applications. Angular is to jQuery as the Silverlight runtime is to the System.Collections namespace.</p>
@@ -89,7 +89,7 @@
                     </aside>
                 </section>
 
-                <section>
+                <section data-transition="linear">
                     <img src="assets/languagebarrier.png" style="min-height:100%" />
                     <aside class="notes">
                         <p>We seemed to be talking about the same things under different guises. I needed to find the link. So, I started to look for concepts that matched up.</p>
@@ -98,9 +98,26 @@
             </section>
 
             <section>
-                <h1>ng-app and bootstrapping</h1>
-                <h2></h2>
+                <section data-transition="linear">
+                    <h1>Application</h1>
+                </section>
+                <section data-transition="linear">
+                </section>
+                <section data-transition="linear">
+                    <h1>ng-app</h1>
+                    <code>&lt;div ng-app="myApp"/&gt;</code>
+
+                    <aside class="notes">
+                        <p>Lots of things beginning with ng. This signifies it's an Angular thing, a directive.</p>
+                        <p>ng-app signifies that the element and its contents are an app.</p>
+                        <p>Specifies the angular module in which the app code lives.</p>
+                        <p>Only one angular app per page using this method; auto-bootstrapping</p>
+                        <p>Multiple can be added by manually bootstrapping (see later)</p>
+                    </aside>
+                </section>
             </section>
+
+
 
             <section>
                 <img src="assets/silverlight-logo.png" style="min-width: 75%; border: none; background: transparent;box-shadow:none;" />
