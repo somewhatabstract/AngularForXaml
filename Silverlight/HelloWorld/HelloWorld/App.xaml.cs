@@ -2,7 +2,6 @@
 {
 	public partial class App : System.Windows.Application
 	{
-
 		public App()
 		{
 			this.Startup += this.Application_Startup;

@@ -100,29 +100,73 @@
 
             <section>
                 <section data-transition="linear">
-                    <h1>Hello World</h1>
+                    <h1>ng-app</h1>
                 </section>
+
                 <section data-transition="linear">
                     <h2>Silverlight</h2>
-                    <object class="silverlight" data="data:application/x-silverlight-2," type="application/x-silverlight-2">
-                        <param name="source" value="silverlight/HelloWorld.xap" />
-                    </object>
+                    <img src="assets/HelloWorldSLCode.png" style="max-height:75%" />
+                    <aside class="notes">
+                        <p>Just want to do a quick comparison. We won't stare at code everywhere.</p>
+                    </aside>
                 </section>
-                <section data-transition="linear">
-                    <h1>ng-app</h1>
-                    <code>&lt;div ng-app="myApp"/&gt;</code>
 
+                <section data-transition="linear">
+                    <h2>Angular</h2>
+                    <img src="assets/HelloWorldNGCode.png" style="max-height:75%" />
+                    <aside class="notes">
+                        <p>Technically, Angular isn't even needed for this example, but then, technically, neither is Silverlight.</p>
+                    </aside>
+                </section>
+
+                <section data-transition="linear">
+                    <h3>No code behind required</h3>
+                    <pre><code>&lt;div ng-app/&gt;</code></pre>
+                    <pre><code>&lt;div data-ng-app/&gt;</code></pre>
                     <aside class="notes">
                         <p>Lots of things beginning with ng. This signifies it's an Angular thing, a directive.</p>
                         <p>ng-app signifies that the element and its contents are an app.</p>
                         <p>Specifies the angular module in which the app code lives.</p>
                         <p>Only one angular app per page using this method; auto-bootstrapping</p>
-                        <p>Multiple can be added by manually bootstrapping (see later)</p>
+                        <p>Code-behind can be added by providing a name</p>
+                        <p>and multiple apps can be added by manually bootstrapping (see later)</p>
+
+                        <h3>ng-app</h3>
+                        <p>Each angular app is like a separate Silverlight control instance</p>
+                        <h3>RootVisual</h3>
+                        <p>The contents of the app element are akin to the MainPage.xaml</p>
+                        <h3>Scripts</h3>
+                        <p>Consider them like DLL references.</p>
+                        <h3>Resources</h3>
+                        <p>Resources in Silverlight are replaced with CSS and directives</p>
                     </aside>
                 </section>
             </section>
 
+            <section>
+                <section data-transition="linear">
+                    <h1>Data Binding</h1>
+                    <div data-ng-app id="angularApp1">
+                        <input ng-model="textStuff" />
+                        <div>Hello {{textStuff}}</div>
+                    </div>
+                    <pre class="fragment"><code contenteditable><div data-ng-app id="angularApp1">
+    <input ng-model="textStuff" />
+    <div>Hello {{textStuff}}</div>
+</div></code></pre>
+                </section>
 
+                <section data-transition="linear">
+                    <pre><code contenteditable>
+                    </code></pre>
+                </section>
+            </section>
+
+            <section>
+                <section data-transition="linear"></section>
+
+                <section data-transition="linear"></section>
+            </section>
 
             <section>
                 <img src="assets/silverlight-logo.png" class="noborder" style="min-width: 75%;" />
@@ -132,11 +176,10 @@
                 <aside class="notes">
                     <p>I knew good reasons to use a framework like Angular over Silverlight</p>
                     <ul>
-                        <li>Only supported on PC and Mac (and WP7, if you compile specifically for that platform)</li>
-                        <li>Requires users install a plugin (not always possible)</li>
-                        <li>Doesn't live within the browser eco-system like Angular and other JavaScript frameworks and utilities which can make page interaction difficult</li>
-                        <li>Doesn't appear to be in active development (unlike Angular)</li>
-                        <li>As we shall see, there are similar concepts between Silverlight and AngularJS applications.</li>
+                        <li>No need for HTML bridge as we're already in HTML</li>
+                        <li>Cross-platform support, not just PC and Mac (and WP7, if you compile specifically for that platform)</li>
+                        <li>No plugin required - just use JavaScript</li>
+                        <li>Well supported and in active development</li>
                     </ul>
                 </aside>
             </section>
@@ -144,6 +187,7 @@
     </div>
     <script src="/lib/js/head.min.js"></script>
     <script src="/js/reveal.min.js"></script>
+    <script src="js/angular.min.js"></script>
     <script>
 
         // Full list of configuration options available here:
