@@ -1,5 +1,5 @@
 ﻿<!doctype html>
-<html lang="en">
+<html ng-app="codemash2014" lang="en">
 <head>
     <meta charset="utf-8">
     <title>Windows to Web - AngularJS for XAML developers</title>
@@ -146,19 +146,19 @@
             <section>
                 <section data-transition="linear">
                     <h1>Data Binding</h1>
-                    <pre><code contenteditable>&lt;div data-ng-app&gt;
+                    <pre><code ng-non-bindable contenteditable>&lt;div data-ng-app&gt;
     &lt;input ng-model=&quot;textStuff&quot; /&gt;
     &lt;div&gt;Hello {{textStuff}}&lt;/div&gt;
 &lt;/div&gt;</code></pre>
-                    <div class="fragment" data-ng-app id="angularApp1">
+                    <div class="fragment" ng-controller="bindingDemoCtrl">
                         <input style="font-size:18pt" ng-model="textStuff" />
                         <div>Hello {{textStuff}}</div>
-                        <input class="fragment" style="font-size:18pt" ng-model="textStuff"/>
+                        <input class="fragment" style="font-size:18pt" ng-model="textStuff" />
                     </div>
                 </section>
 
                 <section data-transition="linear">
-                    <pre><code>&lt;div data-ng-app&gt;
+                    <pre><code ng-non-bindable>&lt;div data-ng-app&gt;
     &lt;input ng-model=&quot;textStuff&quot; /&gt;
     &lt;div&gt;Hello {{textStuff}}&lt;/div&gt;
     &lt;input ng-model=&quot;textStuff&quot; /&gt;
@@ -170,19 +170,19 @@
     &lt;TextBox Text=&quot;{Binding ElementName=textStuff, Path=Text}&quot; /&gt;
 &lt;/StackPanel&gt;
                     </code></pre>
-                    
+
                     <aside class="notes">
                         <p>Technically not quite the same. In Angular, the bindings are two way and bind to a model. In Silverlight as it is here, we are binding to one of the two textboxes.</p>
                         <p>To do what Angular is doing, we need a data context and a little code behind to give the UI a model to bind to. We can also do this in Angular to get finer control over our model.</p>
                     </aside>
                 </section>
-                
+
                 <section data-transition="linear">
                     <h1>Code-behind</h1>
                     <pre><code></code></pre>
                     <pre><code contenteditable>
                     </code></pre>
-                    
+
                     <aside class="notes">
                         <p>Code-behind needs a module. Need to name the app or manually bootstrap the app.</p>
                     </aside>
@@ -211,11 +211,24 @@
                     </ul>
                 </aside>
             </section>
+            
+            <section>
+                <h1>Links</h1>
+                <ul>
+                    <li>Batarang</li>
+                    <li>karma</li>
+                    <li>revealJS</li>
+                    <li>presentation on GitHub</li>
+                    <li>Egghead.io</li>
+                    <li>Side waffle</li>
+                </ul>
+            </section>
         </div>
     </div>
     <script src="/lib/js/head.min.js"></script>
     <script src="/js/reveal.min.js"></script>
     <script src="js/angular.min.js"></script>
+    <script src="js/presentation.js"></script>
     <script>
 
         // Full list of configuration options available here:
