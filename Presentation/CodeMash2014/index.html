@@ -146,23 +146,51 @@
             <section>
                 <section data-transition="linear">
                     <h1>Data Binding</h1>
-                    <div data-ng-app id="angularApp1">
-                        <input ng-model="textStuff" />
+                    <pre><code contenteditable>&lt;div data-ng-app&gt;
+    &lt;input ng-model=&quot;textStuff&quot; /&gt;
+    &lt;div&gt;Hello {{textStuff}}&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                    <div class="fragment" data-ng-app id="angularApp1">
+                        <input style="font-size:18pt" ng-model="textStuff" />
                         <div>Hello {{textStuff}}</div>
+                        <input class="fragment" style="font-size:18pt" ng-model="textStuff"/>
                     </div>
-                    <pre class="fragment"><code contenteditable><div data-ng-app id="angularApp1">
-    <input ng-model="textStuff" />
-    <div>Hello {{textStuff}}</div>
-</div></code></pre>
                 </section>
 
                 <section data-transition="linear">
+                    <pre><code>&lt;div data-ng-app&gt;
+    &lt;input ng-model=&quot;textStuff&quot; /&gt;
+    &lt;div&gt;Hello {{textStuff}}&lt;/div&gt;
+    &lt;input ng-model=&quot;textStuff&quot; /&gt;
+&lt;/div&gt;</code></pre>
+                    <pre><code contenteditable>
+&lt;StackPanel x:Name=&quot;LayoutRoot&quot;&gt;
+    &lt;TextBox x:Name=&quot;textStuff&quot; /&gt;
+    &lt;TextBlock Text=&quot;{Binding ElementName=textStuff, Path=Text}&quot; /&gt;
+    &lt;TextBox Text=&quot;{Binding ElementName=textStuff, Path=Text}&quot; /&gt;
+&lt;/StackPanel&gt;
+                    </code></pre>
+                    
+                    <aside class="notes">
+                        <p>Technically not quite the same. In Angular, the bindings are two way and bind to a model. In Silverlight as it is here, we are binding to one of the two textboxes.</p>
+                        <p>To do what Angular is doing, we need a data context and a little code behind to give the UI a model to bind to. We can also do this in Angular to get finer control over our model.</p>
+                    </aside>
+                </section>
+                
+                <section data-transition="linear">
+                    <h1>Code-behind</h1>
+                    <pre><code></code></pre>
                     <pre><code contenteditable>
                     </code></pre>
+                    
+                    <aside class="notes">
+                        <p>Code-behind needs a module. Need to name the app or manually bootstrap the app.</p>
+                    </aside>
                 </section>
             </section>
 
             <section>
+                <!-- Value Converters -->
                 <section data-transition="linear"></section>
 
                 <section data-transition="linear"></section>

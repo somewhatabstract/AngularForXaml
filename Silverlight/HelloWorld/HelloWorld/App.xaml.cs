@@ -11,7 +11,7 @@
 
 		private void Application_Startup( object sender, System.Windows.StartupEventArgs e )
 		{
-			this.RootVisual = new MainPage();
+			this.RootVisual = new Binding1();
 		}
 	}
 }
