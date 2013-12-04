@@ -146,19 +146,42 @@
             <section>
                 <section data-transition="linear">
                     <h1>Data Binding</h1>
-                    <pre><code ng-non-bindable contenteditable>&lt;div data-ng-app&gt;
+                    <pre class="fragment"><code contenteditable>
+&lt;StackPanel x:Name=&quot;LayoutRoot&quot;&gt;
+    &lt;TextBox x:Name=&quot;textStuff&quot; /&gt;
+    &lt;TextBlock Text=&quot;{Binding ElementName=textStuff, Path=Text}&quot; /&gt;
+&lt;/StackPanel&gt;
+                    </code></pre>
+                    <pre class="fragment"><code ng-non-bindable>&lt;div ng-app&gt;
     &lt;input ng-model=&quot;textStuff&quot; /&gt;
     &lt;div&gt;Hello {{textStuff}}&lt;/div&gt;
 &lt;/div&gt;</code></pre>
-                    <div class="fragment" ng-controller="bindingDemoCtrl">
+
+                    <aside class="notes">
+                        <p>This is a bit of familiar Silverlight, a textbox bound to a textblock. Simple data binding.</p>
+                        <p>Let's see that in Angular.</p>
+                    </aside>
+                </section>
+
+                <section data-transition="linear">
+                    <pre><code ng-non-bindable contenteditable>&lt;div ng-app&gt;
+    &lt;input ng-model=&quot;textStuff&quot; /&gt;
+    &lt;div&gt;Hello {{textStuff}}&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                    <div ng-controller="bindingDemoCtrl">
                         <input style="font-size:18pt" ng-model="textStuff" />
                         <div>Hello {{textStuff}}</div>
                         <input class="fragment" style="font-size:18pt" ng-model="textStuff" />
                     </div>
+
+                    <aside class="notes">
+                        <p>Breaking it down. The ng-model directive is telling the textbox what value it is bound to. To present that value, we use the double braces syntax.</p>
+                        <p>Two way binding works too. Just add another input.</p>
+                    </aside>
                 </section>
 
                 <section data-transition="linear">
-                    <pre><code ng-non-bindable>&lt;div data-ng-app&gt;
+                    <pre><code ng-non-bindable>&lt;div ng-app&gt;
     &lt;input ng-model=&quot;textStuff&quot; /&gt;
     &lt;div&gt;Hello {{textStuff}}&lt;/div&gt;
     &lt;input ng-model=&quot;textStuff&quot; /&gt;
@@ -172,26 +195,115 @@
                     </code></pre>
 
                     <aside class="notes">
-                        <p>Technically not quite the same. In Angular, the bindings are two way and bind to a model. In Silverlight as it is here, we are binding to one of the two textboxes.</p>
-                        <p>To do what Angular is doing, we need a data context and a little code behind to give the UI a model to bind to. We can also do this in Angular to get finer control over our model.</p>
-                    </aside>
-                </section>
-
-                <section data-transition="linear">
-                    <h1>Code-behind</h1>
-                    <pre><code></code></pre>
-                    <pre><code contenteditable>
-                    </code></pre>
-
-                    <aside class="notes">
-                        <p>Code-behind needs a module. Need to name the app or manually bootstrap the app.</p>
+                        <p>Comparing this with Silverlight, you can see a difference. In Silverlight as it is here, we are binding to one of the two textboxes. In Angular, the bindings are two way and bind to a model.</p>
+                        <p>Usually, we would bind to a value in a model specified via the data context. Angular creates this model for us.</p>
+                        <p>But, we can also have the concept of a data context in Angular to get finer control over our model.</p>
+                        <p>In fact, you probably noticed there's a default value here; "World" - that requires code behind.</p>
                     </aside>
                 </section>
             </section>
 
             <section>
-                <!-- Value Converters -->
-                <section data-transition="linear"></section>
+                <section data-transition="linear">
+                    <h1>Code-behind</h1>
+                    <div class="fragment">
+                        <pre><code>&lt;UserControl x:Class="HelloWorld.MainPage"&gt;
+...
+                            </code></pre>
+                        <pre class="fragment"><code>namespace HelloWorld
+{
+	public partial class MainPage : UserControl
+    {
+        ...
+                            </code></pre>
+                    </div>
+
+                    <aside class="notes">
+                        <p>Just like Silverlight, the code-behind has to be associated with the presentation layer.</p>
+                        <p>In Silverlight, this is done by specifying the XAP that implements the app and the x:Class attribute that indicates the class that contains the code.</p>
+                    </aside>
+                </section>
+
+                <section data-transition="linear">
+                    <pre><code ng-non-bindable>&lt;div ng-app='myApp' ng-controller='myController'&gt;
+    ...</code></pre>
+                    <pre><code>var myApp = angular.module('myApp', []);
+myApp.controller('myController', function ($scope) {
+    ...
+</code></pre>
+
+                    <aside class="notes">
+                        <p>
+                            In Angular, the ng-app directive needs a name to specify the angular module that contains the code
+                            and there has to be an ng-controller to specify the function that controls an element.
+                        </p>
+                    </aside>
+                </section>
+
+                <section data-transition="linear">
+                    <pre><code ng-non-bindable>&lt;div ng-app='myApp' ng-controller='myController'&gt;
+    &lt;input ng-model=&quot;textStuff&quot; /&gt;
+    &lt;div&gt;Hello {{textStuff}}&lt;/div&gt;
+    &lt;input ng-model=&quot;textStuff&quot; /&gt;
+&lt;/div&gt;</code></pre>
+                    <pre><code>(function(){
+    var myApp = angular.module('myApp', []);
+    myApp.controller('myController', function ($scope) {
+        $scope.textStuff = 'World';
+    });
+})();</code></pre>
+
+                    <aside class="notes">
+                        <p>Here's the full Angular app for our earlier data binding demo with two textboxes.</p>
+                        <p>Note the [] in the module declaration. This is where additional modules can be injected so that they can be referenced, much like adding references to a Silverlight project.</p>
+                        <p>The $scope value of the controller is injected by Angular and is the model that bindings reference. Other things can be injected here too, such as things from the referenced modules.</p>
+                        <p>More on that later. Back to binding - this time collections.</p>
+                    </aside>
+                </section>
+            </section>
+
+            <section>
+                <section data-transition="linear">
+                    <h1>Data Binding Collections</h1>
+                    <pre class="fragment"><code>&lt;ListBox x:Name=&quot;List&quot;&gt;&lt;/ListBox&gt;</code></pre>
+                    <pre class="fragment"><code>List.ItemsSource = new[] { "Jim", "John", "Bob" }</code></pre>
+                    <aside class="notes">
+                        <p>In Silverlight, some controls have an ItemsSource property for specifying a collection that can be used to generate items.</p>
+                        <p>ng-repeat performs this task in Angular.</p>
+                    </aside>
+                </section>
+
+                <section data-transition="linear">
+                    <pre><code ng-non-bindable>&lt;p ng-repeat=&quot;name in names&quot;&gt;{{name}}&lt;/p&gt;</code></pre>
+                    <pre><code ng-non-bindable>$scope.names = [ 'Jim', 'John', 'Bob'];</code></pre>
+
+                    <div class="fragment" ng-controller="collectionBindingCtrl">
+                        <p ng-repeat="name in names">{{name}}</p>
+                    </div>
+
+                    <aside class="notes">
+                        <p>Inside of our angular app, we add an ng-repeat directive to the element that will repeat (our ItemTemplate, if you will).</p>
+                        <p>We set the collection in the code behind.</p>
+                    </aside>
+                </section>
+
+                <section data-transition="linear">
+                    <h2>Sorting and filtering</h2>
+                    TODO: Add example of Silverlight
+                    <aside class="notes">
+                        <p>CollectionViewSource in Silverlight. Add SortDescriptions for sorting and a filter event handler for filtering.</p>
+                    </aside>
+                </section>
+
+                <section data-transition="linear">
+                    TODO: Angular equivalent for sort and filter using filters
+                </section>
+            </section>
+
+            <section>
+                <section data-transition="linear">
+                    <h1>Value Converters</h1>
+                </section>
 
                 <section data-transition="linear"></section>
             </section>
@@ -211,7 +323,7 @@
                     </ul>
                 </aside>
             </section>
-            
+
             <section>
                 <h1>Links</h1>
                 <ul>

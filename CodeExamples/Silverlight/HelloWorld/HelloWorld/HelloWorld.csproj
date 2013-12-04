@@ -78,6 +78,9 @@
     <Compile Include="Binding1.xaml.cs">
       <DependentUpon>Binding1.xaml</DependentUpon>
     </Compile>
+    <Compile Include="BindingCollections.xaml.cs">
+      <DependentUpon>BindingCollections.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -89,6 +92,10 @@
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
     <Page Include="Binding1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BindingCollections.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
