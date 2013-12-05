@@ -8,6 +8,8 @@
     
     <StackPanel x:Name="LayoutRoot" Background="White">
         <ListBox x:Name="List"></ListBox>
+        <Border BorderThickness="2" BorderBrush="Gray" Margin="3"></Border>
+        <TextBox x:Name="FilterTextBox"></TextBox>
         <ListBox x:Name="List2"></ListBox>
     </StackPanel>
 </UserControl>

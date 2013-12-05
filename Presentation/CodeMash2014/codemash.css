@@ -16,3 +16,7 @@ section img.noborder {
     box-shadow: none;
     background: transparent;
 }
+
+/*.present code {
+    font-size: 90%;
+}*/

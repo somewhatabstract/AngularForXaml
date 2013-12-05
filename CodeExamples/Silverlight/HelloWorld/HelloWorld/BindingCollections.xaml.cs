@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Net;
 using System.Windows;
@@ -21,10 +22,14 @@ namespace HelloWorld
 
 			List.ItemsSource = new[] { "Jim", "John", "Bob" };
 
-			var cvs = new CollectionViewSource();
-			cvs.Source = new[] { "Jim", "John", "Bob" };
+			var collectionView = new CollectionViewSource();
+			collectionView.Source = new[] { "Jim", "John", "Bob" };
+			collectionView.View.SortDescriptions.Add( new SortDescription { Direction = ListSortDirection.Descending } );
+			collectionView.View.Filter = o => String.IsNullOrEmpty( FilterTextBox.Text )
+				|| ( (string)o ).StartsWith( FilterTextBox.Text );
 
-			List2.ItemsSource = cvs.View;
+			List2.ItemsSource = collectionView.View;
+			FilterTextBox.TextChanged += ( sender, args ) => ( (ICollectionView)List2.ItemsSource ).Refresh();
 		}
 	}
 }
