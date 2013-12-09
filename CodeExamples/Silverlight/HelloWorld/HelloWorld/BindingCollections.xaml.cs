@@ -20,13 +20,13 @@ namespace HelloWorld
 		{
 			InitializeComponent();
 
-			List.ItemsSource = new[] { "Jim", "John", "Bob" };
+			List.ItemsSource = new[] { "Leprechaun", "Unicorn", "Bacon" };
 
 			var collectionView = new CollectionViewSource();
-			collectionView.Source = new[] { "Jim", "John", "Bob" };
+			collectionView.Source = new[] { "Leprechaun", "Unicorn", "Bacon" };
 			collectionView.View.SortDescriptions.Add( new SortDescription { Direction = ListSortDirection.Descending } );
 			collectionView.View.Filter = o => String.IsNullOrEmpty( FilterTextBox.Text )
-				|| ( (string)o ).StartsWith( FilterTextBox.Text );
+				|| ( (string)o ).ToLowerInvariant().Contains( FilterTextBox.Text.ToLowerInvariant() );
 
 			List2.ItemsSource = collectionView.View;
 			FilterTextBox.TextChanged += ( sender, args ) => ( (ICollectionView)List2.ItemsSource ).Refresh();

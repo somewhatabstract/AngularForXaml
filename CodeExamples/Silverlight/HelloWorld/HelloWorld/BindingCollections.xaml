@@ -7,9 +7,22 @@
     d:DesignHeight="300" d:DesignWidth="400">
     
     <StackPanel x:Name="LayoutRoot" Background="White">
-        <ListBox x:Name="List"></ListBox>
+        <ItemsControl x:Name="List">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding}"></TextBlock>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
         <Border BorderThickness="2" BorderBrush="Gray" Margin="3"></Border>
         <TextBox x:Name="FilterTextBox"></TextBox>
-        <ListBox x:Name="List2"></ListBox>
+
+        <ItemsControl x:Name="List2">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding}"></TextBlock>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
     </StackPanel>
 </UserControl>

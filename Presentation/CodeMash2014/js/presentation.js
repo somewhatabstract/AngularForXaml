@@ -6,6 +6,6 @@
 	}]);
 
 	codemash2014.controller('collectionBindingCtrl', ['$scope', function ($scope) {
-		$scope.names = ['Jim', 'John', 'Bob'];
+		$scope.names = ['Leprechaun', 'Unicorn', 'Bacon'];
 	}]);
 })();

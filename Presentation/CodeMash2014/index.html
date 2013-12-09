@@ -68,7 +68,7 @@
                 </section>
             </section>
 
-            <section data-background="#404040">
+            <section data-background="#804040">
                 <section data-transition="linear">
                     <img src="assets/silverlight-logo.png" class="noborder" style="min-width: 100%;" />
                     <aside class="notes">
@@ -120,7 +120,7 @@
                 </section>
 
                 <section data-transition="linear">
-                    <h3>No code behind required</h3>
+                    <h3>No code-behind required</h3>
                     <pre><code ng-non-bindable>&lt;div ng-app/&gt;</code></pre>
                     <pre><code ng-non-bindable>&lt;div data-ng-app/&gt;</code></pre>
                     <aside class="notes">
@@ -172,9 +172,9 @@
     &lt;div&gt;Hello {{textStuff}}&lt;/div&gt;
 &lt;/div&gt;</code></pre>
                     <div ng-controller="bindingDemoCtrl">
-                        <input style="font-size:18pt" ng-model="textStuff" />
+                        <input ng-model="textStuff" />
                         <div>Hello {{textStuff}}</div>
-                        <input class="fragment" style="font-size:18pt" ng-model="textStuff" />
+                        <input class="fragment" ng-model="textStuff" />
                     </div>
 
                     <aside class="notes">
@@ -214,33 +214,37 @@
                         <pre><code ng-non-bindable>&lt;UserControl x:Class="HelloWorld.MainPage"&gt;
 ...
                             </code></pre>
-                        <pre><code ng-non-bindable>namespace HelloWorld
-{
-	public partial class MainPage : UserControl
-    {
-        ...
-                            </code></pre>
+                    <pre class="fragment"><code ng-non-bindable>&lt;div ng-app='myApp' ng-controller='myController'&gt;
+    ...</code></pre>
                     </div>
 
                     <aside class="notes">
                         <p>Just like Silverlight, the code-behind has to be associated with the presentation layer.</p>
                         <p>In Silverlight, this is done by specifying the XAP that implements the app and the x:Class attribute that indicates the class that contains the code.</p>
+                        <p>
+                            In Angular, the ng-app directive needs a name to specify the angular module that contains the code
+                            and there has to be an ng-controller to specify the actual code to control the decorated element.
+                        </p>
+                        <p>The controller and app module do not need to be specified on the same line. This is just for brevity. There can be more than one controller per app.</p>
                     </aside>
                 </section>
 
                 <section data-transition="linear">
-                    <pre><code ng-non-bindable>&lt;div ng-app='myApp' ng-controller='myController'&gt;
-    ...</code></pre>
-                    <pre><code class="javascript" ng-non-bindable>var myApp = angular.module('myApp', []);
+                    <pre><code ng-non-bindable>namespace HelloWorld
+{
+    public partial class MainPage : UserControl
+    {
+        ...
+                            </code></pre>
+                    <pre class="fragment"><code class="javascript" ng-non-bindable>var myApp = angular.module('myApp', []);
 myApp.controller('myController', function ($scope) {
     ...
 </code></pre>
 
                     <aside class="notes">
-                        <p>
-                            In Angular, the ng-app directive needs a name to specify the angular module that contains the code
-                            and there has to be an ng-controller to specify the function that controls an element.
-                        </p>
+                        <p>In Silverlight (and other similar .NET frameworks), the namespace and class identify the actual code-behind.</p>
+                        <p>In Angular, the app name specifies the module and the controller specifies the actual code inside that module.</p>
+                        <p>Consider the module to be the assembly/namespace and the controller to be the class name.</p>
                     </aside>
                 </section>
 
@@ -266,68 +270,106 @@ myApp.controller('myController', function ($scope) {
                 </section>
             </section>
 
-            <section data-background="#308040">
+            <section data-background="#403080">
                 <section data-transition="linear">
                     <h1>Data Binding Collections</h1>
                 </section>
 
                 <section data-transition="linear">
-                    <pre><code ng-non-bindable>&lt;ListBox x:Name=&quot;List&quot; /&gt;</code></pre>
-                    <pre><code class="cs" ng-non-bindable>List.ItemsSource = new[] { "Jim", "John", "Bob" }</code></pre>
+                    <pre><code ng-non-bindable>&lt;ItemsControl x:Name=&quot;List&quot;&gt;
+    &lt;ItemsControl.ItemTemplate&gt;
+        &lt;DataTemplate&gt;
+            &lt;TextBlock Text=&quot;{Binding}&quot;&gt;&lt;/TextBlock&gt;
+        &lt;/DataTemplate&gt;
+    &lt;/ItemsControl.ItemTemplate&gt;
+&lt;/ItemsControl&gt;</code></pre>
+                    <pre class="fragment"><code ng-non-bindable>&lt;div ng-repeat=&quot;name in names&quot;&gt;
+    &lt;p&gt;{{name}}&lt;/p&gt;
+&lt;/div&gt;</code></pre>
 
                     <aside class="notes">
-                        <p>In Silverlight, some controls have an ItemsSource property for specifying a collection that can be used to generate items.</p>
+                        <p>In Silverlight, we can have controls that show a sequence of items, repeating a template for each item.</p>
                         <p>ng-repeat performs this task in Angular.</p>
                     </aside>
                 </section>
 
                 <section data-transition="linear">
-                    <pre><code ng-non-bindable>&lt;p ng-repeat=&quot;name in names&quot;&gt;{{name}}&lt;/p&gt;</code></pre>
-                    <pre><code ng-non-bindable class="javascript">$scope.names = [ 'Jim', 'John', 'Bob'];</code></pre>
+                    <pre><code class="cs" ng-non-bindable>List.ItemsSource = new[] { "Leprechaun", "Unicorn", "Bacon" }</code></pre>
+                    <pre class="fragment"><code ng-non-bindable class="javascript">$scope.names = [ 'Leprechaun', 'Unicorn', 'Bacon'];</code></pre>
 
                     <aside class="notes">
-                        <p>Inside of our angular app, we add an ng-repeat directive to the element that will repeat (our ItemTemplate, if you will).</p>
-                        <p>We set the collection in the code behind.</p>
                     </aside>
                 </section>
 
                 <section data-transition="linear">
                     <div ng-controller="collectionBindingCtrl">
-                        <p ng-repeat="name in names">{{name}}</p>
+                        <div ng-repeat="name in names"><p>{{name}}</p></div>
                     </div>
-                </section>
-
-                <section data-transition="linear">
-                    <h2>Sorting and filtering</h2>
-                    <pre><code ng-non-bindable>&lt;TextBox x:Name=&quot;FilterTextBox&quot; &gt;&lt;/TextBox&gt;
-&lt;ListBox x:Name=&quot;List&quot;&gt;&lt;/ListBox&gt;</code></pre>
-                    <pre><code class="cs" ng-non-bindable>var collectionView = new CollectionViewSource();
-collectionView.Source = new[] { &quot;Jim&quot;, &quot;John&quot;, &quot;Bob&quot; };
-collectionView.View.SortDescriptions.Add(
-    new SortDescription { Direction = ListSortDirection.Descending } );
-collectionView.View.Filter =
-    o =&gt; String.IsNullOrEmpty( FilterTextBox.Text )
-            || ( (string)o ).StartsWith( FilterTextBox.Text );
-		
-List.ItemsSource = collectionView.View;
-FilterTextBox.TextChanged +=
-    (sender, args) => ((ICollectionView)List.ItemsSource).Refresh();</code></pre>
+                    
                     <aside class="notes">
-                        <p>CollectionViewSource in Silverlight. Add SortDescriptions for sorting and a filter event handler for filtering.</p>
+                        <p>Not particularly exciting, so let's add some sorting and filtering.</p>
                     </aside>
                 </section>
 
                 <section data-transition="linear">
-                    TODO: Angular equivalent for sort and filter using filters
+                    <h2>Sorting and filtering</h2>
+                    <pre><code class="cs" ng-non-bindable>var collectionView = new CollectionViewSource();
+collectionView.Source = new[] { &quot;Leprechaun&quot;, &quot;Unicorn&quot;, &quot;Bacon&quot; };
+collectionView.View.SortDescriptions.Add(
+    new SortDescription { Direction = ListSortDirection.Descending } );
+collectionView.View.Filter =
+    o =&gt; String.IsNullOrEmpty( FilterTextBox.Text )
+            || ( (string)o ).Contains( FilterTextBox.Text );
+		
+List.ItemsSource = collectionView.View;
+FilterTextBox.TextChanged +=
+    (sender, args) => ((ICollectionView)List.ItemsSource).Refresh();</code></pre>
+                    <pre class="fragment"><code ng-non-bindable contenteditable>&lt;div ng-controller=&quot;myController&quot;&gt;
+    &lt;input ng-model=&quot;filter&quot;/&gt;
+    &lt;div ng-repeat=&quot;name in names | filter:filter | orderBy:&#39;-toString()&#39;&quot;&gt;
+        &lt;p&gt;{{name}}&lt;/p&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                    <aside class="notes">
+                        <p>XAML not shown here but all we've done is add a text box for entering a filter value.</p>
+                        <p>Here in the code, we've used it's value to filter a collection view and also its TextChanged event to refresh the collection source.</p>
+                        <p>In the Angular, things look a bit different. Unlike Silverlight, it's all done in the presentation code; no code-behind required.</p>
+                        <p>Instead of modifying a collection, we filter it through what are conveniently called filters in Angular.</p>
+                        <p>The first filter applies our search term, the second orders the values in descending order.</p>
+                    </aside>
+                </section>
+
+                <section data-transition="linear">
+                    <div ng-controller="collectionBindingCtrl">
+                        <input ng-model="filter"/>
+                        <div ng-repeat="name in names | filter:filter | orderBy:'-toString()'">
+                            <p>{{name}}</p>
+                        </div>
+                    </div>
+                    
+                    <aside class="notes">
+                        <p>And there we have it, a sorted and filtered list of items. But Angular filters can do much more, which brings us to...</p>
+                    </aside>
                 </section>
             </section>
 
             <section>
                 <section data-transition="linear">
                     <h1>Value Converters</h1>
+                    
+                    <aside class="notes">
+                        <p>
+                            If you've written any serious XAML application, you've used value converters. Usually, to take a value from a data model and modify it for the presentation,
+                            such as turning a boolean value into a visibility value, or an enumeration into a color.
+                        </p>
+                        <p>In Angular, there are various ways to achieve this, depending on what we're doing. For example...</p>
+                    </aside>
                 </section>
 
-                <section data-transition="linear"></section>
+                <section data-transition="linear">
+                    
+                    <aside notes=""></aside>
+                </section>
             </section>
 
             <section>
@@ -375,7 +417,7 @@ FilterTextBox.TextChanged +=
             backgroundTransition: "slide",
 
             theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
-            transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+            transition: Reveal.getQueryHash().transition || 'linear', // default/cube/page/concave/zoom/linear/fade/none
 
             // Optional libraries used to extend on reveal.js
             dependencies: [

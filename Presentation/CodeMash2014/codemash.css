@@ -20,3 +20,7 @@ section img.noborder {
 /*.present code {
     font-size: 90%;
 }*/
+
+input {
+    font-size: 100%;
+}
