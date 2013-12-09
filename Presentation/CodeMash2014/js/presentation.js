@@ -8,4 +8,14 @@
 	codemash2014.controller('collectionBindingCtrl', ['$scope', function ($scope) {
 		$scope.names = ['Leprechaun', 'Unicorn', 'Bacon'];
 	}]);
+
+	codemash2014.controller('reverseCtrl', ['$scope', function($scope) {
+		$scope.stringToReverse = 'Hello World';
+	}]);
+
+	codemash2014.filter('reverse', function() {
+		return function(value) {
+			return value.split("").reverse().join("");;
+		};
+	});
 })();

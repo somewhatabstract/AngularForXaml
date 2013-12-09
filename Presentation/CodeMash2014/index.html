@@ -26,7 +26,7 @@
         <!-- Any section element inside of this container is displayed as a slide -->
         <div class="slides">
             <section data-background-color="#104070">
-                <section data-transition="linear">
+                <section>
                     <h1>Windows to Web</h1>
                     <h3>AngularJS for XAML developers</h3>
                     <p>
@@ -42,7 +42,7 @@
                         </ul>
                     </aside>
                 </section>
-                <section data-transition="linear">
+                <section>
                     <div>
                         <div style="width:100%;background-color:darkslategray"><p>12 years</p></div>
                         <div class='fragment roll-in' style='float: left; width: 92%; background-color: #4B95FF; margin-right: 1%'><p style='padding: 2em 0 2em 0; -webkit-transform: rotate(-90deg); '>Windows</p></div>
@@ -60,7 +60,7 @@
                         <p>Spent 12 years doing Windows. Mastered the domain. I've been doing web development for almost a whole year.</p>
                     </aside>
                 </section>
-                <section data-transition="linear">
+                <section>
                     <img src='assets/rv-f1.jpg' style="width:100%" />
                     <aside class="notes">
                         <p>When I changed jobs, I felt like I showed up to an event with the wrong kit. Lots to learn. Where to get started. Time to find similarities.</p>
@@ -69,7 +69,7 @@
             </section>
 
             <section data-background="#804040">
-                <section data-transition="linear">
+                <section>
                     <img src="assets/silverlight-logo.png" class="noborder" style="min-width: 100%;" />
                     <aside class="notes">
                         <p>What I knew of web development was a handful of JAvaScript, some HTML and a bit of CSS, and Silverlight.</p>
@@ -77,7 +77,7 @@
                     </aside>
                 </section>
 
-                <section data-transition="linear">
+                <section>
                     <img src="assets/angularjs.jpeg" class="noborder" style="min-width: 100%;" />
                     <aside class="notes">
                         <p>If into acronyms, it's a MVW framework (Model-View-Widget). Unlike jQuery, a utility library, Angular is a platform on which to build client-side applications. Angular is to jQuery as the Silverlight runtime is to the System.Collections namespace.</p>
@@ -90,7 +90,7 @@
                     </aside>
                 </section>
 
-                <section data-transition="linear">
+                <section>
                     <img src="assets/languagebarrier.png" style="min-height:100%" />
                     <aside class="notes">
                         <p>We seemed to be talking about the same things under different guises. I needed to find the link. So, I started to look for concepts that matched up.</p>
@@ -99,11 +99,11 @@
             </section>
 
             <section data-background="#704010">
-                <section data-transition="linear">
-                    <h1>ng-app</h1>
+                <section>
+                    <h1>Application</h1>
                 </section>
 
-                <section data-transition="linear">
+                <section>
                     <h2>Silverlight</h2>
                     <img src="assets/HelloWorldSLCode.png" style="max-height:75%" />
                     <aside class="notes">
@@ -111,7 +111,7 @@
                     </aside>
                 </section>
 
-                <section data-transition="linear">
+                <section>
                     <h2>Angular</h2>
                     <img src="assets/HelloWorldNGCode.png" style="max-height:75%" />
                     <aside class="notes">
@@ -119,7 +119,7 @@
                     </aside>
                 </section>
 
-                <section data-transition="linear">
+                <section>
                     <h3>No code-behind required</h3>
                     <pre><code ng-non-bindable>&lt;div ng-app/&gt;</code></pre>
                     <pre><code ng-non-bindable>&lt;div data-ng-app/&gt;</code></pre>
@@ -144,11 +144,11 @@
             </section>
 
             <section data-background="#107040">
-                <section data-transition="linear">
+                <section>
                     <h1>Data Binding</h1>
                 </section>
 
-                <section data-transition="linear">
+                <section>
                     <pre><code contenteditable>
 &lt;StackPanel x:Name=&quot;LayoutRoot&quot;&gt;
     &lt;TextBox x:Name=&quot;textStuff&quot; /&gt;
@@ -166,7 +166,7 @@
                     </aside>
                 </section>
 
-                <section data-transition="linear">
+                <section>
                     <pre><code ng-non-bindable contenteditable>&lt;div ng-app&gt;
     &lt;input ng-model=&quot;textStuff&quot; /&gt;
     &lt;div&gt;Hello {{textStuff}}&lt;/div&gt;
@@ -183,13 +183,13 @@
                     </aside>
                 </section>
 
-                <section data-transition="linear">
+                <section>
                     <pre><code contenteditable>&lt;StackPanel x:Name=&quot;LayoutRoot&quot;&gt;
     &lt;TextBox x:Name=&quot;textStuff&quot; /&gt;
     &lt;TextBlock Text=&quot;{Binding ElementName=textStuff, Path=Text}&quot; /&gt;
     &lt;TextBox Text=&quot;{Binding ElementName=textStuff, Path=Text}&quot; /&gt;
 &lt;/StackPanel&gt;</code></pre>
-                    <pre><code ng-non-bindable>&lt;div ng-app&gt;
+                    <pre class="fragment"><code ng-non-bindable>&lt;div ng-app&gt;
     &lt;input ng-model=&quot;textStuff&quot; /&gt;
     &lt;div&gt;Hello {{textStuff}}&lt;/div&gt;
     &lt;input ng-model=&quot;textStuff&quot; /&gt;
@@ -205,16 +205,16 @@
             </section>
 
             <section data-background="#803040">
-                <section data-transition="linear">
+                <section>
                     <h1>Code-behind</h1>
                 </section>
 
-                <section data-transition="linear">
+                <section>
                     <div>
                         <pre><code ng-non-bindable>&lt;UserControl x:Class="HelloWorld.MainPage"&gt;
 ...
                             </code></pre>
-                    <pre class="fragment"><code ng-non-bindable>&lt;div ng-app='myApp' ng-controller='myController'&gt;
+                        <pre class="fragment"><code ng-non-bindable>&lt;div ng-app='myApp' ng-controller='myController'&gt;
     ...</code></pre>
                     </div>
 
@@ -229,7 +229,7 @@
                     </aside>
                 </section>
 
-                <section data-transition="linear">
+                <section>
                     <pre><code ng-non-bindable>namespace HelloWorld
 {
     public partial class MainPage : UserControl
@@ -248,7 +248,7 @@ myApp.controller('myController', function ($scope) {
                     </aside>
                 </section>
 
-                <section data-transition="linear">
+                <section>
                     <pre><code ng-non-bindable>&lt;div ng-app='myApp' ng-controller='myController'&gt;
     &lt;input ng-model=&quot;textStuff&quot; /&gt;
     &lt;div&gt;Hello {{textStuff}}&lt;/div&gt;
@@ -271,11 +271,11 @@ myApp.controller('myController', function ($scope) {
             </section>
 
             <section data-background="#403080">
-                <section data-transition="linear">
+                <section>
                     <h1>Data Binding Collections</h1>
                 </section>
 
-                <section data-transition="linear">
+                <section>
                     <pre><code ng-non-bindable>&lt;ItemsControl x:Name=&quot;List&quot;&gt;
     &lt;ItemsControl.ItemTemplate&gt;
         &lt;DataTemplate&gt;
@@ -293,25 +293,24 @@ myApp.controller('myController', function ($scope) {
                     </aside>
                 </section>
 
-                <section data-transition="linear">
+                <section>
                     <pre><code class="cs" ng-non-bindable>List.ItemsSource = new[] { "Leprechaun", "Unicorn", "Bacon" }</code></pre>
                     <pre class="fragment"><code ng-non-bindable class="javascript">$scope.names = [ 'Leprechaun', 'Unicorn', 'Bacon'];</code></pre>
 
-                    <aside class="notes">
-                    </aside>
+                    <aside class="notes"></aside>
                 </section>
 
-                <section data-transition="linear">
+                <section>
                     <div ng-controller="collectionBindingCtrl">
                         <div ng-repeat="name in names"><p>{{name}}</p></div>
                     </div>
-                    
+
                     <aside class="notes">
                         <p>Not particularly exciting, so let's add some sorting and filtering.</p>
                     </aside>
                 </section>
 
-                <section data-transition="linear">
+                <section>
                     <h2>Sorting and filtering</h2>
                     <pre><code class="cs" ng-non-bindable>var collectionView = new CollectionViewSource();
 collectionView.Source = new[] { &quot;Leprechaun&quot;, &quot;Unicorn&quot;, &quot;Bacon&quot; };
@@ -339,36 +338,128 @@ FilterTextBox.TextChanged +=
                     </aside>
                 </section>
 
-                <section data-transition="linear">
+                <section>
                     <div ng-controller="collectionBindingCtrl">
-                        <input ng-model="filter"/>
+                        <input ng-model="filter" />
                         <div ng-repeat="name in names | filter:filter | orderBy:'-toString()'">
                             <p>{{name}}</p>
                         </div>
                     </div>
-                    
+
                     <aside class="notes">
-                        <p>And there we have it, a sorted and filtered list of items. But Angular filters can do much more, which brings us to...</p>
+                        <p>
+                            And there we have it, a sorted and filtered list of items.
+                        </p>
+                        <p>To do this we used filters, but filters can be used for more than filtering collections.</p>
                     </aside>
                 </section>
             </section>
 
-            <section>
-                <section data-transition="linear">
+            <section data-background="#806040">
+                <section>
                     <h1>Value Converters</h1>
-                    
+
                     <aside class="notes">
                         <p>
-                            If you've written any serious XAML application, you've used value converters. Usually, to take a value from a data model and modify it for the presentation,
-                            such as turning a boolean value into a visibility value, or an enumeration into a color.
+                            There are two types of filter; we've already seen one when we used them to filter a collection by a search term and to order them.
+                            I liken that type of filter to LINQ operators in the .NET world; they take sequences and convert them to different sequences.
+                            The second type of filter takes a single value and transforms it to a different value. These are more akin to ValueConverters
+                            and the StringFormat property on bindings.
                         </p>
-                        <p>In Angular, there are various ways to achieve this, depending on what we're doing. For example...</p>
+                        <p>There are three built-in LINQ-style filters: limitTo, filter, orderBy</p>
+                        <p>And  built-in value converter-style filters: date, currency, uppercase, lowercase, json, number </p>
+                        <p>
+                            If you've written any serious XAML application, you've used value converters. Usually, to take a value from a data model and modify it for the presentation,
+                            such as changing the case of a string, formatting the decimal places on a number, turning a boolean value into a visibility value, or an enumeration into a color.
+                        </p>
+                        <p>
+                            In Angular, just as in Silverlight, there is more than one way to do this, and in fact,
+                            those last two items we will look at later, but for the other situations, we use filters.
+                        </p>
+                        <p>With there being a limited built-in set, you're going to need to write your own. So let's do that.</p>
                     </aside>
                 </section>
 
-                <section data-transition="linear">
+                <section>
+                    <pre><code class="cs">public class ReverseStringConverter : IValueConverter
+{
+    public object Convert( object value, Type targetType, object parameter, CultureInfo culture )
+    {
+        return new String(value.ToString().Reverse());
+    }
+    public object ConvertBack( object value, Type targetType, object parameter, CultureInfo culture )
+    {
+        throw new NotImplementedException();
+    }
+}</code></pre>
+                    <pre class="fragment"><code class="javascript">module('myApp').filter('reverse', function() {
+    return function (value){
+        return value.split("").reverse().join("");
+    };
+});</code></pre>
+                    <aside class="notes">
+                        <p>If we wanted to reverse a string, we could add a converter to do this in Silverlight.</p>
+                        <p>Writing an Angular filter for this is somewhat similar. Note there is no ConvertBack equivalent. A filter is just a oneway conversion method.</p>
+                        <p>Another concept exists for converting from the view back to the model, which we'll look at later.</p>
+                    </aside>
+                </section>
+
+                <section>
+                    <pre><code contenteditable>&lt;StackPanel x:Name=&quot;LayoutRoot&quot;&gt;
+    &lt;StackPanel.Resources&gt;
+        &lt;myApp:ReverseStringConverter x:Name=&quot;ReverseStringConverter&quot; /&gt;
+    &lt;/StackPanel.Resources&gt;
+    &lt;TextBox x:Name=&quot;textStuff&quot; /&gt;
+    &lt;TextBlock Text=&quot;{Binding ElementName=textStuff, Path=Text, Converter={StaticResource ReverseStringConverter}}&quot; /&gt;
+&lt;/StackPanel&gt;</code></pre>
+                    <pre class="fragment"><code ng-non-bindable>&lt;div ng-app&gt;
+    &lt;input ng-model=&quot;textStuff&quot; /&gt;
+    &lt;div&gt;{{textStuff | reverse}}&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+                    <aside class="notes">
+                        <p>In Silverlight, we create an instance of the converter and then add it to our binding..</p>
+                        <p>In Angular, we don't need to create an instance as it already exists within the Angular code, so we just use it.</p>
+                    </aside>
+                </section>
+
+                <section>
+                    <div ng-controller="reverseCtrl">
+                        <input ng-model="stringToReverse" />
+                        <div>{{stringToReverse | reverse}}</div>
+                    </div>
                     
-                    <aside notes=""></aside>
+                    <aside class="notes">
+                        <p>Type "dlroW olleH"</p>
+                    </aside>
+                    
+                </section>
+                
+                <section>
+                    TODO: Show chaining of filters and passing of parameters
+                </section>
+                
+                <section>
+                    TODO: Show demo of preceding concepts
+                </section>
+                
+                <section>
+                    TODO: Touch on parsers. Talk about how they're less common (refer to how often anyone actually implements the ConvertBack method of IValueConverter
+                </section>
+            </section>
+
+            <section data-background="5080E0">
+                <section>
+                    <h1>Styles</h1>
+
+                    <aside class="notes">
+                        <p>In Silverlight, we set the Visibility of an item. In Angular, we can do a number of things.</p>
+                        <ul>
+                            <li>Use ng-class to set a conditional style that changes the display css to none or not</li>
+                            <li>Use ng-show or ng-hide</li>
+                            <li>Use ng-if</li>
+                        </ul>
+                    </aside>
                 </section>
             </section>
 
@@ -421,12 +512,12 @@ FilterTextBox.TextChanged +=
 
             // Optional libraries used to extend on reveal.js
             dependencies: [
-         { src: '/lib/js/classList.js', condition: function () { return !document.body.classList; } },
-         { src: '/plugin/markdown/marked.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
-         { src: '/plugin/markdown/markdown.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
-         { src: '/plugin/highlight/highlight.js', async: true, callback: function () { hljs.initHighlightingOnLoad(); } },
-         { src: '/plugin/zoom-js/zoom.js', async: true, condition: function () { return !!document.body.classList; } },
-         { src: '/plugin/notes/notes.js', async: true, condition: function () { return !!document.body.classList; } }
+         { src: '/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+         { src: '/plugin/markdown/marked.js', condition: function() { return !!document.querySelector('[data-markdown]'); } },
+         { src: '/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector('[data-markdown]'); } },
+         { src: '/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+         { src: '/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+         { src: '/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
             ]
         });
 
