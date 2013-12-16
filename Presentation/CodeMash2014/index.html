@@ -68,7 +68,7 @@
                 </section>
             </section>
 
-            <section data-background="#804040">
+            <section data-background="#FFFFFF">
                 <section>
                     <img src="assets/silverlight-logo.png" class="noborder" style="min-width: 100%;" />
                     <aside class="notes">
@@ -98,8 +98,8 @@
                 </section>
             </section>
 
-            <section data-background="#704010">
-                <section>
+            <section data-background="#203030">
+                <section data-background="assets/Application.jpg">
                     <h1>Application</h1>
                 </section>
 
@@ -143,13 +143,12 @@
                 </section>
             </section>
 
-            <section data-background="#107040">
-                <section>
-                    <h1>Data Binding</h1>
+            <section data-background="#D0D0D0">
+                <section data-background="assets/DataBinding.jpg">
+                    <h1 style="color: #101010">Data Binding</h1>
                 </section>
 
                 <section>
-                    <div ng-non-bindable>TODO: ng-bind as an alternative to {{}}</div>
                     <pre><code contenteditable>
 &lt;StackPanel x:Name=&quot;LayoutRoot&quot;&gt;
     &lt;TextBox x:Name=&quot;textStuff&quot; /&gt;
@@ -161,9 +160,10 @@
     &lt;div&gt;Hello {{textStuff}}&lt;/div&gt;
 &lt;/div&gt;</code></pre>
 
-                    <aside class="notes">
+                    <aside ng-non-bindable class="notes">
                         <p>This is a bit of familiar Silverlight, a textbox bound to a textblock. Simple data binding.</p>
-                        <p>Let's see that in Angular.</p>
+                        <p>2nd fragment: Let's see that in Angular.</p>
+                        <p>Note here that ngBind can be used instead of moustaches but is essentially equivalent (can be useful if not wanting to see bind expression when page is loading - also consider ngCloak).</p>
                     </aside>
                 </section>
 
@@ -174,7 +174,7 @@
 &lt;/div&gt;</code></pre>
                     <div ng-controller="bindingDemoCtrl">
                         <input ng-model="textStuff" />
-                        <div>Hello {{textStuff}}</div>
+                        <div style="color: #101010">Hello {{textStuff}}</div>
                         <input class="fragment" ng-model="textStuff" />
                     </div>
 
@@ -205,8 +205,8 @@
                 </section>
             </section>
 
-            <section data-background="#803040">
-                <section>
+            <section data-background="#107040">
+                <section data-background="assets/CodeBehind.jpg">
                     <h1>Code-behind</h1>
                 </section>
 
@@ -271,8 +271,8 @@ myApp.controller('myController', function ($scope) {
                 </section>
             </section>
 
-            <section data-background="#403080">
-                <section>
+            <section data-background="#E06090"> <!-- Use E06090 for power rangers, or C0A040 for pooh -->
+                <section data-background="assets/DataBindingCollections2.jpg">
                     <h1>Data Binding Collections</h1>
                 </section>
 
@@ -320,7 +320,7 @@ collectionView.View.SortDescriptions.Add(
 collectionView.View.Filter =
     o =&gt; String.IsNullOrEmpty( FilterTextBox.Text )
             || ( (string)o ).Contains( FilterTextBox.Text );
-		
+        
 List.ItemsSource = collectionView.View;
 FilterTextBox.TextChanged +=
     (sender, args) => ((ICollectionView)List.ItemsSource).Refresh();</code></pre>
@@ -357,7 +357,7 @@ FilterTextBox.TextChanged +=
             </section>
 
             <section data-background="#806040">
-                <section>
+                <section data-background="assets/ValueConverters.jpg">
                     <h1>Value Converters</h1>
 
                     <aside class="notes">
@@ -429,21 +429,21 @@ FilterTextBox.TextChanged +=
                         <input ng-model="stringToReverse" />
                         <div>{{stringToReverse | reverse}}</div>
                     </div>
-                    
+
                     <aside class="notes">
                         <p>Type "dlroW olleH"</p>
                     </aside>
-                    
+
                 </section>
-                
+
                 <section>
                     TODO: Show chaining of filters and passing of parameters
                 </section>
-                
+
                 <section>
                     TODO: Show demo of preceding concepts
                 </section>
-                
+
                 <section>
                     TODO: Touch on parsers. Talk about how they're less common (refer to how often anyone actually implements the ConvertBack method of IValueConverter
                 </section>
