@@ -24,3 +24,7 @@ section img.noborder {
 input {
     font-size: 100%;
 }
+
+.reveal section code {
+    font-size: 85%;
+}

@@ -198,8 +198,11 @@
 
                     <aside class="notes">
                         <p>Comparing this with Silverlight, you can see a difference. In Silverlight as it is here, we are binding to one of the two textboxes. In Angular, the bindings are two way and bind to a model.</p>
-                        <p>Usually, we would bind to a value in a model specified via the data context. Angular creates this model for us.</p>
-                        <p>But, we can also have the concept of a data context in Angular to get finer control over our model.</p>
+                        <p>
+                            Usually, we would bind to a value in a model specified via the data context. This would also need at the very least, INotifyPropertyChanged so
+                            that changes could be tracked and bindings updated. Angular creates this model for us, including the ability to watch for changes.
+                        </p>
+                        <p>However, we can also implement the concept of a data context in Angular to get finer control over our model.</p>
                         <p>In fact, you probably noticed there's a default value here; "World" - that requires code behind.</p>
                     </aside>
                 </section>
@@ -271,104 +274,11 @@ myApp.controller('myController', function ($scope) {
                 </section>
             </section>
 
-            <section data-background="#E06090"> <!-- Use E06090 for power rangers, or C0A040 for pooh -->
-                <section data-background="assets/DataBindingCollections2.jpg">
-                    <h1>Data Binding Collections</h1>
-                </section>
-
-                <section>
-                    <pre><code ng-non-bindable>&lt;ItemsControl x:Name=&quot;List&quot;&gt;
-    &lt;ItemsControl.ItemTemplate&gt;
-        &lt;DataTemplate&gt;
-            &lt;TextBlock Text=&quot;{Binding}&quot;&gt;&lt;/TextBlock&gt;
-        &lt;/DataTemplate&gt;
-    &lt;/ItemsControl.ItemTemplate&gt;
-&lt;/ItemsControl&gt;</code></pre>
-                    <pre class="fragment"><code ng-non-bindable>&lt;div ng-repeat=&quot;name in names&quot;&gt;
-    &lt;p&gt;{{name}}&lt;/p&gt;
-&lt;/div&gt;</code></pre>
-
-                    <aside class="notes">
-                        <p>In Silverlight, we can have controls that show a sequence of items, repeating a template for each item.</p>
-                        <p>ng-repeat performs this task in Angular.</p>
-                    </aside>
-                </section>
-
-                <section>
-                    <pre><code class="cs" ng-non-bindable>List.ItemsSource = new[] { "Leprechaun", "Unicorn", "Bacon" }</code></pre>
-                    <pre class="fragment"><code ng-non-bindable class="javascript">$scope.names = [ 'Leprechaun', 'Unicorn', 'Bacon'];</code></pre>
-
-                    <aside class="notes"></aside>
-                </section>
-
-                <section>
-                    <div ng-controller="collectionBindingCtrl">
-                        <div ng-repeat="name in names"><p>{{name}}</p></div>
-                    </div>
-
-                    <aside class="notes">
-                        <p>Not particularly exciting, so let's add some sorting and filtering.</p>
-                    </aside>
-                </section>
-
-                <section>
-                    <h2>Sorting and filtering</h2>
-                    <pre><code class="cs" ng-non-bindable>var collectionView = new CollectionViewSource();
-collectionView.Source = new[] { &quot;Leprechaun&quot;, &quot;Unicorn&quot;, &quot;Bacon&quot; };
-collectionView.View.SortDescriptions.Add(
-    new SortDescription { Direction = ListSortDirection.Descending } );
-collectionView.View.Filter =
-    o =&gt; String.IsNullOrEmpty( FilterTextBox.Text )
-            || ( (string)o ).Contains( FilterTextBox.Text );
-        
-List.ItemsSource = collectionView.View;
-FilterTextBox.TextChanged +=
-    (sender, args) => ((ICollectionView)List.ItemsSource).Refresh();</code></pre>
-                    <pre class="fragment"><code ng-non-bindable contenteditable>&lt;div ng-controller=&quot;myController&quot;&gt;
-    &lt;input ng-model=&quot;filter&quot;/&gt;
-    &lt;div ng-repeat=&quot;name in names | filter:filter | orderBy:&#39;-toString()&#39;&quot;&gt;
-        &lt;p&gt;{{name}}&lt;/p&gt;
-    &lt;/div&gt;
-&lt;/div&gt;</code></pre>
-                    <aside class="notes">
-                        <p>XAML not shown here but all we've done is add a text box for entering a filter value.</p>
-                        <p>Here in the code, we've used it's value to filter a collection view and also its TextChanged event to refresh the collection source.</p>
-                        <p>In the Angular, things look a bit different. Unlike Silverlight, it's all done in the presentation code; no code-behind required.</p>
-                        <p>Instead of modifying a collection, we filter it through what are conveniently called filters in Angular.</p>
-                        <p>The first filter applies our search term, the second orders the values in descending order.</p>
-                    </aside>
-                </section>
-
-                <section>
-                    <div ng-controller="collectionBindingCtrl">
-                        <input ng-model="filter" />
-                        <div ng-repeat="name in names | filter:filter | orderBy:'-toString()'">
-                            <p>{{name}}</p>
-                        </div>
-                    </div>
-
-                    <aside class="notes">
-                        <p>
-                            And there we have it, a sorted and filtered list of items.
-                        </p>
-                        <p>To do this we used filters, but filters can be used for more than filtering collections.</p>
-                    </aside>
-                </section>
-            </section>
-
             <section data-background="#806040">
                 <section data-background="assets/ValueConverters.jpg">
                     <h1>Value Converters</h1>
 
                     <aside class="notes">
-                        <p>
-                            There are two types of filter; we've already seen one when we used them to filter a collection by a search term and to order them.
-                            I liken that type of filter to LINQ operators in the .NET world; they take sequences and convert them to different sequences.
-                            The second type of filter takes a single value and transforms it to a different value. These are more akin to ValueConverters
-                            and the StringFormat property on bindings.
-                        </p>
-                        <p>There are three built-in LINQ-style filters: limitTo, filter, orderBy</p>
-                        <p>And  built-in value converter-style filters: date, currency, uppercase, lowercase, json, number </p>
                         <p>
                             If you've written any serious XAML application, you've used value converters. Usually, to take a value from a data model and modify it for the presentation,
                             such as changing the case of a string, formatting the decimal places on a number, turning a boolean value into a visibility value, or an enumeration into a color.
@@ -421,6 +331,7 @@ FilterTextBox.TextChanged +=
                     <aside class="notes">
                         <p>In Silverlight, we create an instance of the converter and then add it to our binding..</p>
                         <p>In Angular, we don't need to create an instance as it already exists within the Angular code, so we just use it.</p>
+                        <p>Touch on parsers. Talk about how they're less common (refer to how often anyone actually implements the ConvertBack method of IValueConverter</p>
                     </aside>
                 </section>
 
@@ -431,29 +342,136 @@ FilterTextBox.TextChanged +=
                     </div>
 
                     <aside class="notes">
-                        <p>Type "dlroW olleH"</p>
+                        <p>Type "dlroW olleH" and other examples as required</p>
                     </aside>
 
                 </section>
 
                 <section>
-                    TODO: Show chaining of filters and passing of parameters
-                </section>
+                    <pre><code ng-non-bindable>&lt;div ng-app&gt;
+    &lt;input ng-model=&quot;textStuff&quot; /&gt;
+    &lt;div&gt;{{textStuff | reverse | uppercase}}&lt;/div&gt;
+&lt;/div&gt;</code></pre>
 
-                <section>
-                    TODO: Show demo of preceding concepts
-                </section>
+                    <div class="fragment" ng-controller="reverseCtrl">
+                        <input ng-model="stringToReverse" />
+                        <div>{{stringToReverse | reverse | uppercase}}</div>
+                    </div>
 
-                <section>
-                    TODO: Touch on parsers. Talk about how they're less common (refer to how often anyone actually implements the ConvertBack method of IValueConverter
+                    <aside class="notes">
+                        <p>Filters can be chained.</p>
+                    </aside>
                 </section>
             </section>
 
-            <section data-background="5080E0">
+            <section data-background="#E06090">
+                <!-- Use E06090 for power rangers, or C0A040 for pooh -->
+                <section data-background="assets/DataBindingCollections2.jpg">
+                    <h1>Data Binding Collections</h1>
+                    <aside class="notes">
+                        <p>Now that we've looked at bindings, code-behind and filters (value converters), let's look at more complex use of these things to bind to collections.</p>
+                    </aside>
+                </section>
+
                 <section>
-                    <h1>Styles</h1>
+                    <pre><code ng-non-bindable>&lt;ItemsControl x:Name=&quot;List&quot;&gt;
+    &lt;ItemsControl.ItemTemplate&gt;
+        &lt;DataTemplate&gt;
+            &lt;TextBlock Text=&quot;{Binding}&quot;&gt;&lt;/TextBlock&gt;
+        &lt;/DataTemplate&gt;
+    &lt;/ItemsControl.ItemTemplate&gt;
+&lt;/ItemsControl&gt;</code></pre>
+                    <pre class="fragment"><code ng-non-bindable>&lt;div ng-repeat=&quot;name in names&quot;&gt;
+    &lt;p&gt;{{name}}&lt;/p&gt;
+&lt;/div&gt;</code></pre>
 
                     <aside class="notes">
+                        <p>In Silverlight, we can have controls that show a sequence of items, repeating a template for each item.</p>
+                        <p>ng-repeat performs this task in Angular.</p>
+                    </aside>
+                </section>
+
+                <section>
+                    <pre><code class="cs" ng-non-bindable>List.ItemsSource = new[] { "Leprechaun", "Unicorn", "Bacon" }</code></pre>
+                    <pre class="fragment"><code ng-non-bindable class="javascript">$scope.names = [ 'Leprechaun', 'Unicorn', 'Bacon'];</code></pre>
+
+                    <aside class="notes"></aside>
+                </section>
+
+                <section>
+                    <div ng-controller="collectionBindingCtrl">
+                        <div ng-repeat="name in names"><p>{{name}}</p></div>
+                    </div>
+
+                    <aside class="notes">
+                        <p>
+                            Not particularly exciting and these things are not ordered, and perhaps we want to find one of them quickly,
+                            because the list is super long, so let's add some sorting and filtering.
+                        </p>
+                    </aside>
+                </section>
+
+                <section>
+                    <h2>Sorting and filtering</h2>
+                    <pre><code class="cs" ng-non-bindable>var collectionView = new CollectionViewSource();
+collectionView.Source = new[] { &quot;Leprechaun&quot;, &quot;Unicorn&quot;, &quot;Bacon&quot; };
+collectionView.View.SortDescriptions.Add(
+    new SortDescription { Direction = ListSortDirection.Descending } );
+collectionView.View.Filter =
+    o =&gt; String.IsNullOrEmpty( FilterTextBox.Text )
+            || ( (string)o ).Contains( FilterTextBox.Text );
+        
+List.ItemsSource = collectionView.View;
+FilterTextBox.TextChanged +=
+    (sender, args) => ((ICollectionView)List.ItemsSource).Refresh();</code></pre>
+                    <pre class="fragment"><code ng-non-bindable contenteditable>&lt;div ng-controller=&quot;myController&quot;&gt;
+    &lt;input ng-model=&quot;filter&quot;/&gt;
+    &lt;div ng-repeat=&quot;name in names | filter:filter | orderBy:&#39;-toString()&#39;&quot;&gt;
+        &lt;p&gt;{{name}}&lt;/p&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                    <aside class="notes">
+                        <p>XAML not shown here but all we've done is add a text box for entering a filter value.</p>
+                        <p>Here in the code, we've used it's value to filter a collection view and also its TextChanged event to refresh the collection source.</p>
+                        <p>In the Angular, things look a bit different. Unlike Silverlight, it's all done in the presentation code; no code-behind required.</p>
+                        <p>Instead of modifying a collection, we filter it through filters.</p>
+                        <p>The first filter applies our search term, the second orders the values in descending order.</p>
+                        <p>
+                            But wait, these filters are different than the ones we looked at earlier. Rather than converting a value, these
+                            filters are modifying a collection. Rather like LINQ. In fact, there are two types of filters; those that act on individual values
+                            like Value Converters and those that act on collections, like LINQ operators.
+                        </p>
+                        <p>
+                            There are two types of filter and we
+                            I liken that type of filter to LINQ operators in the .NET world; they take sequences and convert them to different sequences.
+                            The second type of filter takes a single value and transforms it to a different value. These are more akin to ValueConverters
+                            and the StringFormat property on bindings.
+                        </p>
+                        <p>There are three built-in LINQ-style filters: limitTo, filter, orderBy</p>
+                        <p>And  built-in value converter-style filters: date, currency, uppercase, lowercase, json, number </p>
+                    </aside>
+                </section>
+
+                <section>
+                    <div ng-controller="collectionBindingCtrl">
+                        <input ng-model="filter" />
+                        <div ng-repeat="name in names | filter:filter | orderBy:'-toString()'">
+                            <p>{{name}}</p>
+                        </div>
+                    </div>
+
+                    <aside class="notes">
+                        <p>And there we have it, a sorted and filtered list of items.</p>
+                    </aside>
+                </section>
+            </section>
+
+            <section data-background="#701000">
+                <section data-background="assets/Style.jpg">
+                    <h1>Style</h1>
+
+                    <aside class="notes">
+                        <p>So far, we've looked at how we get data into our view, but what about controlling when and how it appears?</p>
                         <p>In Silverlight, we set the Visibility of an item. In Angular, we can do a number of things.</p>
                         <ul>
                             <li>Use ng-class to set a conditional style that changes the display css to none or not</li>
@@ -461,6 +479,139 @@ FilterTextBox.TextChanged +=
                             <li>Use ng-if</li>
                         </ul>
                     </aside>
+                </section>
+
+                <section>
+                    <pre><code contenteditable>&lt;StackPanel x:Name=&quot;LayoutRoot&quot; Background=&quot;White&quot;&gt;
+    &lt;CheckBox
+              IsChecked=&quot;{Binding IsHelloWorldVisible, Mode=TwoWay}&quot;&gt;Show&lt;/CheckBox&gt;
+    &lt;TextBlock Text=&quot;SURPRISE!!!&quot;
+               Visibility=&quot;{Binding IsHelloWorldVisible, Converter={StaticResource VisibilityConverter}}&quot; /&gt;
+&lt;/StackPanel&gt;</code></pre>
+
+                    <pre class="fragment"><code contenteditable ng-non-bindable>&lt;div ng-controller=&quot;MyController&quot;&gt;
+    &lt;input type=&quot;checkbox&quot; ng-model=&quot;isShowingSurprise&quot; /&gt;
+    &lt;div ng-show=&quot;isShowingSurprise&quot;&gt;SURPRISE!&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+                    <div class="fragment" ng-controller="presentationBindingCtrl">
+                        <input type="checkbox" ng-model="isShowingSurprise" name="showSurpriseCheck" />
+                        <label for="showSurpriseCheck">Show</label>
+                        <div ng-show="isShowingSurprise">SURPRISE!</div>
+                        <div class="fragment" ng-hide="isShowingSurprise">No surprise :(</div>
+                    </div>
+
+                    <aside class="notes">
+                        <p>Controlling Visibility is a common task in Silverlight. We add and remove things using Visiblity.Collapsed and Visiblity.Visible (and Visiblity.Hidden if we include WPF)</p>
+                        <p>
+                            A simple example would be to bind a checkbox to the visiblity of another control. Of course, simple means writing:
+                            <ul>
+                                <li>A boolean-to-visibility value converter</li>
+                                <li>A data model with INotifyPropertyChanged</li>
+                            </ul>
+                            But let's assume we've got all that.
+                        </p>
+                        <p>In Angular, we can achieve this in a number of ways. The simplest uses ng-show, as in this example (next fragment)</p>
+                        <p>There is also ng-hide. So, we could edit this to add something that shows in the opposite circumstance. This is equivalent to !ng-show.</p>
+                        <p>ng-hide and ng-show manipulate the display CSS style based on a condition.</p>
+                        <p>But we could also use ng-if, which is different in that the element doesn't even get included if the condition is not met. (show ng-if in editor)</p>
+                        <p>Finally, we could use ng-class or ng-style to apply a specific CSS style based on bound conditions.</p>
+                    </aside>
+                </section>
+
+                <section>
+                    <pre><code>&lt;RadioButton
+    IsChecked=&quot;{Binding IsError, Mode=TwoWay}&quot;&gt;
+    Has Errors&lt;/RadioButton&gt;
+&lt;RadioButton
+    IsChecked=&quot;{Binding IsError, Mode=TwoWay, Converter={StaticResource NotConverter}}&quot;&gt;
+    No Errors&lt;/RadioButton&gt;
+&lt;TextBlock Text=&quot;Some status message&quot;
+    Foreground=&quot;{Binding IsError, Converter={StaticResource ErrorColorConverter}}&quot; /&gt;
+</code></pre>
+                    <pre class="fragment"><code ng-non-bindable>&lt;div ng-controller=&quot;MyController&quot;&gt;
+    &lt;div&gt;
+        &lt;input type=&quot;radio&quot; ng-model=&quot;isError&quot; value=&quot;1&quot; name=&quot;isErrorRadio&quot; /&gt;
+        &lt;label for=&quot;isErrorRadio&quot;&gt;Has Errors&lt;/label&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+        &lt;input type=&quot;radio&quot; ng-model=&quot;isError&quot; value=&quot;0&quot; name=&quot;notIsErrorRadio&quot; /&gt;
+        &lt;label for=&quot;notIsErrorRadio&quot;&gt;No Errors&lt;/label&gt;
+    &lt;/div&gt;
+    &lt;div ng-style=&quot;{color: errorColor}&quot;&gt;Some status message&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+                    <aside class="notes">
+                        <p>Other presentation changes tend to involve colours, borders, etc. For this, ng-class is the thing to use.</p>
+                        <p>
+                            While in Silverlight, we can use styles, templates and bindings to
+                            individual properties like FontSize to change control appearance, depending on the scenario.
+                            In Angular, since we're building on top of HTML, we use CSS (cascading style sheets) and the ng-class and ng-style directives.
+                            To confuse things slightly, what we call styles in XAML, we would call classes in CSS. Styles in CSS are the individual properties within a class.
+                        </p>
+                        <p>
+                            Here we have a simple binding for text color. Of course, nothing is that simple. In Silverlight I had to create a couple of converters to do this.
+                            It's just for illustrative purposes so the code isn't particularly nice, but it does the job for our purposes.
+                            I've used radio buttons here instead of a checkbox for variety, but these radios change a boolean in the background
+                            which the status text binds to via a converter to get a brush that signifies the error state.
+
+                            Just like in Silverlight (it's a different story for WPF), classes in Angular are atomic - we can't bind to individual styles within it.
+                            Instead, we can bind separately using ngStyle. Consider it an equivalent to binding on individual properties.
+                        </p>
+                    </aside>
+                </section>
+
+                <section>
+                    <pre><code class="cs">if ( (bool)value )
+{
+    return new SolidColorBrush(Colors.Red);
+}
+return new SolidColorBrush(Colors.Green);</code></pre>
+                    <pre class="fragment"><code contenteditable class="javascript">$scope.isError = &#39;0&#39;;
+$scope.$watch(&#39;isError&#39;, function() {
+    $scope.errorColor = $scope.isError === &#39;1&#39; ? &#39;red&#39; : &#39;green&#39;;
+});</code></pre>
+                    
+                    <aside class="notes">
+                        <p>I've stripped these examples down to the pertinent code. Illustrative purposes.</p>
+                        <p>
+                            Notice that isError is a string. That's due to how the value attribute on the radio input works. It will set the model value
+                            to a string, so we do the same. If we wanted this to be a bool, we could use ngChange directive and execute code when value changes
+                            to set a boolean model value, for example.
+                        </p>
+                        <p>
+                            Of course, we could just have the value of the radio buttons be the colors we want and bind everything to the same model value.
+                        </p>
+                    </aside>
+                </section>
+
+                <section>
+                    <div ng-controller="presentationBindingCtrl">
+                        <div>
+                            <input type="radio" ng-model="isError" value="1" name="isErrorRadio" />
+                            <label for="isErrorRadio">Has Errors</label>
+                        </div>
+                        <div>
+                            <input type="radio" ng-model="isError" value="0" name="notIsErrorRadio" />
+                            <label for="notIsErrorRadio">No Errors</label>
+                        </div>
+                        <div ng-style="{color: errorColor}">Some status message</div>
+                    </div>
+                </section>
+
+                <section>
+                    <aside class="notes">
+                        <p>
+                            Here is how we might do the previous example using ngClass and Silverlight styles.
+                        </p>
+                        <p>All of this can, of course, be much more complex than the examples I've shown here.</p>
+                    </aside>
+                </section>
+            </section>
+
+            <section data-background="#404040">
+                <section data-background="assets/Controls.jpg">
+                    <h1>Controls</h1>
                 </section>
             </section>
 

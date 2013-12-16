@@ -13,6 +13,15 @@
 		$scope.stringToReverse = 'Hello World';
 	}]);
 
+	codemash2014.controller('presentationBindingCtrl', ['$scope', function($scope) {
+		$scope.isShowingSurprise = false;
+		$scope.isError = '0';
+
+		$scope.$watch('isError', function() {
+			$scope.errorColor = $scope.isError === '1' ? 'red' : 'green';
+		});
+	}]);
+
 	codemash2014.filter('reverse', function() {
 		return function(value) {
 			return value.split("").reverse().join("");;
