@@ -520,26 +520,19 @@ FilterTextBox.TextChanged +=
                 </section>
 
                 <section>
-                    <pre><code>&lt;RadioButton
-    IsChecked=&quot;{Binding IsError, Mode=TwoWay}&quot;&gt;
-    Has Errors&lt;/RadioButton&gt;
-&lt;RadioButton
-    IsChecked=&quot;{Binding IsError, Mode=TwoWay, Converter={StaticResource NotConverter}}&quot;&gt;
-    No Errors&lt;/RadioButton&gt;
+                    <pre><code>&lt;CheckBox IsChecked=&quot;{Binding HasError, Mode=TwoWay}&quot;&gt;Has Error&lt;/CheckBox&gt;
 &lt;TextBlock Text=&quot;Some status message&quot;
-    Foreground=&quot;{Binding IsError, Converter={StaticResource ErrorColorConverter}}&quot; /&gt;
+    Foreground=&quot;{Binding HasError, Converter={StaticResource ErrorColorConverter}}&quot; /&gt;
 </code></pre>
-                    <pre class="fragment"><code ng-non-bindable>&lt;div ng-controller=&quot;MyController&quot;&gt;
-    &lt;div&gt;
-        &lt;input type=&quot;radio&quot; ng-model=&quot;isError&quot; value=&quot;1&quot; name=&quot;isErrorRadio&quot; /&gt;
-        &lt;label for=&quot;isErrorRadio&quot;&gt;Has Errors&lt;/label&gt;
-    &lt;/div&gt;
-    &lt;div&gt;
-        &lt;input type=&quot;radio&quot; ng-model=&quot;isError&quot; value=&quot;0&quot; name=&quot;notIsErrorRadio&quot; /&gt;
-        &lt;label for=&quot;notIsErrorRadio&quot;&gt;No Errors&lt;/label&gt;
-    &lt;/div&gt;
-    &lt;div ng-style=&quot;{color: errorColor}&quot;&gt;Some status message&lt;/div&gt;
-&lt;/div&gt;</code></pre>
+                    <pre class="fragment"><code ng-non-bindable>&lt;input type=&quot;checkbox&quot; ng-model=&quot;hasError&quot; name=&quot;isErrorRadio&quot; /&gt;
+&lt;label for=&quot;isErrorRadio&quot;&gt;Has Error&lt;/label&gt;
+&lt;div ng-style=&quot;{color: hasError ? &#39;red&#39; : &#39;green&#39;}&quot;&gt;Some status message&lt;/div&gt;</code></pre>
+
+                    <div class="fragment" ng-controller="presentationBindingCtrl">
+                        <input type="checkbox" ng-model="hasError" name="isErrorRadio" />
+                        <label for="isErrorRadio">Has Error</label>
+                        <div ng-style="{color: hasError ? 'red' : 'green'}">Some status message</div>
+                    </div>
 
                     <aside class="notes">
                         <p>Other presentation changes tend to involve colours, borders, etc. For this, ng-class is the thing to use.</p>
@@ -550,59 +543,76 @@ FilterTextBox.TextChanged +=
                             To confuse things slightly, what we call styles in XAML, we would call classes in CSS. Styles in CSS are the individual properties within a class.
                         </p>
                         <p>
-                            Here we have a simple binding for text color. Of course, nothing is that simple. In Silverlight I had to create a couple of converters to do this.
+                            Here we have a simple binding for text color.
                             It's just for illustrative purposes so the code isn't particularly nice, but it does the job for our purposes.
-                            I've used radio buttons here instead of a checkbox for variety, but these radios change a boolean in the background
-                            which the status text binds to via a converter to get a brush that signifies the error state.
-
-                            Just like in Silverlight (it's a different story for WPF), classes in Angular are atomic - we can't bind to individual styles within it.
-                            Instead, we can bind separately using ngStyle. Consider it an equivalent to binding on individual properties.
                         </p>
                     </aside>
                 </section>
 
                 <section>
-                    <pre><code class="cs">if ( (bool)value )
+                    <pre><code class="cs">public object Convert( object value, Type targetType, object param, CultureInfo culture )
 {
-    return new SolidColorBrush(Colors.Red);
-}
-return new SolidColorBrush(Colors.Green);</code></pre>
-                    <pre class="fragment"><code contenteditable class="javascript">$scope.isError = &#39;0&#39;;
-$scope.$watch(&#39;isError&#39;, function() {
-    $scope.errorColor = $scope.isError === &#39;1&#39; ? &#39;red&#39; : &#39;green&#39;;
-});</code></pre>
-                    
+    return (bool) value ? new SolidColorBrush(Colors.Red) :
+                          new SolidColorBrush(Colors.Green);
+}</code></pre>
+                    <pre class="fragment"><code contenteditable>ng-style="{color: hasError ? 'red' : 'green'}"</code></pre>
+
                     <aside class="notes">
-                        <p>I've stripped these examples down to the pertinent code. Illustrative purposes.</p>
+                        <p>We have a value converter for Silverlight that converts a bool to a color.</p>
+                        <p>In Angular we have this...</p>
+                        <p>Of course, we could create scope values for the colors.</p>
+                        <p>Or we could delegate the color selection to a method.</p>
+                        <p>Or we could write a filter.</p>
+                        <p>Show some examples in code edits</p>
                         <p>
-                            Notice that isError is a string. That's due to how the value attribute on the radio input works. It will set the model value
-                            to a string, so we do the same. If we wanted this to be a bool, we could use ngChange directive and execute code when value changes
-                            to set a boolean model value, for example.
-                        </p>
-                        <p>
-                            Of course, we could just have the value of the radio buttons be the colors we want and bind everything to the same model value.
+                            However, usually, we won't manipulate individual properties like this. Instead, we would apply a Style or Template
+                            in Silverlight, or a CSS class in Angular.
                         </p>
                     </aside>
                 </section>
 
                 <section>
-                    <div ng-controller="presentationBindingCtrl">
-                        <div>
-                            <input type="radio" ng-model="isError" value="1" name="isErrorRadio" />
-                            <label for="isErrorRadio">Has Errors</label>
-                        </div>
-                        <div>
-                            <input type="radio" ng-model="isError" value="0" name="notIsErrorRadio" />
-                            <label for="notIsErrorRadio">No Errors</label>
-                        </div>
-                        <div ng-style="{color: errorColor}">Some status message</div>
-                    </div>
-                </section>
+                    <pre><code>&lt;div ng-class=&quot;{ 'status-error': hasError, 'status-ok': !hasError }&quot;&gt;
+    Totally different status message
+&lt;/div&gt;</code></pre>
+                    <pre><code class="css" contenteditable>.status-ok {
+    color: green; }
+.status-error {
+    color: red; }</code></pre>
 
-                <section>
+                    <div class="fragment" ng-controller="presentationBindingCtrl">
+                        <input type="checkbox" ng-model="hasError" name="isErrorRadio" />
+                        <label for="isErrorRadio">Has Error</label>
+                        <div ng-class="{ 'status-error': hasError, 'status-ok': !hasError }">Totally different status message</div>
+                    </div>
+
                     <aside class="notes">
                         <p>
-                            Here is how we might do the previous example using ngClass and Silverlight styles.
+                            Similar to ngStyle, ngClass provides a mechanism for adding and removing styles based on conditions.
+                        </p>
+                        <p>
+                            IN Silverlight, changing the style based on the data usually means data-bindings similar to what we had before but inside the style (so we can
+                            reuse it elsewhere on other controls), or some sort of resource look-up value converter that returns a style resource based on the
+                            value in our model.
+
+                            For Angular, we can just do this.
+                        </p>
+                        <p>
+                            Here we have just the message portion from before.
+                            THe ng-class directive takes an object where the name of the properties is the style name and the value is a binding (or constant) that
+                            determines when that style should be applied.
+                        </p>
+                        <p>
+                            Of course, just changing the color is boring and you've seen that already, and we're using styles now so we can easily change some more stuff
+                            fit without changing the logic. So, let's grab the user's attention with something like.
+
+                            <div>
+                                Add the following to each style.
+
+                                font-weight: bold;
+                            </div>
+
+                            Let's see this in action.
                         </p>
                         <p>All of this can, of course, be much more complex than the examples I've shown here.</p>
                     </aside>
@@ -612,35 +622,156 @@ $scope.$watch(&#39;isError&#39;, function() {
             <section data-background="#404040">
                 <section data-background="assets/Controls.jpg">
                     <h1>Controls</h1>
+
+                    <aside class="notes">
+                        <p>
+                            So, we've looked at some of the basic building blocks to making an Angular application and these will take you pretty far,
+                            but now you want to encapsulate a particular piece of funcationality so you can reuse it somewhere else or to tidy up
+                            your code so your colleagues won't want to kill you as they try to review it.
+                        </p>
+                        <p>
+                            In Silverlight, this is achieved using user controls and controls (or derivatives thereof). One could consider the inline
+                            examples we've seen as user controls, even though many might exist within a single HTML file. Each div has a controller associated
+                            with it that indicates the code-behind for that section. However, they are all in a single HTML file and that's messy.
+                        </p>
+                        <p>
+                            To encapsulate these elsewhere, we use directives. Directives are a way of extending HTML to add behavior and presentation.
+                            We've already seen a few such as ngClass, ngStyle and ngController and we can leverage this feature to encapsulate our cool components for reuse.
+                        </p>
+                    </aside>
+                </section>
+
+                <section>
+                    TODO: Show simple directive that encapsulates our status text
+
+                    <aside class="notes">
+                        <p>
+                            Explain restrict (note older browsers don't support E). Options are EACM (Element/Attribute/Class/Comment).
+                            I tend to use A although there are various opinions on which should be used for what. For example, if the directive includes HTML elements,
+                            use E, if it modifies behavior, use A, and if it modifies styling, use C. I am not sure what M might be used for.
+                        </p>
+                        <p>This isn't particularly useful. We should be able to change the text, for example, or indicate that it's an error message.</p>
+                    </aside>
+                </section>
+
+                <section>
+                    <h2>Dependency Properties</h2>
+
+                    TODO: Show example of reusing a control with a dependency property on it.
+                    <div class="fragment"> TODO: Show Angular equivalent</div>
+
+                    <aside class="notes">
+                        <p>In Silverlight, we pass data to the controls using dependency properties like this.</p>
+                        <p>In Angular, we do very similar things to pass values, but they are declared in the directive a little differently.</p>
+                        <p>
+                            There is a lot more nuance to scope than I'm showing here and I highly recommend reading up on this as well as attending Brian Genisio's talk
+                            on Directives Demystified as this can get pretty complicated. To make it easy on myself, I'm going to skirt around the complexities, but please be aware
+                            that you need to learn more about scope if you're going to work with directives.
+                        </p>
+                    </aside>
+                </section>
+
+                <section>
+                    TODO: Show code-behind and directive scope
+                    TODO: Show our working directive with scope
+                </section>
+
+                <section>
+                    <h2>Dependency Injection</h2>
+                    <aside class="notes">
+                        <p>
+                            Sometimes, we want to push some work off to a service somewhere that we're dependent on. We might use a DI framework like Unity
+                            or we may pass the service in a property or use some other mechanism to ensure that our code can use that service, or we might just
+                            add a using statement and use some behavior from an imported assembly directly.
+                        </p>
+                        <p>
+                            In Angular, as I had mentioned earlier, we get dependency injection built-in and it is used for any scenario where we want to use
+                            the facilities offered by something elsewhere in a referenced module. All we need to do is tell it what we want injected
+                            and if it exists in the loaded modules, we'll get it. $scope is a commonly injected item, although newer versions of Angular allow you to omit it
+                            for the situations we've been using it.
+                        </p>
+                        <p>
+                            Consider how we use value converters from resources. We mention the resource by name and let Silverlight actually grab it and use it. Angular does this
+                            in a similar way, by grabbing named dependencies from the imported modules.
+
+                            We can provide something for dependency injection using providers. Using a provider, we register for dependency injection the thing we want to inject.
+                            angular.controller and angular.directive are examples of specialised providers.  While controllers and directives are more related to the presentation
+                            and behavior of the UI, there are others that provide access to functionality like accessing RESTful services or your cunning stats calculator.
+                        </p>
+                    </aside>
+                </section>
+
+                <section>
+                    TODO: Show angular values for error colors, service for choosing a color and a factory for something equally entertaining and valuable
+
+                    <aside class="notes">
+                        <p>
+                            Let's look at an example; rather than the ErrorColorConverter we used in Silverlight,
+                            what if we define those colors separately and then want to convert to them.
+                            what if we wanted an error color service throughout our app that could be used by any directive - perhaps we can't just use CSS styles because the colors
+                            can be changed on the fly - and perhaps we want the colors to be configurable for use outside of the logic that is used to convert a bool to one
+                            of those colors.
+
+                            Here is how we would define such a dependency.
+                        </p>
+                        <p>
+                            angular.service will inject an instance of the defined function, angular.factory will inject the result of the defined function, and angular.value injects
+                            the value it was defined with.
+                        </p>
+                    </aside>
+                </section>
+
+                <section>
+                    TODO: Show these things used in a directive.
+                    <aside class="notes">
+                        <p>Now that we've defined our various utilities and values, let's use them in our directive.</p>
+                    </aside>
                 </section>
             </section>
 
             <section>
-                <img src="assets/silverlight-logo.png" class="noborder" style="min-width: 75%;" />
-                <h1>VS</h1>
-                <img src="assets/angularjs.jpeg" class="noborder" style="min-width: 75%;" />
+                <section>
+                    <h1>Conclusion</h1>
 
-                <aside class="notes">
-                    <p>I knew good reasons to use a framework like Angular over Silverlight</p>
+                    <aside class="notes">
+                        <p>
+                            We've looked at some of the more common elements of Silverlight and other XAML-based frameworks and seen how we might achieve the same thing using
+                            AngularJS, HTML and CSS. So, let's return to our Silverlight app I showed at the start and see that in AngularJS using the concepts we've learned.
+                        </p>
+                    </aside>
+                </section>
+
+                <section>
+                    <img src="assets/silverlight-logo.png" class="noborder" style="min-width: 75%;" />
+                    <h1>VS</h1>
+                    <img src="assets/angularjs.jpeg" class="noborder" style="min-width: 75%;" />
+
+                    <aside class="notes">
+                        <p>I knew good reasons to use a framework like Angular over Silverlight</p>
+                        <ul>
+                            <li>No need for HTML bridge as we're already in HTML</li>
+                            <li>Cross-platform support, not just PC and Mac (and WP7, if you compile specifically for that platform)</li>
+                            <li>No plugin required - just use JavaScript</li>
+                            <li>Well supported and in active development</li>
+                        </ul>
+                    </aside>
+                </section>
+
+                <section>
+                    <h1>Links</h1>
                     <ul>
-                        <li>No need for HTML bridge as we're already in HTML</li>
-                        <li>Cross-platform support, not just PC and Mac (and WP7, if you compile specifically for that platform)</li>
-                        <li>No plugin required - just use JavaScript</li>
-                        <li>Well supported and in active development</li>
+                        <li>Batarang</li>
+                        <li>karma</li>
+                        <li>revealJS</li>
+                        <li>presentation on GitHub</li>
+                        <li>Egghead.io</li>
+                        <li>Side waffle</li>
                     </ul>
-                </aside>
-            </section>
-
-            <section>
-                <h1>Links</h1>
-                <ul>
-                    <li>Batarang</li>
-                    <li>karma</li>
-                    <li>revealJS</li>
-                    <li>presentation on GitHub</li>
-                    <li>Egghead.io</li>
-                    <li>Side waffle</li>
-                </ul>
+                </section>
+                
+                <section>
+                    <h1>Questions</h1>
+                </section>
             </section>
         </div>
     </div>

@@ -38,15 +38,15 @@ namespace HelloWorld
 				}
 			}
 
-			public bool IsError
+			public bool HasError
 			{
-				get { return _isError; }
+				get { return _hasError; }
 				set
 				{
-					if ( _isError != value )
+					if ( _hasError != value )
 					{
-						_isError = value;
-						OnPropertyChanged( "IsError" );
+						_hasError = value;
+						OnPropertyChanged( "HasError" );
 					}
 				}
 			}
@@ -63,7 +63,7 @@ namespace HelloWorld
 			}
 
 			private bool _isShowingSurprise;
-			private bool _isError;
+			private bool _hasError;
 		}
 	}
 }

@@ -7,9 +7,10 @@
     mc:Ignorable="d"
     d:DesignHeight="300" d:DesignWidth="400">
     <UserControl.Resources>
-        <helloWorld:NotConverter x:Name="NotConverter" />
-        <helloWorld:ErrorColorConverter x:Name="ErrorColorConverter" />
-        <helloWorld:VisibilityConverter x:Name="VisibilityConverter" />
+        <helloWorld:NotConverter x:Key="NotConverter" />
+        <helloWorld:ErrorColorConverter x:Key="ErrorColorConverter" />
+        <helloWorld:VisibilityConverter x:Key="VisibilityConverter" />
+        
     </UserControl.Resources>
 
     <StackPanel x:Name="LayoutRoot" Background="White" Width="Auto">
@@ -17,8 +18,7 @@
         <TextBlock Text="SURPRISE!" FontSize="24"
             Visibility="{Binding IsShowingSurprise, Converter={StaticResource VisibilityConverter}}" />
 
-        <RadioButton IsChecked="{Binding IsError, Mode=TwoWay}">Has Errors</RadioButton>
-        <RadioButton IsChecked="{Binding IsError, Mode=TwoWay, Converter={StaticResource NotConverter}}">No Errors</RadioButton>
-        <TextBlock Text="Some status message" FontSize="24" Foreground="{Binding IsError, Converter={StaticResource ErrorColorConverter}}" />
+        <CheckBox FontSize="24" IsChecked="{Binding HasError, Mode=TwoWay}">Has Error</CheckBox>
+        <TextBlock Text="Some status message" FontSize="24" Foreground="{Binding HasError, Converter={StaticResource ErrorColorConverter}}" />
     </StackPanel>
 </UserControl>

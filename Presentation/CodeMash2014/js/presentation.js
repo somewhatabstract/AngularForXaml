@@ -15,11 +15,9 @@
 
 	codemash2014.controller('presentationBindingCtrl', ['$scope', function($scope) {
 		$scope.isShowingSurprise = false;
-		$scope.isError = '0';
+		$scope.hasError = false;
 
-		$scope.$watch('isError', function() {
-			$scope.errorColor = $scope.isError === '1' ? 'red' : 'green';
-		});
+		$scope.errorColor = $scope.hasError ? 'red' : 'green';
 	}]);
 
 	codemash2014.filter('reverse', function() {
