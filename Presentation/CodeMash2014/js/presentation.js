@@ -25,4 +25,19 @@
 			return value.split("").reverse().join("");;
 		};
 	});
+
+	codemash2014.directive('statusMessageSimple', function() {
+		return {
+			template: '<div>Our status message</div>',
+			restrict: 'E'
+		};
+	});
+
+	codemash2014.directive('statusMessage', function() {
+		return {
+			template: '<div>{{message}}</div>',
+			restrict: 'E',
+			scope: { message: '@' }
+		};
+	});
 })();

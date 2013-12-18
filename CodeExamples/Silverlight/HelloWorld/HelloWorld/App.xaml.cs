@@ -11,7 +11,8 @@
 
 		private void Application_Startup( object sender, System.Windows.StartupEventArgs e )
 		{
-			this.RootVisual = new Presentation();
+			this.RootVisual = new Controls();
+			//this.RootVisual = new Presentation();
 			//this.RootVisual = new Binding1();
 			//this.RootVisual = new BindingCollections();
 		}
