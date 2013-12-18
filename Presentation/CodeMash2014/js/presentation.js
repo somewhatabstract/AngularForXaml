@@ -40,4 +40,20 @@
 			scope: { message: '@' }
 		};
 	});
+
+	codemash2014.value('errorColor', 'red');
+	codemash2014.value('okColor', 'green');
+
+	codemash2014.service('statusColorService', ['errorColor', 'okColor', function(errorColor, okColor) {
+		this.getTextColor = function(hasError) {
+			return hasError ? errorColor : okColor;
+		};
+	}]);
+
+	codemash2014.controller('colorBindingCtrl', ['$scope', 'statusColorService', function($scope, statusColorService) {
+		$scope.hasError = false;
+		$scope.getTextColor = function(hasError) {
+			return statusColorService.getTextColor(hasError);
+		};
+	}]);
 })();

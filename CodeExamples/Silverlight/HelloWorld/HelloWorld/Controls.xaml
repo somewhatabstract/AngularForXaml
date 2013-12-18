@@ -8,16 +8,26 @@
     d:DesignHeight="300" d:DesignWidth="400">
 
     <StackPanel x:Name="LayoutRoot" Background="White">
+        <StackPanel.Resources>
+            <Color x:Key="ErrorColor">Red</Color>
+            <Color x:Key="OkColor">Green</Color>
+        </StackPanel.Resources>
+        
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="CommonStates">
                 <VisualState x:Name="Error">
                     <Storyboard>
-                        <ColorAnimation To="Red" Duration="0:00:00" Storyboard.TargetName="MessageTextBlock" Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)" />
+                        <ColorAnimation To="{StaticResource ErrorColor}" Duration="0:00:00" Storyboard.TargetName="MessageTextBlock" Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)" />
                     </Storyboard>
                 </VisualState>
-                <VisualState x:Name="Normal" />
+                <VisualState x:Name="Normal">
+                    <Storyboard>
+                        <ColorAnimation To="{StaticResource OkColor}" Duration="0:00:00" Storyboard.TargetName="MessageTextBlock" Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)" />
+                    </Storyboard>
+                </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
+        
         <CheckBox FontSize="24" IsChecked="{Binding HasError, Mode=TwoWay}">Show</CheckBox>
         <helloWorld:StatusMessage x:Name="MessageTextBlock" Message="Look at this brilliant text!" FontSize="24" />
     </StackPanel>

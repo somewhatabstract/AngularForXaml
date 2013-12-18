@@ -19,6 +19,7 @@ namespace HelloWorld
 		{
 			InitializeComponent();
 			this.DataContext = this;
+			VisualStateManager.GoToState( this, "Normal", true );
 		}
 
 		public bool HasError

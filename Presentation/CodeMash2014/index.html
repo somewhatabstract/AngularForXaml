@@ -258,12 +258,10 @@ myApp.controller('myController', function ($scope) {
     &lt;div&gt;Hello {{textStuff}}&lt;/div&gt;
     &lt;input ng-model=&quot;textStuff&quot; /&gt;
 &lt;/div&gt;</code></pre>
-                    <pre><code class="javascript" ng-non-bindable>(function(){
-    var myApp = angular.module('myApp', []);
-    myApp.controller('myController', function ($scope) {
-        $scope.textStuff = 'World';
-    });
-})();</code></pre>
+                    <pre><code class="javascript" ng-non-bindable>var myApp = angular.module(&#39;myApp&#39;, []);
+myApp.controller(&#39;myController&#39;, function ($scope) {
+    $scope.textStuff = &#39;World&#39;;
+});</code></pre>
 
                     <aside class="notes">
                         <p>Here's the full Angular app for our earlier data binding demo with two textboxes.</p>
@@ -560,6 +558,7 @@ FilterTextBox.TextChanged +=
                     <aside class="notes">
                         <p>We have a value converter for Silverlight that converts a bool to a color.</p>
                         <p>In Angular we have this...</p>
+                        <p>Note this is better as it moves our style into the presentation instead of the code-behind</p>
                         <p>Of course, we could create scope values for the colors.</p>
                         <p>Or we could delegate the color selection to a method.</p>
                         <p>Or we could write a filter.</p>
@@ -607,9 +606,9 @@ FilterTextBox.TextChanged +=
                             fit without changing the logic. So, let's grab the user's attention with something like.
 
                             <div>
-                                Add the following to each style.
+                                Add the following to error style - make sure this matches what actually happens so smoke and mirrors occurs.
 
-                                font-weight: bold;
+                                TODO: Add style here to copy in
                             </div>
 
                             Let's see this in action.
@@ -681,10 +680,10 @@ FilterTextBox.TextChanged +=
                             Explain restrict.
                             <div>Options are EACM (Element/Attribute/Class/Comment).</div>
                             <ul>
-                                <li>E when a new control</li>
-                                <li>A when a new behavior</li>
-                                <li>C when a new style</li>
-                                <li>M when, well, I'm not sure</li>
+                                <li>E when wanting a new control</li>
+                                <li>A when attaching new behavior to a specific element</li>
+                                <li>C when extending an existing class with new behavior</li>
+                                <li>Don't use M - it exists for legacy reasons</li>
                             </ul>
 
                             Tend to use A as it is supported in most browsers.
@@ -764,6 +763,30 @@ public string Message
 
                 <section>
                     <h2>Code Reuse</h2>
+                    <pre><code>&lt;CheckBox IsChecked=&quot;{Binding HasError, Mode=TwoWay}&quot;&gt;Show&lt;/CheckBox&gt;
+&lt;myApp:StatusMessage x:Name=&quot;MessageTextBlock&quot; Message=&quot;Look at this brilliant text!&quot; /&gt;</code></pre>
+                    <pre class="fragment"><code>&lt;StackPanel.Resources&gt;
+    &lt;Color x:Key=&quot;ErrorColor&quot;&gt;Red&lt;/Color&gt;
+    &lt;Color x:Key=&quot;OkColor&quot;&gt;Green&lt;/Color&gt;
+&lt;/StackPanel.Resources&gt;</code></pre>
+
+                    <pre class="fragment"><code>&lt;VisualStateManager.VisualStateGroups&gt;
+    &lt;VisualStateGroup x:Name=&quot;CommonStates&quot;&gt;
+        &lt;VisualState x:Name=&quot;Error&quot;&gt;
+            &lt;Storyboard&gt;
+                &lt;ColorAnimation To=&quot;{StaticResource ErrorColor}&quot; Duration=&quot;0:00:00&quot; Storyboard.TargetName=&quot;MessageTextBlock&quot; Storyboard.TargetProperty=&quot;(TextBlock.Foreground).(SolidColorBrush.Color)&quot; /&gt;
+            &lt;/Storyboard&gt;
+        &lt;/VisualState&gt;
+        &lt;VisualState x:Name=&quot;Normal&quot;&gt;
+            &lt;Storyboard&gt;
+                &lt;ColorAnimation To=&quot;{StaticResource OkColor}&quot; Duration=&quot;0:00:00&quot; Storyboard.TargetName=&quot;MessageTextBlock&quot; Storyboard.TargetProperty=&quot;(TextBlock.Foreground).(SolidColorBrush.Color)&quot; /&gt;
+            &lt;/Storyboard&gt;
+        &lt;/VisualState&gt;
+    &lt;/VisualStateGroup&gt;
+&lt;/VisualStateManager.VisualStateGroups&gt;</code></pre>
+                    
+                    <pre class="fragment"><code class="cs">VisualStateManager.GoToState( this, &quot;Error&quot;, true );</code></pre>
+
                     <aside class="notes">
                         <p>
                             Often, we want to reuse useful bits of code or use code someone else has written.
@@ -787,7 +810,7 @@ public string Message
                                 <li>Consider value converters in bindings</li>
                                 <li>We reference them by resource key</li>
                                 <li>
-                                    ErrorColorConverter in Silverlight
+                                    Instead of ErrorColorConverter in Silverlight
                                     <ul>
                                         <li>Define colors separately for use elsewhere and want to use them throughout our app</li>
                                         <li>Could use VisualStates to specify what state the control is in</li>
@@ -800,28 +823,35 @@ public string Message
                 </section>
 
                 <section>
-                    TODO: Show angular values for error colors, service for choosing a color and a factory for something equally entertaining and valuable
+                    <pre><code>&lt;StackPanel.Resources&gt;
+    &lt;Color x:Key=&quot;ErrorColor&quot;&gt;Red&lt;/Color&gt;
+    &lt;Color x:Key=&quot;OkColor&quot;&gt;Green&lt;/Color&gt;
+&lt;/StackPanel.Resources&gt;</code></pre>
+                    
+                    <pre class="fragment"><code>myApp.value('errorColor', 'red');
+myApp.value('okColor', 'green');</code></pre>
 
                     <aside class="notes">
                         <p>
-                            Let's look at an example; rather than the ErrorColorConverter we used in Silverlight,
-                            what if we define those colors separately and then want to convert to them.
-                            what if we wanted an error color service throughout our app that could be used by any directive - perhaps we can't just use CSS styles because the colors
-                            can be changed on the fly - and perhaps we want the colors to be configurable for use outside of the logic that is used to convert a bool to one
-                            of those colors.
-
-                            Here is how we would define such a dependency.
-                        </p>
-                        <p>
-                            angular.service will inject an instance of the defined function, angular.factory will inject the result of the defined function, and angular.value injects
-                            the value it was defined with.
+                            angular.value injects the value it was defined with.
                         </p>
                     </aside>
                 </section>
 
                 <section>
                     TODO: Show these things used in a directive.
+                    
+                    <div class="fragment" ng-controller="colorBindingCtrl">
+                        <input type="checkbox" ng-model="hasError" name="isErrorRadio" />
+                        <label for="isErrorRadio">Has Error</label>
+                        <div ng-style="{color: getTextColor(hasError)}">Some status message</div>
+                    </div>
+
                     <aside class="notes">
+                        <p>
+                            angular.service will inject an instance of the defined function, angular.factory will inject the result of the defined function, and angular.value injects
+                            the value it was defined with.
+                        </p>
                         <p>Now that we've defined our various utilities and values, let's use them in our directive.</p>
                     </aside>
                 </section>
@@ -830,6 +860,8 @@ public string Message
             <section>
                 <section>
                     <h1>Conclusion</h1>
+                    
+                    TODO: Mention if you want to learn about ContentControls, you need to see Brian's talk
 
                     <aside class="notes">
                         <p>
@@ -869,6 +901,17 @@ public string Message
 
                 <section>
                     <h1>Questions</h1>
+                    1. Border colors on code samples to distinguish angular/silverlight
+                    2. Use visual states example earlier
+                    3. More visual corrolations especially borrowing off Britishness
+                    4. Make initial code for app readable
+                    5. Increase code fontsize (prefer scrollbar over fontsize)
+                    6. Fix code highlighting styles (increase syntax)
+                    7. Be clearer on which technology I am talking about
+                    8. Change "filter" to something else "criteria"
+                    9. Use class as Silverlight corollary to service in Angular
+                    10. Practise code edits
+                    11. 
                 </section>
             </section>
         </div>
@@ -905,3 +948,5 @@ public string Message
     </script>
 </body>
 </html>
+
+
