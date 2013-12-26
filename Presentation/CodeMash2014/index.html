@@ -175,7 +175,7 @@ namespace HelloWorld
                 </section>
 
                 <section>
-                    <pre><code class='silverlight' contenteditable>&lt;StackPanel x:Name=&quot;LayoutRoot&quot;&gt;
+                    <pre><code class='silverlight'>&lt;StackPanel x:Name=&quot;LayoutRoot&quot;&gt;
   &lt;TextBox x:Name=&quot;textStuff&quot; /&gt;
   &lt;TextBlock Text=&quot;{Binding ElementName=textStuff, Path=Text}&quot; /&gt;
 &lt;/StackPanel&gt;</code></pre>
@@ -338,7 +338,7 @@ myApp.controller(&#39;myController&#39;, function ($scope) {
                 </section>
 
                 <section>
-                    <pre><code class='silverlight' contenteditable>&lt;StackPanel x:Name=&quot;LayoutRoot&quot;&gt;
+                    <pre><code class='silverlight'>&lt;StackPanel x:Name=&quot;LayoutRoot&quot;&gt;
   &lt;StackPanel.Resources&gt;
     &lt;myApp:ReverseStringConverter x:Name=&quot;ReverseStringConverter&quot; /&gt;
   &lt;/StackPanel.Resources&gt;
@@ -446,7 +446,7 @@ collectionView.View.Filter =
 List.ItemsSource = collectionView.View;
 CriteriaTextBox.TextChanged +=
   (sender, args) => ((ICollectionView)List.ItemsSource).Refresh();</code></pre>
-                    <pre class="fragment"><code class='angular' ng-non-bindable contenteditable>&lt;div ng-controller=&quot;myController&quot;&gt;
+                    <pre class="fragment"><code class='angular' ng-non-bindable>&lt;div ng-controller=&quot;myController&quot;&gt;
   &lt;input ng-model=&quot;criteria&quot;/&gt;
   &lt;div ng-repeat=&quot;name in names | filter:criteria | orderBy:&#39;-toString()&#39;&quot;&gt;
     &lt;p&gt;{{name}}&lt;/p&gt;
@@ -535,6 +535,7 @@ CriteriaTextBox.TextChanged +=
                         </p>
                         <p>In Angular, we can achieve this in a number of ways. The simplest uses ng-show, as in this example (next fragment)</p>
                         <p>There is also ng-hide. So, we could edit this to add something that shows in the opposite circumstance. This is equivalent to !ng-show.</p>
+                        <p><strong>Edit to add div ng-hide="isShowingSurprise" No Surprise :(</strong></p>
                         <p>ng-hide and ng-show manipulate the display CSS style based on a condition.</p>
                         <p>But we could also use ng-if, which is different in that the element doesn't even get included if the condition is not met. (show ng-if in editor)</p>
                         <p>Finally, we could use ng-class or ng-style to apply a specific CSS style based on bound conditions.</p>
@@ -719,7 +720,7 @@ CriteriaTextBox.TextChanged +=
 
                 <section>
                     <pre><code ng-non-bindable class="silverlight">&lt;myApp:StatusMessage /&gt;</code></pre>
-                    <pre ng-non-bindable><code class='angular' contenteditable="">&lt;status-message /&gt;</code></pre>
+                    <pre ng-non-bindable><code class='angular' contenteditable>&lt;status-message /&gt;</code></pre>
 
                     <div class="fragment">
                         <status-message-simple />
