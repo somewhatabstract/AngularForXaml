@@ -19,6 +19,11 @@ input {
     font-size: 100%;
 }
 
+.reveal section code {
+    font-size: 130%;
+    line-height: 1.2em;
+}
+
 .reveal section code.angular {
     border-left-width: 20px;
     border-left-style: solid;

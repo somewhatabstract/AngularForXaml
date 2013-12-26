@@ -114,14 +114,15 @@
 <pre><code ng-non-bindable class="silverlight cs" data-trim>
 namespace HelloWorld
 {
-    public partial class App : System.Windows.Application
+  public partial class App : System.Windows.Application
+  {
+    public App()
     {
-        public App()
-        {
-            this.Startup += (sender, e) => this.RootVisual = new TextBlock() { FontSize = 24, Text = "Hello World" };
-            InitializeComponent();
-        }
+      this.Startup +=
+        (sender, e) => this.RootVisual = new TextBlock() { FontSize = 24, Text = "Hello World" };
+      InitializeComponent();
     }
+  }
 }
 </code></pre>
 <pre><code ng-non-bindable class="silverlight" data-trim>
@@ -944,10 +945,12 @@ myApp.value('okColor', 'green');</code></pre>
         // Full list of configuration options available here:
         // https://github.com/hakimel/reveal.js#configuration
         Reveal.initialize({
-            controls: true,
+            controls: false,
             progress: true,
             history: true,
             center: true,
+            width: 1280,
+            height: 768,
             backgroundTransition: "slide",
 
             theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
