@@ -440,15 +440,15 @@ collectionView.Source = new[] { &quot;Leprechaun&quot;, &quot;Unicorn&quot;, &qu
 collectionView.View.SortDescriptions.Add(
   new SortDescription { Direction = ListSortDirection.Descending } );
 collectionView.View.Filter =
-  o =&gt; String.IsNullOrEmpty( FilterTextBox.Text )
-      || ( (string)o ).Contains( FilterTextBox.Text );
+  o =&gt; String.IsNullOrEmpty( CriteriaTextBox.Text )
+      || ( (string)o ).Contains( CriteriaTextBox.Text );
     
 List.ItemsSource = collectionView.View;
-FilterTextBox.TextChanged +=
+CriteriaTextBox.TextChanged +=
   (sender, args) => ((ICollectionView)List.ItemsSource).Refresh();</code></pre>
                     <pre class="fragment"><code class='angular' ng-non-bindable contenteditable>&lt;div ng-controller=&quot;myController&quot;&gt;
-  &lt;input ng-model=&quot;filter&quot;/&gt;
-  &lt;div ng-repeat=&quot;name in names | filter:filter | orderBy:&#39;-toString()&#39;&quot;&gt;
+  &lt;input ng-model=&quot;criteria&quot;/&gt;
+  &lt;div ng-repeat=&quot;name in names | filter:criteria | orderBy:&#39;-toString()&#39;&quot;&gt;
     &lt;p&gt;{{name}}&lt;/p&gt;
   &lt;/div&gt;
 &lt;/div&gt;</code></pre>
@@ -476,8 +476,8 @@ FilterTextBox.TextChanged +=
 
                 <section>
                     <div ng-controller="collectionBindingCtrl">
-                        <input ng-model="filter" />
-                        <div ng-repeat="name in names | filter:filter | orderBy:'-toString()'">
+                        <input ng-model="criteria" />
+                        <div ng-repeat="name in names | filter:criteria | orderBy:'-toString()'">
                             <p>{{name}}</p>
                         </div>
                     </div>
@@ -929,7 +929,6 @@ myApp.value('okColor', 'green');</code></pre>
                     2. Use visual states example earlier
                     3. More visual corrolations especially borrowing off Britishness
                     7. Be clearer on which technology I am talking about
-                    8. Change "filter" to something else "criteria"
                     9. Use class as Silverlight corollary to service in Angular
                     10. Practise code edits
                 </section>

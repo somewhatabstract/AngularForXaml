@@ -15,7 +15,7 @@
             </ItemsControl.ItemTemplate>
         </ItemsControl>
         <Border BorderThickness="2" BorderBrush="Gray" Margin="3"></Border>
-        <TextBox x:Name="FilterTextBox"></TextBox>
+        <TextBox x:Name="CriteriaTextBox"></TextBox>
 
         <ItemsControl x:Name="List2">
             <ItemsControl.ItemTemplate>

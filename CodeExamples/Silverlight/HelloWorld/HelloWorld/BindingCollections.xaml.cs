@@ -25,11 +25,11 @@ namespace HelloWorld
 			var collectionView = new CollectionViewSource();
 			collectionView.Source = new[] { "Leprechaun", "Unicorn", "Bacon" };
 			collectionView.View.SortDescriptions.Add( new SortDescription { Direction = ListSortDirection.Descending } );
-			collectionView.View.Filter = o => String.IsNullOrEmpty( FilterTextBox.Text )
-				|| ( (string)o ).ToLowerInvariant().Contains( FilterTextBox.Text.ToLowerInvariant() );
+			collectionView.View.Filter = o => String.IsNullOrEmpty( CriteriaTextBox.Text )
+				|| ( (string)o ).ToLowerInvariant().Contains( CriteriaTextBox.Text.ToLowerInvariant() );
 
 			List2.ItemsSource = collectionView.View;
-			FilterTextBox.TextChanged += ( sender, args ) => ( (ICollectionView)List2.ItemsSource ).Refresh();
+			CriteriaTextBox.TextChanged += ( sender, args ) => ( (ICollectionView)List2.ItemsSource ).Refresh();
 		}
 	}
 }
