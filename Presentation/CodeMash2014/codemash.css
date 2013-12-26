@@ -19,8 +19,16 @@ input {
     font-size: 100%;
 }
 
-.reveal section code {
-    font-size: 85%;
+.reveal section code.angular {
+    border-left-width: 20px;
+    border-left-style: solid;
+    border-left-color: red;
+}
+
+.reveal section code.silverlight {
+    border-left-width: 20px;
+    border-left-style: solid;
+    border-left-color: lightblue;
 }
 
 .status-ok {
