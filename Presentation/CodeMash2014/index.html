@@ -282,7 +282,7 @@ myApp.controller('myController', function ($scope) {
   &lt;div&gt;Hello {{textStuff}}&lt;/div&gt;
   &lt;input ng-model=&quot;textStuff&quot; /&gt;
 &lt;/div&gt;</code></pre>
-                    <pre><code class="javascript angular" ng-non-bindable>var myApp = angular.module(&#39;myApp&#39;, []);
+                    <pre class="fragment"><code class="javascript angular" ng-non-bindable>var myApp = angular.module(&#39;myApp&#39;, []);
 myApp.controller(&#39;myController&#39;, function ($scope) {
   $scope.textStuff = &#39;World&#39;;
 });</code></pre>
@@ -633,7 +633,9 @@ CriteriaTextBox.TextChanged +=
                             <div>
                                 Add the following to error style - make sure this matches what actually happens so smoke and mirrors occurs.
 
-                                TODO: Add style here to copy in
+                                <textarea rows="12" cols="60">;
+    -webkit-transform: rotate(-45deg);
+                                </textarea>
                             </div>
 
                             Let's see this in action.
