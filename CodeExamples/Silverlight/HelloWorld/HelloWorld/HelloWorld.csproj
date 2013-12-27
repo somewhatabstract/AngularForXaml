@@ -96,6 +96,7 @@
     <Compile Include="ReverseStringConverter.cs" />
     <Compile Include="StatusMessage.cs" />
     <Compile Include="VisibilityConverter.cs" />
+    <Compile Include="Words.cs" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
