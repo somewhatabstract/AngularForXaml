@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 
-namespace HelloWorld
+namespace ShakespeareanInsultGenerator
 {
 	public class Words
 	{
-		public static IEnumerable<string> FirstWords = new List<string>
+		public static IEnumerable<string> Adjectives = new List<string>
 		{
 			"artless",
 			"bawdy",
@@ -58,7 +58,7 @@ namespace HelloWorld
 			"yeasty"
 		}.AsReadOnly();
 
-		public static IEnumerable<string> SecondWords = new List<string>
+		public static IEnumerable<string> HyphenatedAdjectives = new List<string>
 		{
 			"base-court",
 			"bat-fowling",
@@ -71,7 +71,7 @@ namespace HelloWorld
 			"crook-pated",
 			"dismal-dreaming",
 			"dizzy-eyed",
-			"doghearted",
+			"dog-hearted",
 			"dread-bolted",
 			"earth-vexing",
 			"elf-skinned",
@@ -112,7 +112,7 @@ namespace HelloWorld
 			"weather-bitten"
 		}.AsReadOnly();
 
-		public static IEnumerable<string> ThirdWords = new List<string>
+		public static IEnumerable<string> Nouns = new List<string>
 		{
 			"apple-john",
 			"baggage",

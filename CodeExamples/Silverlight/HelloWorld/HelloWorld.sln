@@ -5,6 +5,8 @@ VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelloWorld", "HelloWorld\HelloWorld.csproj", "{B7207B35-2CE0-41A1-871F-7B784DB3E657}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shakespearean Insult Generator", "Shakespearean Insult Generator\Shakespearean Insult Generator.csproj", "{CE0F02EE-B683-43CB-97C8-06FB9424412B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{B7207B35-2CE0-41A1-871F-7B784DB3E657}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B7207B35-2CE0-41A1-871F-7B784DB3E657}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B7207B35-2CE0-41A1-871F-7B784DB3E657}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE0F02EE-B683-43CB-97C8-06FB9424412B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE0F02EE-B683-43CB-97C8-06FB9424412B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE0F02EE-B683-43CB-97C8-06FB9424412B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE0F02EE-B683-43CB-97C8-06FB9424412B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
