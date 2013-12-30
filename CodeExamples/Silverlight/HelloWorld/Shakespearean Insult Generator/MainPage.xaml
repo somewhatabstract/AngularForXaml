@@ -23,12 +23,10 @@
         <Style TargetType="Button">
             <Setter Property="Margin" Value="3"/>
             <Setter Property="FontWeight" Value="Bold"/>
-            <!--<Setter Property="VerticalAlignment" Value="Top"/>-->
         </Style>
         
         <Style TargetType="RichTextBox">
             <Setter Property="Margin" Value="3"/>
-            <!--<Setter Property="VerticalAlignment" Value="Top"/>-->
             <Setter Property="IsReadOnly" Value="True"/>
             <Setter Property="TextAlignment" Value="Left"/>
             <Setter Property="FontWeight" Value="Bold"/>
