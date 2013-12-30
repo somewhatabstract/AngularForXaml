@@ -15,7 +15,7 @@ section img.noborder {
     box-shadow: none;
 }
 
-input {
+input, select, button {
     font-size: 100%;
 }
 
@@ -43,4 +43,41 @@ input {
 .status-error {
     color: red;
     -webkit-transform: rotate(-45deg);
+}
+
+.insult-generator {
+    text-align: left;
+}
+
+.insult-generator .label {
+    width: 6em;
+    margin: .2em;
+    display: inline-block;
+    font-style: italic;
+    text-align: right;
+}
+
+.insult-generator select {
+    width: 70%;
+    margin: .2em;
+}
+
+.insult-generator button {
+    width: 6em;
+    margin: .2em;
+    vertical-align: top;
+    font-weight: bold;
+}
+
+.insult-generator .insult-container {
+    margin: .2em;
+    width: 70%;
+    font-size: 100%;
+    display: inline-block;
+}
+
+.insult-generator .insult {
+    width: 100%;
+    font-size: 150%;
+    font-weight: bold;
 }
