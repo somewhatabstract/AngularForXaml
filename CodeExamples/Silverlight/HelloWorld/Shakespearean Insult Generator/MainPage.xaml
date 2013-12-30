@@ -3,10 +3,75 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="clr-namespace:ShakespeareanInsultGenerator"
     mc:Ignorable="d"
-    d:DesignHeight="300" d:DesignWidth="400">
+    FontSize="24"         
+    d:DesignHeight="150" d:DesignWidth="400">
 
-    <Grid x:Name="LayoutRoot" Background="White">
+    <UserControl.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="TextAlignment" Value="Right" />
+            <Setter Property="Margin" Value="3" />
+            <Setter Property="FontStyle" Value="Italic" />
+        </Style>
+        
+        <Style TargetType="ComboBox">
+            <Setter Property="Margin" Value="3"/>
+        </Style>
 
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="3"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <!--<Setter Property="VerticalAlignment" Value="Top"/>-->
+        </Style>
+        
+        <Style TargetType="RichTextBox">
+            <Setter Property="Margin" Value="3"/>
+            <!--<Setter Property="VerticalAlignment" Value="Top"/>-->
+            <Setter Property="IsReadOnly" Value="True"/>
+            <Setter Property="TextAlignment" Value="Left"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="36"/>
+        </Style>
+
+        <local:InsultModel x:Key="Model" />
+    </UserControl.Resources>
+
+    <Grid x:Name="LayoutRoot" Background="White" DataContext="{Binding Source={StaticResource Model}}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Adjective 1:" Grid.Column="0" Grid.Row="0" />
+        <ComboBox Grid.Column="1" Grid.Row="0" ItemsSource="{Binding FirstAdjectiveList}" SelectedValue="{Binding FirstAdjective, Mode=TwoWay}" />
+
+        <TextBlock Text="Adjective 2:" Grid.Column="0" Grid.Row="1" />
+        <ComboBox Grid.Column="1" Grid.Row="1" ItemsSource="{Binding SecondAdjectiveList}" SelectedValue="{Binding SecondAdjective, Mode=TwoWay}" />
+
+        <TextBlock Text="Noun:" Grid.Column="0" Grid.Row="2" />
+        <ComboBox Grid.Column="1" Grid.Row="2" ItemsSource="{Binding NounList}" SelectedValue="{Binding Noun, Mode=TwoWay}" />
+
+        <Button Grid.Column="0" Grid.Row="3" Content="Randomize" Click="OnClickRandomize" />
+        <RichTextBox  Grid.Column="1" Grid.Row="3">
+            <RichTextBox.Blocks>
+                <Paragraph>
+                    <Span>
+                        <Run Text="Thou" />
+                        <Run Text="{Binding FirstAdjective}" />
+                        <Run Text="{Binding SecondAdjective}" />
+                        <Run Text="{Binding Noun, StringFormat='{0}!'}" />
+                    </Span>
+                </Paragraph>
+            </RichTextBox.Blocks>
+        </RichTextBox>
     </Grid>
 </UserControl>

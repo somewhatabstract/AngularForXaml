@@ -2,7 +2,7 @@
 
 namespace ShakespeareanInsultGenerator
 {
-	public class Words
+	public static class Words
 	{
 		public static IEnumerable<string> Adjectives = new List<string>
 		{

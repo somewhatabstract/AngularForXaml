@@ -18,5 +18,10 @@ namespace ShakespeareanInsultGenerator
 		{
 			InitializeComponent();
 		}
+
+		private void OnClickRandomize( object sender, RoutedEventArgs e )
+		{
+			((InsultModel)Resources["Model"]).Randomize();
+		}
 	}
 }
