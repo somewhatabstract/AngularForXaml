@@ -236,14 +236,14 @@
 		$scope.randomize();
 	});
 
-	codemash2014.directive('wordList', function() {
+	codemash2014.directive('labelledCombo', function() {
 		return {
-			template: '<div><div class="label">{{title}}</div><select ng-model="selectedWord" ng-options="word for word in words"></select></div>',
+			template: '<div><div class="label">{{title}}</div><select ng-model="selectedItem" ng-options="item for item in items"></select></div>',
 			restrict: 'E',
 			replace: true,
 			scope: {
-				selectedWord: '=',
-				words: '=',
+				selectedItem: '=',
+				items: '=',
 				title: '@'
 			}
 		};
@@ -255,9 +255,9 @@
 			replace:true,
 			template:
 				'<div class="insult-generator">'
-				+ '<word-list title="Adjective 1:" words="firstAdjectives" selected-word="firstAdjective"></word-list>'
-				+ '<word-list title="Adjective 2:" words="secondAdjectives" selected-word="secondAdjective"></word-list>'
-				+ '<word-list title="Noun:" words="nouns" selected-word="noun"></word-list>'
+				+ '<labelled-combo title="Adjective 1:" items="firstAdjectives" selected-item="firstAdjective"></labelled-combo>'
+				+ '<labelled-combo title="Adjective 2:" items="secondAdjectives" selected-item="secondAdjective"></labelled-combo>'
+				+ '<labelled-combo title="Noun:" items="nouns" selected-item="noun"></labelled-combo>'
 				+ '<div>'
 					+ '<button ng-click="randomize()">Randomize</button>'
 					+ '<div class="insult-container"><textarea class="insult" readonly rows="2">Thou {{firstAdjective}} {{secondAdjective}} {{noun}}!</textarea></div>'
