@@ -39,6 +39,8 @@
                         <ul>
                             <li>Introduce myself</li>
                             <li>Mention who I work for and what I do</li>
+                            <li>Explain talk</li>
+                            <li>Ask who is familiar with Silverlight or Angular</li>
                         </ul>
                     </aside>
                 </section>
@@ -50,20 +52,24 @@
                     </div>
                     <aside class="notes">
                         <ul>
-                            <li>Explain my background to give context of why I'm presenting this</li>
-                            <li>Worked in motorsport for 5 years (C++, COM, ATL, WTL)</li>
-                            <li>Worked in diesel engine diagnostic tools for 5/6 years (C#, .NET, WinForms)</li>
-                            <li>Side projects from timesheet entry using Silverlight to end-of-line testers and diagnostic tools using WPF</li>
+                            <li>Explain my background in context this talk</li>
+                            <li>Worked in motorsport 5 years (C++, COM, ATL, WTL)</li>
+                            <li>Worked in engine diagnostic tools 5/6 years (C#, .NET, WinForms)</li>
+                            <li>Side projects; timesheet entry using Silverlight to end-of-line testers and diagnostic tools using WPF</li>
                             <li>CMMI process improvement, team lead, etc.</li>
                             <li>Most recently, Health Information Exchange (C#,ASP.NET MVC, WebForms, AngularJS, jQuery, JavaScript, HTML, CSS)</li>
+                            <li>12 years windows, then changed to web development</li>
+                            <li>--Next slide for line--</li>
                         </ul>
-                        <p>Spent 12 years doing Windows. Mastered the domain. I've been doing web development for almost a whole year.</p>
                     </aside>
                 </section>
                 <section>
                     <img src='assets/rv-f1.jpg' style="width:100%" />
                     <aside class="notes">
-                        <p>When I changed jobs, I felt like I showed up to an event with the wrong kit. Lots to learn. Where to get started. Time to find similarities.</p>
+                        <ul>
+                            <li>Felt like the RV in this picture.</li>
+                            <li>Similar baggage, just not tuned for the job.</li>
+                        </ul>
                     </aside>
                 </section>
             </section>
@@ -72,20 +78,23 @@
                 <section>
                     <img src="assets/silverlight-logo.png" class="noborder" style="min-width: 100%;" />
                     <aside class="notes">
-                        <p>What I knew of web development was a handful of JAvaScript, some HTML and a bit of CSS, and Silverlight.</p>
-                        <p>Silverlight (originally code-named WPF Everywhere) is a .NET runtime that runs in and out of the browser on both PC and Mac. It requires a plugin but allows you to write rich web apps using C#/VB and XAML.</p>
+                        <ul>
+                            <li>Knew a little client-side web development;  mostly Silverlight and a little JS/HTML/CSS</li>
+                            <li>Silverlight is .NET runtime plugin</li>
+                            <li>Plug-in cross platform (PC and Mac), in and out of web browsers</li>
+                        </ul>
                     </aside>
                 </section>
 
                 <section>
                     <img src="assets/angularjs.jpeg" class="noborder" style="min-width: 100%;" />
                     <aside class="notes">
-                        <p>If into acronyms, it's a MVW framework (Model-View-Widget). Unlike jQuery, a utility library, Angular is a platform on which to build client-side applications. Angular is to jQuery as the Silverlight runtime is to the System.Collections namespace.</p>
                         <ul>
-                            <li>Terms like filters, modules, factories, services, providers, and directives everywhere.</li>
+                            <li>New job used AngularJS for client-side</li>
+                            <li>development framework from Google</li>
                             <li>Javascript/HTML/CSS</li>
-                            <li>But I didn't know Angular and I only had a passing acquaintance with JS, HTML and CSS</li>
-                            <li>I knew Silverlight, C# and XAML.</li>
+                            <li>I knew value converters, controls and resources; not filters, directives and CSS</li>
+                            <li>(transition as saying): I knew the concepts but we were talking different languages.</li>
                         </ul>
                     </aside>
                 </section>
@@ -93,7 +102,11 @@
                 <section>
                     <img src="assets/languagebarrier.png" style="min-height:100%" />
                     <aside class="notes">
-                        <p>We seemed to be talking about the same things under different guises. I needed to find the link. So, I started to look for concepts that matched up.</p>
+                        <ul>
+                            <li>Needed to look for a way to translate between Angular and what I knew</li>
+                            <li>Took lots of effort then, but written an app to help today</li>
+                            <li>SHOW SILVERLIGHT APP</li>
+                        </ul>
                     </aside>
                 </section>
             </section>
@@ -101,6 +114,12 @@
             <section data-background="#203030">
                 <section data-background="assets/Application.jpg">
                     <h1>Application</h1>
+                    <aside class="notes">
+                        <ul>
+                            <li>Every framework has boilerplate to assimilate an application</li>
+                            <li>Let's take a look</li>
+                        </ul>
+                    </aside>
                 </section>
 
                 <section>
@@ -131,7 +150,12 @@ namespace HelloWorld
 &lt;/object&gt;
 </code></pre>
                     <aside class="notes">
-                        <p>Just want to do a quick comparison. We won't stare at code everywhere.</p>
+                        <ul>
+                            <li>Bare minimum</li>
+                            <li>Application declaration</li>
+                            <li>Code-behind</li>
+                            <li>HTML to embed plugin (in-browser)</li>
+                        </ul>
                     </aside>
                 </section>
 
@@ -148,23 +172,13 @@ namespace HelloWorld
 &lt;/html&gt;
 </code></pre>
                     <aside class="notes">
-                        <p>Technically, Angular isn't even needed for this example, but then, technically, neither is Silverlight.</p>
-
-                        <p>Lots of things beginning with ng. This signifies it's an Angular thing, a directive.</p>
-                        <p>ng-app signifies that the element and its contents are an app.</p>
-                        <p>Specifies the angular module in which the app code lives.</p>
-                        <p>Only one angular app per page using this method; auto-bootstrapping</p>
-                        <p>Code-behind can be added by providing a name</p>
-                        <p>and multiple apps can be added by manually bootstrapping (see later)</p>
-
-                        <h3>ng-app</h3>
-                        <p>Each angular app is like a separate Silverlight control instance</p>
-                        <h3>RootVisual</h3>
-                        <p>The contents of the app element are akin to the MainPage.xaml</p>
-                        <h3>Scripts</h3>
-                        <p>Consider them like DLL references.</p>
-                        <h3>Resources</h3>
-                        <p>Resources in Silverlight are replaced with CSS and directives</p>
+                        <ul>
+                            <li>ng-app declaration</li>
+                            <li>Since HTML, not required just for Hello World (neither is Silverlight)</li>
+                            <li>Contents of ng-app element are RootVisual</li>
+                            <li>Scipts in head element are DLL references</li>
+                            <li>CSS is like resources</li>
+                        </ul>
                     </aside>
                 </section>
             </section>
