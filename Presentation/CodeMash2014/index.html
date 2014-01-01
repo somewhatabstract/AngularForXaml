@@ -186,6 +186,15 @@ namespace HelloWorld
             <section data-background="#D0D0D0">
                 <section data-background="assets/DataBinding.jpg">
                     <h1 style="color: #101010">Data Binding</h1>
+                    <aside ng-non-bindable class="notes">
+                        <ul>
+                            <li>Binding to data is a basic element</li>
+                            <li>Our app uses it to drive insult selection and display</li>
+                            <li>Silverlight has syntactical support</li>
+                            <li>Angular has syntactical support</li>
+                            <li>Let's look at an example</li>
+                        </ul>
+                    </aside>
                 </section>
 
                 <section>
@@ -199,9 +208,13 @@ namespace HelloWorld
 &lt;/div&gt;</code></pre>
 
                     <aside ng-non-bindable class="notes">
-                        <p>This is a bit of familiar Silverlight, a textbox bound to a textblock. Simple data binding.</p>
-                        <p>2nd fragment: Let's see that in Angular.</p>
-                        <p>Note here that ngBind can be used instead of moustaches but is essentially equivalent (can be useful if not wanting to see bind expression when page is loading - also consider ngCloak).</p>
+                        <ul>
+                            <li>Simple example</li>
+                            <li>Familiar to anyone doing XAML</li>
+                            <li>SPACE: Shows angular fragment</li>
+                            <li>Angular version very similar</li>
+                            <li>Let's take closer look</li>
+                        </ul>
                     </aside>
                 </section>
 
@@ -217,8 +230,14 @@ namespace HelloWorld
                     </div>
 
                     <aside class="notes">
-                        <p>Breaking it down. The ng-model directive is telling the textbox what value it is bound to. To present that value, we use the double braces syntax.</p>
-                        <p>Two way binding works too. Just add another input.</p>
+                        <ul>
+                            <li>Code and actual running example</li>
+                            <li>ng-model indicates what textbox is bound to</li>
+                            <li>ng-model is two-way binding</li>
+                            <li>Moustaches evaluate binding value to string for display</li>
+                            <li>TODO: Copy textbox line under display line</li>
+                            <li>FRAGMENT: Additional textbox shows up</li>
+                        </ul>
                     </aside>
                 </section>
 
