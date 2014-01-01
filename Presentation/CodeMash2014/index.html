@@ -247,20 +247,21 @@ namespace HelloWorld
   &lt;TextBlock Text=&quot;{Binding ElementName=textStuff, Path=Text}&quot; /&gt;
   &lt;TextBox Text=&quot;{Binding ElementName=textStuff, Path=Text}&quot; /&gt;
 &lt;/StackPanel&gt;</code></pre>
-                    <pre class="fragment"><code class='angular' ng-non-bindable>&lt;div ng-app&gt;
+                    <pre><code class='angular' ng-non-bindable>&lt;div ng-app&gt;
   &lt;input ng-model=&quot;textStuff&quot; /&gt;
   &lt;div&gt;Hello {{textStuff}}&lt;/div&gt;
   &lt;input ng-model=&quot;textStuff&quot; /&gt;
 &lt;/div&gt;</code></pre>
 
                     <aside class="notes">
-                        <p>Comparing this with Silverlight, you can see a difference. In Silverlight as it is here, we are binding to one of the two textboxes. In Angular, the bindings are two way and bind to a model.</p>
-                        <p>
-                            Usually, we would bind to a value in a model specified via the data context. This would also need at the very least, INotifyPropertyChanged so
-                            that changes could be tracked and bindings updated. Angular creates this model for us, including the ability to watch for changes.
-                        </p>
-                        <p>However, we can also implement the concept of a data context in Angular to get finer control over our model.</p>
-                        <p>In fact, you probably noticed there's a default value here; "World" - that requires code behind.</p>
+                        <ul>
+                            <li>Compare Silverlight and Angular</li>
+                            <li>Silverlight is binding to a master textbox</li>
+                            <li>Angular has an implied backend value</li>
+                            <li>Normally, need model in Silverlight using back-end code</li>
+                            <li>INotifyPropertyChanged to track model changes</li>
+                            <li>Angular has similar concepts, in fact, used for "World" default value</li>
+                        </ul>
                     </aside>
                 </section>
             </section>
@@ -273,20 +274,25 @@ namespace HelloWorld
                 <section>
                     <div>
                         <pre><code class='silverlight' ng-non-bindable>&lt;UserControl x:Class="HelloWorld.MainPage"&gt;
+    xmlns:local="clr-namespace:HelloWorld"
 ...
               </code></pre>
-                        <pre class="fragment"><code class='angular' ng-non-bindable>&lt;div ng-app='myApp' ng-controller='myController'&gt;
+                        <pre class="fragment"><code class='angular' ng-non-bindable>&lt;div ng-app='helloWorld' ng-controller='myController'&gt;
   ...</code></pre>
                     </div>
 
                     <aside class="notes">
-                        <p>Just like Silverlight, the code-behind has to be associated with the presentation layer.</p>
-                        <p>In Silverlight, this is done by specifying the XAP that implements the app and the x:Class attribute that indicates the class that contains the code.</p>
-                        <p>
-                            In Angular, the ng-app directive needs a name to specify the angular module that contains the code
-                            and there has to be an ng-controller to specify the actual code to control the decorated element.
-                        </p>
-                        <p>The controller and app module do not need to be specified on the same line. This is just for brevity. There can be more than one controller per app.</p>
+                        <ul>
+                            <li>object element indicates XAP file with silverlight app</li>
+                            <li>x:Class attribute indicates code-behind for a control</li>
+                            <li>Namespace declarations in XAML import other code-behind elements</li>
+                            <li>FRAGMENT: Here is an angular equivalent</li>
+                            <li>ng-app indicates the angular module that contains the code (like namespace)</li>
+                            <li>ng-controller directive indicates code for this element in the application (like class)</li>
+                            <li>Additional modules can be loaded into the app in code-behind</li>
+                            <li>Multiple controllers per app, one ng-app declaration</li>
+                            <li>Can have multiple apps per page, but advanced topic for another time</li>
+                        </ul>
                     </aside>
                 </section>
 
@@ -297,15 +303,17 @@ namespace HelloWorld
   {
     ...
               </code></pre>
-                    <pre class="fragment"><code class="javascript angular" ng-non-bindable>var myApp = angular.module('myApp', []);
+                    <pre class="fragment"><code class="javascript angular" contenteditable ng-non-bindable>var myApp = angular.module('myApp', []);
 myApp.controller('myController', function ($scope) {
   ...
 </code></pre>
-
                     <aside class="notes">
-                        <p>In Silverlight (and other similar .NET frameworks), the namespace and class identify the actual code-behind.</p>
-                        <p>In Angular, the app name specifies the module and the controller specifies the actual code inside that module.</p>
-                        <p>Consider the module to be the assembly/namespace and the controller to be the class name.</p>
+                        <ul>
+                            <li>Silverlight code-behind uses namespace and class</li>
+                            <li>FRAGMENT: .module creates a module with the app name</li>
+                            <li>[] brackets can be used to import additional modules (type example to demonstrate 'awesomeThings','stuff')</li>
+                            <li>.controller creates a controller within a module for use with ngController directive</li>
+                        </ul>
                     </aside>
                 </section>
 
@@ -321,10 +329,17 @@ myApp.controller(&#39;myController&#39;, function ($scope) {
 });</code></pre>
 
                     <aside class="notes">
-                        <p>Here's the full Angular app for our earlier data binding demo with two textboxes.</p>
-                        <p>Note the [] in the module declaration. This is where additional modules can be injected so that they can be referenced, much like adding references to a Silverlight project.</p>
-                        <p>The $scope value of the controller is injected by Angular and is the model that bindings reference. Other things can be injected here too, such as things from the referenced modules.</p>
-                        <p>More on that later. Back to binding - this time collections.</p>
+                        <ul>
+                            <li>Returning to previous example</li>
+                            <li>Add controller to our app</li>
+                            <li>FRAGMENT: Create controller and default our model value</li>
+                            <li>Things can be injected into the controller</li>
+                            <li>$scope is injected into our controller here</li>
+                            <li>$scope is root of our view model</li>
+                            <li>Properties off $scope are available for binding</li>
+                            <li>Of course, more to binding than single values and defaults</li>
+                            <li>What if we need to project the value before display?</li>
+                        </ul>
                     </aside>
                 </section>
             </section>
@@ -334,15 +349,14 @@ myApp.controller(&#39;myController&#39;, function ($scope) {
                     <h1>Value Converters</h1>
 
                     <aside class="notes">
-                        <p>
-                            If you've written any serious XAML application, you've used value converters. Usually, to take a value from a data model and modify it for the presentation,
-                            such as changing the case of a string, formatting the decimal places on a number, turning a boolean value into a visibility value, or an enumeration into a color.
-                        </p>
-                        <p>
-                            In Angular, just as in Silverlight, there is more than one way to do this, and in fact,
-                            those last two items we will look at later, but for the other situations, we use filters.
-                        </p>
-                        <p>With there being a limited built-in set, you're going to need to write your own. So let's do that.</p>
+                        <ul>
+                            <li>Our demo app doesn't actually need these, but they're important for work outside of period-specific insult generators</li>
+                            <li>In Silverlight, we use ValueConverters to convert a value display</li>
+                            <li>Turning a bool into a Visibility, or an enumeration into a text color, for example</li>
+                            <li>Angular has several ways to do the same thing</li>
+                            <li>Generally, Angular uses filters</li>
+                            <li>While there's a built-in set, much like with Silverlight, you'll need to write your own</li>
+                        </ul>
                     </aside>
                 </section>
 
@@ -364,9 +378,13 @@ myApp.controller(&#39;myController&#39;, function ($scope) {
   };
 });</code></pre>
                     <aside class="notes">
-                        <p>If we wanted to reverse a string, we could add a converter to do this in Silverlight.</p>
-                        <p>Writing an Angular filter for this is somewhat similar. Note there is no ConvertBack equivalent. A filter is just a oneway conversion method.</p>
-                        <p>Another concept exists for converting from the view back to the model, which we'll look at later.</p>
+                        <ul>
+                            <li>Contrived example to reverse a string</li>
+                            <li>ConvertBack not implemented as usual (;) )</li>
+                            <li>FRAGMENT: Angular declaration equivalent to Convert method</li>
+                            <li>No ConvertBack for a filter - different Angular concept exists for this and used just as much as ConvertBack</li>
+                            <li>Let's see how they're used</li>
+                        </ul>
                     </aside>
                 </section>
 
@@ -382,24 +400,23 @@ myApp.controller(&#39;myController&#39;, function ($scope) {
   &lt;input ng-model=&quot;textStuff&quot; /&gt;
   &lt;div&gt;{{textStuff | reverse}}&lt;/div&gt;
 &lt;/div&gt;</code></pre>
-
-                    <aside class="notes">
-                        <p>In Silverlight, we create an instance of the converter and then add it to our binding..</p>
-                        <p>In Angular, we don't need to create an instance as it already exists within the Angular code, so we just use it.</p>
-                        <p>Touch on parsers. Talk about how they're less common (refer to how often anyone actually implements the ConvertBack method of IValueConverter</p>
-                    </aside>
-                </section>
-
-                <section>
-                    <div ng-controller="reverseCtrl">
+                    <div class="fragment" ng-controller="reverseCtrl">
                         <input ng-model="stringToReverse" />
                         <div>{{stringToReverse | reverse}}</div>
                     </div>
 
                     <aside class="notes">
-                        <p>Type "dlroW olleH" and other examples as required</p>
+                        <ul>
+                            <li>Declare an instance of our converter in resources</li>
+                            <li>Reference converter in Binding</li>
+                            <li>FRAGMENT: Angular similar</li>
+                            <li>Filter instance is managed by Angular from code-behind</li>
+                            <li>Pipe bound value into filter</li>
+                            <li>FRAGMENT: Let's see that working</li>
+                            <li>Type "dlroW olleH" and other examples as required</li>
+                            <li>Angular can chain filters</li>
+                        </ul>
                     </aside>
-
                 </section>
 
                 <section>
@@ -414,7 +431,12 @@ myApp.controller(&#39;myController&#39;, function ($scope) {
                     </div>
 
                     <aside class="notes">
-                        <p>Filters can be chained.</p>
+                        <ul>
+                            <li>Requires a custom ValueConverter in Silverlight</li>
+                            <li>Easy in Angular</li>
+                            <li>Here, we pipe reverse value into uppercase filter</li>
+                            <li>FRAGMENT: Demo - now you know how to reverse and uppercase a string. Job done</li>
+                        </ul>
                     </aside>
                 </section>
             </section>
@@ -424,7 +446,10 @@ myApp.controller(&#39;myController&#39;, function ($scope) {
                 <section data-background="assets/DataBindingCollections2.jpg">
                     <h1>Data Binding Collections</h1>
                     <aside class="notes">
-                        <p>Now that we've looked at bindings, code-behind and filters (value converters), let's look at more complex use of these things to bind to collections.</p>
+                        <ul>
+                            <li>Of course, binding values and converting values is great, but what about lists of values?</li>
+                            <li>Collection of similar items that need displaying in some way</li>
+                        </ul>
                     </aside>
                 </section>
 
