@@ -466,28 +466,29 @@ myApp.controller(&#39;myController&#39;, function ($scope) {
 &lt;/div&gt;</code></pre>
 
                     <aside class="notes">
-                        <p>In Silverlight, we can have controls that show a sequence of items, repeating a template for each item.</p>
-                        <p>ng-repeat performs this task in Angular.</p>
+                        <ul>
+                            <li>ItemsControls are used to display a collection of items</li>
+                            <li>Here we have a simple template for each item</li>
+                            <li>FRAGMENT: In Angular, we use the ngRepeat directive</li>
+                            <li>The element marked by ng-repeat is the item template</li>
+                        </ul>
                     </aside>
                 </section>
 
                 <section>
                     <pre><code class="cs silverlight" ng-non-bindable>List.ItemsSource = new[] { "Leprechaun", "Unicorn", "Bacon" }</code></pre>
                     <pre class="fragment"><code ng-non-bindable class="javascript angular">$scope.names = [ 'Leprechaun', 'Unicorn', 'Bacon'];</code></pre>
-
-                    <aside class="notes"></aside>
-                </section>
-
-                <section>
-                    <div ng-controller="collectionBindingCtrl">
+                    <div class="fragment" ng-controller="collectionBindingCtrl">
                         <div ng-repeat="name in names"><p>{{name}}</p></div>
                     </div>
 
                     <aside class="notes">
-                        <p>
-                            Not particularly exciting and these things are not ordered, and perhaps we want to find one of them quickly,
-                            because the list is super long, so let's add some sorting and filtering.
-                        </p>
+                        <ul>
+                            <li>To use, we would set ItemsSource using XAML binding or code-behind</li>
+                            <li>FRAGMENT: Angular, we use the code-behind to set a collection on the scope</li>
+                            <li>FRAGMENT: This really is Angular running - not very exciting</li>
+                            <li>Let's add some excitement</li>
+                        </ul>
                     </aside>
                 </section>
 
@@ -511,24 +512,27 @@ CriteriaTextBox.TextChanged +=
   &lt;/div&gt;
 &lt;/div&gt;</code></pre>
                     <aside class="notes">
-                        <p>XAML not shown here but all we've done is add a text box for entering a filter value.</p>
-                        <p>Here in the code, we've used it's value to filter a collection view and also its TextChanged event to refresh the collection source.</p>
-                        <p>In the Angular, things look a bit different. Unlike Silverlight, it's all done in the presentation code; no code-behind required.</p>
-                        <p>Instead of modifying a collection, we filter it through filters.</p>
-                        <p>The first filter applies our search term, the second orders the values in descending order.</p>
-                        <p>
-                            But wait, these filters are different than the ones we looked at earlier. Rather than converting a value, these
-                            filters are modifying a collection. Rather like LINQ. In fact, there are two types of filters; those that act on individual values
-                            like Value Converters and those that act on collections, like LINQ operators.
-                        </p>
-                        <p>
-                            There are two types of filter and we
-                            I liken that type of filter to LINQ operators in the .NET world; they take sequences and convert them to different sequences.
-                            The second type of filter takes a single value and transforms it to a different value. These are more akin to ValueConverters
-                            and the StringFormat property on bindings.
-                        </p>
-                        <p>There are three built-in LINQ-style filters: limitTo, filter, orderBy</p>
-                        <p>And  built-in value converter-style filters: date, currency, uppercase, lowercase, json, number </p>
+                        <ul>
+                            <li>A list of items might need sorting or filtering by some criteria</li>
+                            <li>Silveright does this using a CollectionView from a CollectionViewSource</li>
+                            <li>Here we are sorting in descending order</li>
+                            <li>Adding filter handler to filter items by a value in a textbox</li>
+                            <li>TextChanged on textbox causes the collection view to be updated (reapplying the filter criteria)</li>
+                            <li>XAML not shown for simplicity</li>
+                            <li>FRAGMENT: Angular declares all this work in the presentation</li>
+                            <li>Input bound to our criteria</li>
+                            <li>Collection items filtered using filters</li>
+                            <li>Two kinds of filters; value converter type (saw earlier) and LINQ type (shown here)</li>
+                            <li>Filters can take parameters (see criteria or orderBy)</li>
+                            <li>
+                                Built-in filters:
+                                <ul>
+                                    <li>LINQ: limitTo, filter, orderBy</li>
+                                    <li>ValueConverter: date,currency,uppercase,lowercase,json,number</li>
+                                </ul>
+                            </li>
+                            <li>Now our example is way more exciting - DEMO</li>
+                        </ul>
                     </aside>
                 </section>
 
@@ -541,7 +545,35 @@ CriteriaTextBox.TextChanged +=
                     </div>
 
                     <aside class="notes">
-                        <p>And there we have it, a sorted and filtered list of items.</p>
+                        <ul>
+                            <li>Great. It works.</li>
+                        </ul>
+                    </aside>
+                </section>
+
+                <section>
+                    <h2>ComboBox</h2>
+                    <pre><code class="silverlight" contenteditable>&lt;ComboBox ItemsSource=&quot;{Binding Words}&quot; SelectedValue=&quot;{Binding SelectedWord, Mode=TwoWay}&quot; /&gt;</code></pre>
+                    <pre class="fragment"><code class="angular">&lt;select ng-model=&quot;selectedWord&quot; ng-options=&quot;word for word in words&quot;&gt;&lt;/select&gt;</code></pre>
+                    
+                    <div class="fragment" ng-controller="collectionBindingCtrl">
+                        <input ng-model="criteria" />
+                        <select ng-model="selectedItem" ng-options="name for name in names | filter:criteria | orderBy:'-toString()'"></select>
+                    </div>
+                    <aside class="notes">
+                        <ul>
+                            <li>Demo app uses comboboxes</li>
+                            <li>In Silveright, ComboBox is an ItemsControl</li>
+                            <li>Might look a bit like this (it doesn't, but it might)</li>
+                            <li>A more complex binding might use DisplayMemberPath and SelectedValuePath</li>
+
+                            <li>FRAGMENT: Angular has special case for combos, using the HTML select element and ngOptions directive</li>
+                            <li>ngModel indicates how selected item is bound</li>
+                            <li>ngOptions indicates where display value and value come from in collection of items</li>
+                            <li>The first part is the DisplayMemberPath equivalent</li>
+                            
+                            <li>FRAGMENT: We could combine this with previous example to get a filterable combo</li>
+                        </ul>
                     </aside>
                 </section>
             </section>
