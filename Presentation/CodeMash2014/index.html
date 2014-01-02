@@ -555,7 +555,7 @@ CriteriaTextBox.TextChanged +=
                     <h2>ComboBox</h2>
                     <pre><code class="silverlight" contenteditable>&lt;ComboBox ItemsSource=&quot;{Binding Words}&quot; SelectedValue=&quot;{Binding SelectedWord, Mode=TwoWay}&quot; /&gt;</code></pre>
                     <pre class="fragment"><code class="angular">&lt;select ng-model=&quot;selectedWord&quot; ng-options=&quot;word for word in words&quot;&gt;&lt;/select&gt;</code></pre>
-                    
+
                     <div class="fragment" ng-controller="collectionBindingCtrl">
                         <input ng-model="criteria" />
                         <select ng-model="selectedItem" ng-options="name for name in names | filter:criteria | orderBy:'-toString()'"></select>
@@ -571,7 +571,7 @@ CriteriaTextBox.TextChanged +=
                             <li>ngModel indicates how selected item is bound</li>
                             <li>ngOptions indicates where display value and value come from in collection of items</li>
                             <li>The first part is the DisplayMemberPath equivalent</li>
-                            
+
                             <li>FRAGMENT: We could combine this with previous example to get a filterable combo</li>
                         </ul>
                     </aside>
@@ -625,8 +625,8 @@ CriteriaTextBox.TextChanged +=
                         </ul>
                     </aside>
                 </section>
-                
-                
+
+
 
                 <section>
                     <pre><code class="silverlight">&lt;CheckBox IsChecked=&quot;{Binding HasError, Mode=TwoWay}&quot;&gt;Has Error&lt;/CheckBox&gt;
@@ -703,8 +703,8 @@ CriteriaTextBox.TextChanged +=
                             <li>
                                 We could add:
                                 <textarea rows="12" cols="60">
-;
--webkit-transform: rotate(-45deg);
+                                    ;
+                                    -webkit-transform: rotate(-45deg);
                                 </textarea>
                             </li>
                             <li>FRAGMENT: Tada! DEMO</li>
@@ -718,25 +718,16 @@ CriteriaTextBox.TextChanged +=
                     <h1>Controls</h1>
 
                     <aside class="notes">
-                        <p>
-                            So, we've looked at some of the basic building blocks to making an Angular application and these will take you pretty far,
-                            but now you want to encapsulate a particular piece of funcationality so you can reuse it somewhere else or to tidy up
-                            your code so your colleagues won't want to kill you as they try to review it.
-                        </p>
-                        <p>
-                            In Silverlight, this is achieved using user controls and controls (or derivatives thereof). One could consider the inline
-                            examples we've seen as user controls, even though many might exist within a single HTML file. Each div has a controller associated
-                            with it that indicates the code-behind for that section. However, they are all in a single HTML file and that's messy.
-                        </p>
-                        <p>
-                            To encapsulate these elsewhere, we use directives. Directives are a way of extending HTML to add behavior and presentation.
-                            We've already seen a few such as ngClass, ngStyle and ngController and we can leverage this feature to encapsulate our cool components for reuse.
-                        </p>
+                        <ul>
+                            <li>Controls encapsulate useful functionality into single components</li>
+                            <li>Silverlight provides Controls and derivations for this</li>
+                            <li>Angular extends HTML using directives</li>
+                            <li>ngRepeat, ngClass, ngStyle, ngShow, ngController etc are all directives</li>
+                        </ul>
                     </aside>
                 </section>
 
                 <section>
-
                     <pre><code ng-non-bindable class='silverlight'>&lt;Style TargetType=&quot;myApp:StatusMessage&quot;&gt;
   &lt;Setter Property=&quot;Template&quot;&gt;
     &lt;Setter.Value&gt;
@@ -760,47 +751,36 @@ CriteriaTextBox.TextChanged +=
   };
 });</code></pre>
                     <aside class="notes">
-                        <p>
-                            Here's our Silverlight control.
-                            <ul>
-                                <li>A default style that sets up the control template (usually in Generic.xaml)</li>
-                                <li>Some code to indicate the default style</li>
-                            </ul>
-                        </p>
-                        <p>
-                            And here is our Angular equivalent.
-                        </p>
-
-                        <p>
-                            Explain restrict.
-                            <div>Options are EACM (Element/Attribute/Class/Comment).</div>
-                            <ul>
-                                <li>E when wanting a new control</li>
-                                <li>A when attaching new behavior to a specific element</li>
-                                <li>C when extending an existing class with new behavior</li>
-                                <li>Don't use M - it exists for legacy reasons</li>
-                            </ul>
-
-                            Tend to use A as it is supported in most browsers.
-                        </p>
-
-                        <p>Show templateUrl instead of template. More akin to how Silverlight does things.</p>
+                        <ul>
+                            <li>Here is a very simple control.</li>
+                            <li>Shows a string.</li>
+                            <li>FRAGMENT: here's Angular equivalent</li>
+                            <li>Template gives structure (like generic.xaml default style)</li>
+                            <li>Can use templateUrl instead to indicate external source for template</li>
+                            <li>
+                                Restrict indicates how the directive is used
+                                <div>Options are EACM (Element/Attribute/Class/Comment).</div>
+                                <ul>
+                                    <li>E when wanting a new control</li>
+                                    <li>A when attaching new behavior to a specific element</li>
+                                    <li>C when extending an existing class with new behavior</li>
+                                    <li>Don't use M - it exists for legacy reasons</li>
+                                </ul>
+                                Tend to use A as supportd in most browsers
+                            </li>
+                        </ul>
                     </aside>
                 </section>
 
                 <section>
                     <pre><code ng-non-bindable class="silverlight">&lt;myApp:StatusMessage /&gt;</code></pre>
-                    <pre ng-non-bindable><code class='angular' contenteditable>&lt;status-message /&gt;</code></pre>
-
-                    <div class="fragment">
-                        <status-message-simple />
-                    </div>
+                    <pre class="fragment" ng-non-bindable><code class='angular' contenteditable>&lt;status-message /&gt;</code></pre>
 
                     <aside class="notes">
-                        <p>And this is how we use it.</p>
-                        <p>Show how we might use if restriction were A, C or M</p>
-                        <p>Show it working.</p>
-                        <p>This isn't particularly useful. We should be able to change the text, for example, or indicate that it's an error message.</p>
+                        <ul>
+                            <li>Here's usage for Silverlight</li>
+                            <li>FRAGMENT: Angular usage is very similar</li>
+                        </ul>
                     </aside>
                 </section>
 
@@ -830,35 +810,296 @@ public string Message
 });</code></pre>
 
                     <aside class="notes">
-                        <p>In Silverlight, we pass data using dependency properties.</p>
-                        <p>In Angular, we do very similar things to pass values, but they are declared in the directive a little differently.</p>
-                        <p>
-                            There is a lot more nuance to scope than I'm showing here and I highly recommend reading up on this as well as attending Brian Genisio's talk
-                            on Directives Demystified as this can get pretty complicated. To make it easy on myself, I'm going to skirt around the complexities, but please be aware
-                            that you need to learn more about scope if you're going to work with directives.
-                        </p>
-                        <p>
-                            <ul>
-                                <li>@: attribute binding - OneWay</li>
-                                <li>=: two way binding</li>
-                                <li>&amp;: pass a callback</li>
-                            </ul>
-                        </p>
+                        <ul>
+                            <li>We can make more useful by passing data to the template</li>
+                            <li>For this, we need dependency property</li>
+                            <li>FRAGMENT: Angular similar but we specifiy a scope model</li>
+                            <li>Scope has a lot more nuance that I am not touching on</li>
+                            <li>Attend Brian Genisio's talk on Directives Demystified tomorrow</li>
+                            <li>In this example, @ means bind the string of the attribute "message" to scope.message</li>
+                            <li>Can use = for object binding (allowing two-way binding) or & for passing callback functions</li>
+                        </ul>
                     </aside>
                 </section>
 
                 <section>
                     <pre><code class='silverlight' ng-non-bindable>&lt;myApp:StatusMessage Message=&quot;Now THIS is a status message. Exciting!&quot; /&gt;</code></pre>
-                    <pre><code class="angular" ng-non-bindable>&lt;status-message message=&quot;Now THIS is a status message. Exciting!&quot; /&gt;</code></pre>
+                    <pre class="fragment"><code class="angular" ng-non-bindable>&lt;status-message message=&quot;Now THIS is a status message. Exciting!&quot; /&gt;</code></pre>
 
-                    <div class="fragment">
-                        <status-message message="Now THIS is a status message. Exciting!" />
-                    </div>
+                    <aside class="notes">
+                        <ul>
+                            <li>Again, usage is simple</li>
+                            <li>FRAGMENT: Angular looks almost the same as Silverlight</li>
+                            <li>This example is too simple</li>
+                            <li>The power of directives is in encapsulating complexity</li>
+                        </ul>
+                    </aside>
                 </section>
 
-            </section>
+                <section>
+                    <pre ng-non-bindable><code class="angular javascript" data-trim>
+codemash2014.directive(&#39;labelledCombo&#39;, function() {
+        return {
+            template: &#39;&lt;div&gt;&lt;div class=&quot;label&quot;&gt;{{title}}&lt;/div&gt;&lt;select ng-model=&quot;selectedItem&quot; ng-options=&quot;item for item in items&quot;&gt;&lt;/select&gt;&lt;/div&gt;&#39;,
+            restrict: &#39;E&#39;,
+            replace: true,
+            scope: {
+                selectedItem: &#39;=&#39;,
+                items: &#39;=&#39;,
+                title: &#39;@&#39;
+            }
+        };
+    });
+</code></pre>
+                    
+                    <pre ng-non-bindable class="fragment"><code class="angular">&lt;labelled-combo title=&quot;Adjective 1:&quot; items=&quot;firstAdjectives&quot; selected-item=&quot;firstAdjective&quot;&gt;&lt;/labelled-combo&gt;</code></pre>
 
+                    <aside class="notes">
+                        <ul>
+                            <li>The whole Silverlight generator is a single user control</li>
+                            <li>However, when writing the angular one, I saw another control; LabelledCombo</li>
+                            <li>A label and a combodropdown combined</li>
+                            <li>Here is what that looks like.</li>
+                            <li>FRAGMENT: Usage</li>
+                            <li>We'll see what that looks like in a minute</li>
+                            <li>Replace tells angular to replace marked element with template</li>
+                        </ul>
+                    </aside>
+                </section>
+            </section>
+            
             <section>
+                <section>
+                    <h1>Putting It Together</h1>
+                    
+                    <aside class="notes">
+                        <ul>
+                            <li>We've covered almost all the bits we need to create our Angular insult generator</li>
+                            <li>Let's put these concepts together and see what it looks like</li>
+                        </ul>
+                    </aside>
+                </section>
+                
+                <section>
+                    <pre ng-non-bindable><code class="silverlight" data-trim>
+&lt;Grid x:Name=&quot;LayoutRoot&quot; Background=&quot;White&quot; DataContext=&quot;{Binding Source={StaticResource Model}}&quot;&gt;
+    &lt;TextBlock Text=&quot;Adjective 1:&quot; Grid.Column=&quot;0&quot; Grid.Row=&quot;0&quot; /&gt;
+    &lt;ComboBox Grid.Column=&quot;1&quot; Grid.Row=&quot;0&quot; ItemsSource=&quot;{Binding FirstAdjectiveList}&quot; SelectedValue=&quot;{Binding FirstAdjective, Mode=TwoWay}&quot; /&gt;
+
+    &lt;TextBlock Text=&quot;Adjective 2:&quot; Grid.Column=&quot;0&quot; Grid.Row=&quot;1&quot; /&gt;
+    &lt;ComboBox Grid.Column=&quot;1&quot; Grid.Row=&quot;1&quot; ItemsSource=&quot;{Binding SecondAdjectiveList}&quot; SelectedValue=&quot;{Binding SecondAdjective, Mode=TwoWay}&quot; /&gt;
+
+    &lt;TextBlock Text=&quot;Noun:&quot; Grid.Column=&quot;0&quot; Grid.Row=&quot;2&quot; /&gt;
+    &lt;ComboBox Grid.Column=&quot;1&quot; Grid.Row=&quot;2&quot; ItemsSource=&quot;{Binding NounList}&quot; SelectedValue=&quot;{Binding Noun, Mode=TwoWay}&quot; /&gt;
+
+    &lt;Button Grid.Column=&quot;0&quot; Grid.Row=&quot;3&quot; Content=&quot;Randomize&quot; Click=&quot;OnClickRandomize&quot; /&gt;
+    &lt;RichTextBox  Grid.Column=&quot;1&quot; Grid.Row=&quot;3&quot;&gt;
+        &lt;RichTextBox.Blocks&gt;
+            &lt;Paragraph&gt;
+                &lt;Span&gt;
+                    &lt;Run Text=&quot;Thou&quot; /&gt;
+                    &lt;Run Text=&quot;{Binding FirstAdjective}&quot; /&gt;
+                    &lt;Run Text=&quot;{Binding SecondAdjective}&quot; /&gt;
+                    &lt;Run Text=&quot;{Binding Noun, StringFormat=&#39;{0}!&#39;}&quot; /&gt;
+                &lt;/Span&gt;
+            &lt;/Paragraph&gt;
+        &lt;/RichTextBox.Blocks&gt;
+    &lt;/RichTextBox&gt;
+&lt;/Grid&gt;
+</code></pre>
+                    
+                    <aside class="notes">
+                        <ul>
+                            <li>UserControl using a grid</li>
+                            <li>TextBlock/ComboBox could be combined into a user control, but I didn't</li>
+                            <li>Button for randomizing</li>
+                            <li>RichTextBox to render insult for copying.</li>
+                            <li>Grid is databound to model, which is declared in the app as a static resource</li>
+                            <li>Skipped styles here and we'll skip the CSS definitions too</li>
+                        </ul>
+                    </aside>
+                </section>
+                
+                <section>
+                    <pre ng-non-bindable><code class="angular javascript" data-trim>
+codemash2014.directive(&#39;insultGenerator&#39;, function() {
+    return {
+        controller: &#39;insultGeneratorCtrl&#39;,
+        replace:true,
+        template:
+            &#39;&lt;div class=&quot;insult-generator&quot;&gt;&#39;
+            + &#39;&lt;labelled-combo title=&quot;Adjective 1:&quot; items=&quot;firstAdjectives&quot; selected-item=&quot;firstAdjective&quot;&gt;&lt;/labelled-combo&gt;&#39;
+            + &#39;&lt;labelled-combo title=&quot;Adjective 2:&quot; items=&quot;secondAdjectives&quot; selected-item=&quot;secondAdjective&quot;&gt;&lt;/labelled-combo&gt;&#39;
+            + &#39;&lt;labelled-combo title=&quot;Noun:&quot; items=&quot;nouns&quot; selected-item=&quot;noun&quot;&gt;&lt;/labelled-combo&gt;&#39;
+            + &#39;&lt;div&gt;&#39;
+                + &#39;&lt;button ng-click=&quot;randomize()&quot;&gt;Randomize&lt;/button&gt;&#39;
+                + &#39;&lt;div class=&quot;insult-container&quot;&gt;&lt;textarea class=&quot;insult&quot; readonly rows=&quot;2&quot;&gt;Thou {{firstAdjective}} {{secondAdjective}} {{noun}}!&lt;/textarea&gt;&lt;/div&gt;&#39;
+            + &#39;&lt;/div&gt;&#39;
+            + &#39;&lt;/div&gt;&#39;,
+        restrict: &#39;E&#39;,
+        scope: {}
+    };
+});
+</code></pre>
+                    
+                    <aside class="notes">
+                        <ul>
+                            <li>Repeat the directive we saw earlier for each dropdown</li>
+                            <li>Last row is our randomize button and our output</li>
+                            <li>Note ng-click here, which we use to bind the button to method on controller</li>
+                            <li>CSS styles should have distintive names to avoid clashing with styles that others might use</li>
+                            <li>CSS is global namespace so recommend very specific names</li>
+                            <li>controller specifies the name of the controller to use for this directive</li>
+                        </ul>
+                    </aside>
+                </section>
+                
+                <section>
+                    <pre ng-non-bindable><code class="silverlight cs" data-trim>
+public partial class MainPage : UserControl
+{
+    public MainPage()
+    {
+        InitializeComponent();
+    }
+
+    private void OnClickRandomize( object sender, RoutedEventArgs e )
+    {
+        ((InsultModel)Resources[&quot;Model&quot;]).Randomize();
+    }
+}
+</code></pre>
+                    <pre ng-non-bindable><code class="silverlight cs" data-trim>
+public class InsultModel : INotifyPropertyChanged
+{
+    public InsultModel()
+    {
+        _firstAdjectiveList = Words.Adjectives.ToList().AsReadOnly();
+        _secondAdjectiveList = Words.HyphenatedAdjectives.ToList().AsReadOnly();
+        _nounList = Words.Nouns.ToList().AsReadOnly();
+
+        Randomize();
+    }
+
+    public void Randomize()
+    {
+        FirstAdjective = _firstAdjectiveList.Random();
+        SecondAdjective = _secondAdjectiveList.Random();
+        Noun = _nounList.Random();
+    }
+
+    public string FirstAdjective
+    {
+        get { return _firstAdjective; }
+        set
+        {
+            if ( _firstAdjective != value )
+            {
+
+                _firstAdjective = value;
+                OnPropertyChanged( &quot;FirstAdjective&quot; );
+            }
+        }
+    }
+
+    public string SecondAdjective
+    {
+        get { return _secondAdjective; }
+        set
+        {
+            if ( _secondAdjective != value )
+            {
+
+                _secondAdjective = value;
+                OnPropertyChanged( &quot;SecondAdjective&quot; );
+            }
+        }
+    }
+    
+    public string Noun
+    {
+        get { return _noun; }
+        set
+        {
+            if ( _noun != value )
+            {
+
+                _noun = value;
+                OnPropertyChanged( &quot;Noun&quot; );
+            }
+        }
+    }
+
+    public IEnumerable&lt;string&gt; FirstAdjectiveList { get { return _firstAdjectiveList; } }
+    public IEnumerable&lt;string&gt; SecondAdjectiveList { get { return _secondAdjectiveList; } }
+    public IEnumerable&lt;string&gt; NounList { get { return _nounList; } }
+
+    public event PropertyChangedEventHandler PropertyChanged;
+
+    protected virtual void OnPropertyChanged( string propertyName )
+    {
+        PropertyChangedEventHandler handler = PropertyChanged;
+        if ( handler != null ) { handler( this, new PropertyChangedEventArgs( propertyName ) ); }
+    }
+
+    private string _firstAdjective;
+    private string _secondAdjective;
+    private string _noun;
+    private readonly IEnumerable&lt;string&gt; _firstAdjectiveList;
+    private readonly IEnumerable&lt;string&gt; _secondAdjectiveList;
+    private readonly IEnumerable&lt;string&gt; _nounList;
+}
+</code></pre>
+                    
+                    <aside class="notes">
+                        <ul>
+                            <li>In the code-behind we have a button handler that delegates to the model</li>
+                            <li>The model does all the work</li>
+                            <li>A Words class contains the lists of words (nothing special to see)</li>
+                            <li>That's it</li>
+                        </ul>
+                    </aside>
+                </section>
+                
+                <section>
+                    <pre ng-non-bindable><code class="angular javascript" data-trim>
+codemash2014.controller('insultGeneratorCtrl', function($scope, insultWords) {
+    $scope.firstAdjectives = insultWords.firstAdjectives;
+    $scope.secondAdjectives = insultWords.secondAdjectives;
+    $scope.nouns = insultWords.nouns;
+
+    $scope.randomize = function() {
+        $scope.firstAdjective = getRandomElement($scope.firstAdjectives);
+        $scope.secondAdjective = getRandomElement($scope.secondAdjectives);
+        $scope.noun = getRandomElement($scope.nouns);
+    };
+
+    function getRandomIndex(limit) {
+        return Math.round(limit * Math.random() + 0.5);
+    }
+
+    function getRandomElement(array) {
+        var index = getRandomIndex(array.length - 1);
+        return array[index];
+    }
+
+    $scope.randomize();
+});
+</code></pre>
+                    
+                    <aside class="notes">
+                        <ul>
+                            <li>Our code-behind</li>
+                            <li>declared controller</li>
+                            <li>Injecting something called insultWords</li>
+                            <li>An object defined using angular.value that just provides arrays of words</li>
+                            <li>See how randomize funtion is defined on scope for binding to button</li>
+                            <li>Other functions are private to the controller</li>
+                            <li>Putting this altogether we get...</li>
+                        </ul>
+                    </aside>
+                </section>
+                
                 <section>
                     <h2>Shakespearean Insult Generator</h2>
                     <insult-generator />
