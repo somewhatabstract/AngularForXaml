@@ -583,12 +583,12 @@ CriteriaTextBox.TextChanged +=
                     <h1>Style</h1>
 
                     <aside class="notes">
-                        <p>So far, we've looked at how we get data into our view, but what about controlling when and how it appears?</p>
-                        <p>In Silverlight, we set the Visibility of an item. In Angular, we can do a number of things.</p>
                         <ul>
-                            <li>Use ng-class to set a conditional style that changes the display css to none or not</li>
-                            <li>Use ng-show or ng-hide</li>
-                            <li>Use ng-if</li>
+                            <li>We can show data and manipulate data</li>
+                            <li>What about controlling appearance?</li>
+                            <li>In Silverlight we can use Style resources and bindings</li>
+                            <li>Angular we use CSS</li>
+                            <li>For dynamic style changes, we have to be a little more resourceful</li>
                         </ul>
                     </aside>
                 </section>
@@ -614,74 +614,69 @@ CriteriaTextBox.TextChanged +=
                     </div>
 
                     <aside class="notes">
-                        <p>Controlling Visibility is a common task in Silverlight. We add and remove things using Visiblity.Collapsed and Visiblity.Visible (and Visiblity.Hidden if we include WPF)</p>
-                        <p>
-                            A simple example would be to bind a checkbox to the visiblity of another control. Of course, simple means writing:
-                            <ul>
-                                <li>A boolean-to-visibility value converter</li>
-                                <li>A data model with INotifyPropertyChanged</li>
-                            </ul>
-                            But let's assume we've got all that.
-                        </p>
-                        <p>In Angular, we can achieve this in a number of ways. The simplest uses ng-show, as in this example (next fragment)</p>
-                        <p>There is also ng-hide. So, we could edit this to add something that shows in the opposite circumstance. This is equivalent to !ng-show.</p>
-                        <p><strong>Edit to add div ng-hide="isShowingSurprise" No Surprise :(</strong></p>
-                        <p>ng-hide and ng-show manipulate the display CSS style based on a condition.</p>
-                        <p>But we could also use ng-if, which is different in that the element doesn't even get included if the condition is not met. (show ng-if in editor)</p>
-                        <p>Finally, we could use ng-class or ng-style to apply a specific CSS style based on bound conditions.</p>
+                        <ul>
+                            <li>Basic example, we use a ValueConverter to change visibility</li>
+                            <li>FRAGMENT: In Angular, we use ng-show to bind to a condition</li>
+                            <li>FRAGMENT: DEMO</li>
+                            <li>Can use ng-hide for opposite situation</li>
+                            <li>Add ng-hide with "No surprise :("</li>
+                            <li>FRAGMENT: DEMO</li>
+                            <li>Note: ng-if also available. Similar to Visibility.Collapsed in WPF, but actually doesn't insert HTML into DOM</li>
+                        </ul>
                     </aside>
                 </section>
+                
+                
 
                 <section>
-                    <pre><code class='silverlight' ng-non-binadble>&lt;CheckBox IsChecked=&quot;{Binding HasError, Mode=TwoWay}&quot;&gt;Has Error&lt;/CheckBox&gt;
-&lt;TextBlock Text=&quot;Some status message&quot;
-  Foreground=&quot;{Binding HasError, Converter={StaticResource ErrorColorConverter}}&quot; /&gt;
+                    <pre><code class="silverlight">&lt;CheckBox IsChecked=&quot;{Binding HasError, Mode=TwoWay}&quot;&gt;Has Error&lt;/CheckBox&gt;
+&lt;TextBlock Text=&quot;Some status message&quot; FontStyle=&quot;{Binding HasError, Converter={StaticResource FontStyleConverter}}&quot; /&gt;
 </code></pre>
                     <pre class="fragment"><code class='angular' ng-non-bindable>&lt;input type=&quot;checkbox&quot; ng-model=&quot;hasError&quot; name=&quot;isErrorRadio&quot; /&gt;
 &lt;label for=&quot;isErrorRadio&quot;&gt;Has Error&lt;/label&gt;
-&lt;div ng-style=&quot;{color: hasError ? &#39;red&#39; : &#39;green&#39;}&quot;&gt;Some status message&lt;/div&gt;</code></pre>
+&lt;div ng-style=&quot;{&#39;font-style&#39;: hasError ? &#39;italic&#39; : &#39;normal&#39;}&quot;&gt;Some status message&lt;/div&gt;</code></pre>
 
                     <div class="fragment" ng-controller="presentationBindingCtrl">
                         <input type="checkbox" ng-model="hasError" name="isErrorRadio" />
                         <label for="isErrorRadio">Has Error</label>
-                        <div ng-style="{color: hasError ? 'red' : 'green'}">Some status message</div>
+                        <div ng-style="{'font-style': hasError ? 'italic' : ''}">Some status message</div>
                     </div>
 
                     <aside class="notes">
-                        <p>Other presentation changes tend to involve colours, borders, etc. For this, ng-class is the thing to use.</p>
-                        <p>
-                            While in Silverlight, we can use styles, templates and bindings to
-                            individual properties like FontSize to change control appearance, depending on the scenario.
-                            In Angular, since we're building on top of HTML, we use CSS (cascading style sheets) and the ng-class and ng-style directives.
-                            To confuse things slightly, what we call styles in XAML, we would call classes in CSS. Styles in CSS are the individual properties within a class.
-                        </p>
-                        <p>
-                            Here we have a simple binding for text color.
-                            It's just for illustrative purposes so the code isn't particularly nice, but it does the job for our purposes.
-                        </p>
+                        <ul>
+                            <li>Here we have a value converter to convert a bool to a font style</li>
+                            <li>FRAGMENT: ngStyle allows us to conditionally apply styles</li>
+                            <li>Moves the presentation stuff into the presentation layer and out of code-behind</li>
+                            <li>Generally should use ngClass instead of ngStyle to put all styling in CSS files</li>
+                        </ul>
                     </aside>
                 </section>
 
                 <section>
-                    <pre><code class="cs silverlight">public object Convert( object value, Type targetType, object param, CultureInfo culture )
-{
-  return (bool) value ? new SolidColorBrush(Colors.Red) :
-              new SolidColorBrush(Colors.Green);
-}</code></pre>
-                    <pre class="fragment"><code class='angular' contenteditable>ng-style="{color: hasError ? 'red' : 'green'}"</code></pre>
+                    <pre><code class="silverlight" ng-non-bindable>&lt;VisualStateManager.VisualStateGroups&gt;
+  &lt;VisualStateGroup x:Name=&quot;CommonStates&quot;&gt;
+    &lt;VisualState x:Name=&quot;Error&quot;&gt;
+      &lt;Storyboard&gt;
+        &lt;ColorAnimation To=&quot;{StaticResource ErrorColor}&quot; Duration=&quot;0:00:00&quot; Storyboard.TargetName=&quot;MessageTextBlock&quot; Storyboard.TargetProperty=&quot;(TextBlock.Foreground).(SolidColorBrush.Color)&quot; /&gt;
+      &lt;/Storyboard&gt;
+    &lt;/VisualState&gt;
+    &lt;VisualState x:Name=&quot;Normal&quot;&gt;
+      &lt;Storyboard&gt;
+        &lt;ColorAnimation To=&quot;{StaticResource OkColor}&quot; Duration=&quot;0:00:00&quot; Storyboard.TargetName=&quot;MessageTextBlock&quot; Storyboard.TargetProperty=&quot;(TextBlock.Foreground).(SolidColorBrush.Color)&quot; /&gt;
+      &lt;/Storyboard&gt;
+    &lt;/VisualState&gt;
+  &lt;/VisualStateGroup&gt;
+&lt;/VisualStateManager.VisualStateGroups&gt;</code></pre>
+
+                    <pre class="fragment"><code class="cs silverlight" ng-non-bindable>VisualStateManager.GoToState( this, &quot;Error&quot;, true );</code></pre>
 
                     <aside class="notes">
-                        <p>We have a value converter for Silverlight that converts a bool to a color.</p>
-                        <p>In Angular we have this...</p>
-                        <p>Note this is better as it moves our style into the presentation instead of the code-behind</p>
-                        <p>Of course, we could create scope values for the colors.</p>
-                        <p>Or we could delegate the color selection to a method.</p>
-                        <p>Or we could write a filter.</p>
-                        <p>Show some examples in code edits</p>
-                        <p>
-                            However, usually, we won't manipulate individual properties like this. Instead, we would apply a Style or Template
-                            in Silverlight and either use a ValueConverter to pick the right one or the VisualStateManager and VisualStates, or a CSS class in Angular.
-                        </p>
+                        <ul>
+                            <li>In fact, VisualStateManager more likely for real world XAML apps</li>
+                            <li>Might define some colors somewhere in our theme</li>
+                            <li>Then define some visual states that manipulate various values</li>
+                            <li>FRAGMENT: Use codebehind to initiate state transitions based on data changes</li>
+                        </ul>
                     </aside>
                 </section>
 
@@ -689,7 +684,7 @@ CriteriaTextBox.TextChanged +=
                     <pre><code ng-non-bindable class='angular'>&lt;div ng-class=&quot;{ 'status-error': hasError, 'status-ok': !hasError }&quot;&gt;
   Totally different status message
 &lt;/div&gt;</code></pre>
-                    <pre><code class="css angular" contenteditable>.status-ok {
+                    <pre class="fragment"><code class="css angular" contenteditable>.status-ok {
   color: green; }
 .status-error {
   color: red; }</code></pre>
@@ -701,37 +696,19 @@ CriteriaTextBox.TextChanged +=
                     </div>
 
                     <aside class="notes">
-                        <p>
-                            Similar to ngStyle, ngClass provides a mechanism for adding and removing styles based on conditions.
-                        </p>
-                        <p>
-                            IN Silverlight, changing the style based on the data usually means data-bindings similar to what we had before but inside the style (so we can
-                            reuse it elsewhere on other controls), or some sort of resource look-up value converter that returns a style resource based on the
-                            value in our model.
-
-                            For Angular, we can just do this.
-                        </p>
-                        <p>
-                            Here we have just the message portion from before.
-                            THe ng-class directive takes an object where the name of the properties is the style name and the value is a binding (or constant) that
-                            determines when that style should be applied.
-                        </p>
-                        <p>
-                            Of course, just changing the color is boring and you've seen that already, and we're using styles now so we can easily change some more stuff
-                            fit without changing the logic. So, let's grab the user's attention with something like.
-
-                            <div>
-                                Add the following to error style - make sure this matches what actually happens so smoke and mirrors occurs.
-
+                        <ul>
+                            <li>ngClass nicely separates the view structure and the view model from the styling</li>
+                            <li>Similar to ngStyle with conditions for each class we apply</li>
+                            <li>ngClass allows easier composite style changes</li>
+                            <li>
+                                We could add:
                                 <textarea rows="12" cols="60">
-                                    ;
-                                    -webkit-transform: rotate(-45deg);
+;
+-webkit-transform: rotate(-45deg);
                                 </textarea>
-                            </div>
-
-                            Let's see this in action.
-                        </p>
-                        <p>All of this can, of course, be much more complex than the examples I've shown here.</p>
+                            </li>
+                            <li>FRAGMENT: Tada! DEMO</li>
+                        </ul>
                     </aside>
                 </section>
             </section>
@@ -879,100 +856,6 @@ public string Message
                     </div>
                 </section>
 
-                <section>
-                    <h2>Code Reuse</h2>
-                    <pre><code class='silverlight' ng-non-bindable>&lt;CheckBox IsChecked=&quot;{Binding HasError, Mode=TwoWay}&quot;&gt;Show&lt;/CheckBox&gt;
-&lt;myApp:StatusMessage x:Name=&quot;MessageTextBlock&quot; Message=&quot;Look at this brilliant text!&quot; /&gt;</code></pre>
-                    <pre class="fragment"><code class="silverlight" ng-non-bindable>&lt;StackPanel.Resources&gt;
-  &lt;Color x:Key=&quot;ErrorColor&quot;&gt;Red&lt;/Color&gt;
-  &lt;Color x:Key=&quot;OkColor&quot;&gt;Green&lt;/Color&gt;
-&lt;/StackPanel.Resources&gt;</code></pre>
-
-                    <pre class="fragment"><code class="silverlight" ng-non-bindable>&lt;VisualStateManager.VisualStateGroups&gt;
-  &lt;VisualStateGroup x:Name=&quot;CommonStates&quot;&gt;
-    &lt;VisualState x:Name=&quot;Error&quot;&gt;
-      &lt;Storyboard&gt;
-        &lt;ColorAnimation To=&quot;{StaticResource ErrorColor}&quot; Duration=&quot;0:00:00&quot; Storyboard.TargetName=&quot;MessageTextBlock&quot; Storyboard.TargetProperty=&quot;(TextBlock.Foreground).(SolidColorBrush.Color)&quot; /&gt;
-      &lt;/Storyboard&gt;
-    &lt;/VisualState&gt;
-    &lt;VisualState x:Name=&quot;Normal&quot;&gt;
-      &lt;Storyboard&gt;
-        &lt;ColorAnimation To=&quot;{StaticResource OkColor}&quot; Duration=&quot;0:00:00&quot; Storyboard.TargetName=&quot;MessageTextBlock&quot; Storyboard.TargetProperty=&quot;(TextBlock.Foreground).(SolidColorBrush.Color)&quot; /&gt;
-      &lt;/Storyboard&gt;
-    &lt;/VisualState&gt;
-  &lt;/VisualStateGroup&gt;
-&lt;/VisualStateManager.VisualStateGroups&gt;</code></pre>
-
-                    <pre class="fragment"><code class="cs silverlight" ng-non-bindable>VisualStateManager.GoToState( this, &quot;Error&quot;, true );</code></pre>
-
-                    <aside class="notes">
-                        <p>
-                            Often, we want to reuse useful bits of code or use code someone else has written.
-                            <ul>
-                                <li>Might use a DI framework like Unity</li>
-                                <li>Might pass in interface via property</li>
-                                <li>Might reference an assembly and just use its types directly</li>
-                            </ul>
-
-                            <ul>
-                                <li>Angular provides DI</li>
-                                <li>Referenced modules are checked for named dependencies</li>
-                                <li>$scope is an example (note, newer versions make $scope unnecessary for our scenarios)</li>
-                                <li>Define available things using providers</li>
-                                <li>angular.controller, angular.directive and angular.filter are all providers we've used</li>
-                                <li>Those mainly provide things to modify the presentation stuff</li>
-                                <li>There are others provided for code reuse and data access</li>
-                            </ul>
-
-                            <ul>
-                                <li>Consider value converters in bindings</li>
-                                <li>We reference them by resource key</li>
-                                <li>
-                                    Instead of ErrorColorConverter in Silverlight
-                                    <ul>
-                                        <li>Define colors separately for use elsewhere and want to use them throughout our app</li>
-                                        <li>Could use VisualStates to specify what state the control is in</li>
-                                        <li>Could reference the colors from static resources</li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </p>
-                    </aside>
-                </section>
-
-                <section>
-                    <pre><code class="silverlight" ng-non-bindable>&lt;StackPanel.Resources&gt;
-  &lt;Color x:Key=&quot;ErrorColor&quot;&gt;Red&lt;/Color&gt;
-  &lt;Color x:Key=&quot;OkColor&quot;&gt;Green&lt;/Color&gt;
-&lt;/StackPanel.Resources&gt;</code></pre>
-
-                    <pre class="fragment"><code class="angular" ng-non-bindable>myApp.value('errorColor', 'red');
-myApp.value('okColor', 'green');</code></pre>
-
-                    <aside class="notes">
-                        <p>
-                            angular.value injects the value it was defined with.
-                        </p>
-                    </aside>
-                </section>
-
-                <section>
-                    TODO: Show these things used in a directive.
-
-                    <div class="fragment" ng-controller="colorBindingCtrl">
-                        <input type="checkbox" ng-model="hasError" name="isErrorRadio" />
-                        <label for="isErrorRadio">Has Error</label>
-                        <div ng-style="{color: getTextColor(hasError)}">Some status message</div>
-                    </div>
-
-                    <aside class="notes">
-                        <p>
-                            angular.service will inject an instance of the defined function, angular.factory will inject the result of the defined function, and angular.value injects
-                            the value it was defined with.
-                        </p>
-                        <p>Now that we've defined our various utilities and values, let's use them in our directive.</p>
-                    </aside>
-                </section>
             </section>
 
             <section>
