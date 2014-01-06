@@ -105,7 +105,6 @@
                         <ul>
                             <li>Needed to look for a way to translate between Angular and what I knew</li>
                             <li>Took lots of effort then, but written an app to help today</li>
-                            <li>SHOW SILVERLIGHT APP</li>
                         </ul>
                     </aside>
                 </section>
@@ -117,7 +116,6 @@
                     <aside class="notes">
                         <ul>
                             <li>Every framework has boilerplate to assimilate an application</li>
-                            <li>Let's take a look</li>
                         </ul>
                     </aside>
                 </section>
@@ -130,7 +128,7 @@
          x:Class=&quot;HelloWorld.App&quot;&gt;
 &lt;/Application&gt;
 </code></pre>
-<pre><code ng-non-bindable class="silverlight cs" data-trim>
+                    <pre><code ng-non-bindable class="silverlight cs" data-trim>
 namespace HelloWorld
 {
   public partial class App : System.Windows.Application
@@ -144,7 +142,7 @@ namespace HelloWorld
   }
 }
 </code></pre>
-<pre><code ng-non-bindable class="silverlight" data-trim>
+                    <pre><code ng-non-bindable class="silverlight" data-trim>
 &lt;object data=&quot;data:application/x-silverlight-2,&quot; width=&quot;100%&quot; type=&quot;application/x-silverlight-2&quot;&gt;
     &lt;param name=&quot;source&quot; value=&quot;Bin/Debug/HelloWorld.xap&quot;/&gt;
 &lt;/object&gt;
@@ -178,6 +176,133 @@ namespace HelloWorld
                             <li>Contents of ng-app element are RootVisual</li>
                             <li>Scipts in head element are DLL references</li>
                             <li>CSS is like resources</li>
+                            <li>Before we continue, it will be easier to discuss concepts with an example</li>
+                            <li>DEMO: SHOW SILVERLIGHT APP</li>
+                        </ul>
+                    </aside>
+                </section>
+
+                <section>
+                    <object class="silverlight" data="data:application/x-silverlight-2," height="300px" width="100%" type="application/x-silverlight-2">
+                        <param name="source" value="assets/ShakespeareanInsultGenerator.xap" />
+                    </object>
+                </section>
+                
+                <section>
+                    <pre ng-non-bindable><code class="silverlight" data-trim>
+&lt;Grid x:Name=&quot;LayoutRoot&quot; Background=&quot;White&quot; DataContext=&quot;{Binding Source={StaticResource Model}}&quot;&gt;
+    &lt;TextBlock Text=&quot;Adjective 1:&quot; Grid.Column=&quot;0&quot; Grid.Row=&quot;0&quot; /&gt;
+    &lt;ComboBox Grid.Column=&quot;1&quot; Grid.Row=&quot;0&quot; ItemsSource=&quot;{Binding FirstAdjectiveList}&quot; SelectedValue=&quot;{Binding FirstAdjective, Mode=TwoWay}&quot; /&gt;
+    &lt;TextBlock Text=&quot;Adjective 2:&quot; Grid.Column=&quot;0&quot; Grid.Row=&quot;1&quot; /&gt;
+    &lt;ComboBox Grid.Column=&quot;1&quot; Grid.Row=&quot;1&quot; ItemsSource=&quot;{Binding SecondAdjectiveList}&quot; SelectedValue=&quot;{Binding SecondAdjective, Mode=TwoWay}&quot; /&gt;
+    &lt;TextBlock Text=&quot;Noun:&quot; Grid.Column=&quot;0&quot; Grid.Row=&quot;2&quot; /&gt;
+    &lt;ComboBox Grid.Column=&quot;1&quot; Grid.Row=&quot;2&quot; ItemsSource=&quot;{Binding NounList}&quot; SelectedValue=&quot;{Binding Noun, Mode=TwoWay}&quot; /&gt;
+    &lt;Button Grid.Column=&quot;0&quot; Grid.Row=&quot;3&quot; Content=&quot;Randomize&quot; Click=&quot;OnClickRandomize&quot; /&gt;
+    &lt;RichTextBox  Grid.Column=&quot;1&quot; Grid.Row=&quot;3&quot;&gt;
+        &lt;RichTextBox.Blocks&gt;
+            &lt;Paragraph&gt;
+                &lt;Span&gt;
+                    &lt;Run Text=&quot;Thou&quot; /&gt;
+                    &lt;Run Text=&quot;{Binding FirstAdjective}&quot; /&gt;
+                    &lt;Run Text=&quot;{Binding SecondAdjective}&quot; /&gt;
+                    &lt;Run Text=&quot;{Binding Noun, StringFormat=&#39;{0}!&#39;}&quot; /&gt;
+                &lt;/Span&gt;
+            &lt;/Paragraph&gt;
+        &lt;/RichTextBox.Blocks&gt;
+    &lt;/RichTextBox&gt;
+&lt;/Grid&gt;
+</code></pre>
+                </section>
+
+                <section>
+                    <pre ng-non-bindable><code class="silverlight cs" data-trim>
+public partial class MainPage : UserControl
+{
+    public MainPage()
+    {
+        InitializeComponent();
+    }
+    private void OnClickRandomize( object sender, RoutedEventArgs e )
+    {
+        ((InsultModel)Resources[&quot;Model&quot;]).Randomize();
+    }
+}
+</code></pre>
+                    <pre ng-non-bindable><code class="silverlight cs" data-trim>
+public class InsultModel : INotifyPropertyChanged
+{
+    public InsultModel()
+    {
+        _firstAdjectiveList = Words.Adjectives.ToList().AsReadOnly();
+        _secondAdjectiveList = Words.HyphenatedAdjectives.ToList().AsReadOnly();
+        _nounList = Words.Nouns.ToList().AsReadOnly();
+        Randomize();
+    }
+    public void Randomize()
+    {
+        FirstAdjective = _firstAdjectiveList.Random();
+        SecondAdjective = _secondAdjectiveList.Random();
+        Noun = _nounList.Random();
+    }
+    public string FirstAdjective
+    {
+        get { return _firstAdjective; }
+        set
+        {
+            if ( _firstAdjective != value )
+            {
+                _firstAdjective = value;
+                OnPropertyChanged( &quot;FirstAdjective&quot; );
+            }
+        }
+    }
+    public string SecondAdjective
+    {
+        get { return _secondAdjective; }
+        set
+        {
+            if ( _secondAdjective != value )
+            {
+                _secondAdjective = value;
+                OnPropertyChanged( &quot;SecondAdjective&quot; );
+            }
+        }
+    }
+    
+    public string Noun
+    {
+        get { return _noun; }
+        set
+        {
+            if ( _noun != value )
+            {
+                _noun = value;
+                OnPropertyChanged( &quot;Noun&quot; );
+            }
+        }
+    }
+    public IEnumerable&lt;string&gt; FirstAdjectiveList { get { return _firstAdjectiveList; } }
+    public IEnumerable&lt;string&gt; SecondAdjectiveList { get { return _secondAdjectiveList; } }
+    public IEnumerable&lt;string&gt; NounList { get { return _nounList; } }
+    public event PropertyChangedEventHandler PropertyChanged;
+    protected virtual void OnPropertyChanged( string propertyName )
+    {
+        PropertyChangedEventHandler handler = PropertyChanged;
+        if ( handler != null ) { handler( this, new PropertyChangedEventArgs( propertyName ) ); }
+    }
+    private string _firstAdjective;
+    private string _secondAdjective;
+    private string _noun;
+    private readonly IEnumerable&lt;string&gt; _firstAdjectiveList;
+    private readonly IEnumerable&lt;string&gt; _secondAdjectiveList;
+    private readonly IEnumerable&lt;string&gt; _nounList;
+}
+</code></pre>
+                    
+                    <aside class="notes">
+                        <ul>
+                            <li>Not every concept we cover is used in app</li>
+                            <li>But everything we cover is useful to know</li>
                         </ul>
                     </aside>
                 </section>
@@ -185,7 +310,7 @@ namespace HelloWorld
 
             <section data-background="#D0D0D0">
                 <section data-background="assets/DataBinding.jpg">
-                    <h1 style="color: #101010">Data Binding</h1>
+                    <h1>Data Binding</h1>
                     <aside ng-non-bindable class="notes">
                         <ul>
                             <li>Binding to data is a basic element</li>
@@ -728,7 +853,8 @@ CriteriaTextBox.TextChanged +=
                 </section>
 
                 <section>
-                    <pre><code ng-non-bindable class='silverlight'>&lt;Style TargetType=&quot;myApp:StatusMessage&quot;&gt;
+                    <pre><code ng-non-bindable class='silverlight' data-trim>
+&lt;Style TargetType=&quot;myApp:StatusMessage&quot;&gt;
   &lt;Setter Property=&quot;Template&quot;&gt;
     &lt;Setter.Value&gt;
       &lt;ControlTemplate TargetType=&quot;myApp:StatusMessage&quot;&gt;
@@ -736,7 +862,8 @@ CriteriaTextBox.TextChanged +=
       &lt;/ControlTemplate&gt;
     &lt;/Setter.Value&gt;
   &lt;/Setter&gt;
-&lt;/Style&gt;</code></pre>
+&lt;/Style&gt;
+</code></pre>
                     <pre><code ng-non-bindable class="cs silverlight">public class StatusMessage : Control
 {
   public StatusMessage()
@@ -851,7 +978,7 @@ codemash2014.directive(&#39;labelledCombo&#39;, function() {
         };
     });
 </code></pre>
-                    
+
                     <pre ng-non-bindable class="fragment"><code class="angular">&lt;labelled-combo title=&quot;Adjective 1:&quot; items=&quot;firstAdjectives&quot; selected-item=&quot;firstAdjective&quot;&gt;&lt;/labelled-combo&gt;</code></pre>
 
                     <aside class="notes">
@@ -867,11 +994,11 @@ codemash2014.directive(&#39;labelledCombo&#39;, function() {
                     </aside>
                 </section>
             </section>
-            
-            <section>
-                <section>
-                    <h1>Putting It Together</h1>
-                    
+
+            <section data-background="#353535">
+                <section data-background="assets/puttingitalltogether.jpg">
+                    <h1 >Putting It Together</h1>
+
                     <aside class="notes">
                         <ul>
                             <li>We've covered almost all the bits we need to create our Angular insult generator</li>
@@ -879,19 +1006,16 @@ codemash2014.directive(&#39;labelledCombo&#39;, function() {
                         </ul>
                     </aside>
                 </section>
-                
+
                 <section>
                     <pre ng-non-bindable><code class="silverlight" data-trim>
 &lt;Grid x:Name=&quot;LayoutRoot&quot; Background=&quot;White&quot; DataContext=&quot;{Binding Source={StaticResource Model}}&quot;&gt;
     &lt;TextBlock Text=&quot;Adjective 1:&quot; Grid.Column=&quot;0&quot; Grid.Row=&quot;0&quot; /&gt;
     &lt;ComboBox Grid.Column=&quot;1&quot; Grid.Row=&quot;0&quot; ItemsSource=&quot;{Binding FirstAdjectiveList}&quot; SelectedValue=&quot;{Binding FirstAdjective, Mode=TwoWay}&quot; /&gt;
-
     &lt;TextBlock Text=&quot;Adjective 2:&quot; Grid.Column=&quot;0&quot; Grid.Row=&quot;1&quot; /&gt;
     &lt;ComboBox Grid.Column=&quot;1&quot; Grid.Row=&quot;1&quot; ItemsSource=&quot;{Binding SecondAdjectiveList}&quot; SelectedValue=&quot;{Binding SecondAdjective, Mode=TwoWay}&quot; /&gt;
-
     &lt;TextBlock Text=&quot;Noun:&quot; Grid.Column=&quot;0&quot; Grid.Row=&quot;2&quot; /&gt;
     &lt;ComboBox Grid.Column=&quot;1&quot; Grid.Row=&quot;2&quot; ItemsSource=&quot;{Binding NounList}&quot; SelectedValue=&quot;{Binding Noun, Mode=TwoWay}&quot; /&gt;
-
     &lt;Button Grid.Column=&quot;0&quot; Grid.Row=&quot;3&quot; Content=&quot;Randomize&quot; Click=&quot;OnClickRandomize&quot; /&gt;
     &lt;RichTextBox  Grid.Column=&quot;1&quot; Grid.Row=&quot;3&quot;&gt;
         &lt;RichTextBox.Blocks&gt;
@@ -907,7 +1031,7 @@ codemash2014.directive(&#39;labelledCombo&#39;, function() {
     &lt;/RichTextBox&gt;
 &lt;/Grid&gt;
 </code></pre>
-                    
+
                     <aside class="notes">
                         <ul>
                             <li>UserControl using a grid</li>
@@ -919,7 +1043,7 @@ codemash2014.directive(&#39;labelledCombo&#39;, function() {
                         </ul>
                     </aside>
                 </section>
-                
+
                 <section>
                     <pre ng-non-bindable><code class="angular javascript" data-trim>
 codemash2014.directive(&#39;insultGenerator&#39;, function() {
@@ -941,7 +1065,7 @@ codemash2014.directive(&#39;insultGenerator&#39;, function() {
     };
 });
 </code></pre>
-                    
+
                     <aside class="notes">
                         <ul>
                             <li>Repeat the directive we saw earlier for each dropdown</li>
@@ -953,7 +1077,7 @@ codemash2014.directive(&#39;insultGenerator&#39;, function() {
                         </ul>
                     </aside>
                 </section>
-                
+
                 <section>
                     <pre ng-non-bindable><code class="silverlight cs" data-trim>
 public partial class MainPage : UserControl
@@ -962,7 +1086,6 @@ public partial class MainPage : UserControl
     {
         InitializeComponent();
     }
-
     private void OnClickRandomize( object sender, RoutedEventArgs e )
     {
         ((InsultModel)Resources[&quot;Model&quot;]).Randomize();
@@ -977,17 +1100,14 @@ public class InsultModel : INotifyPropertyChanged
         _firstAdjectiveList = Words.Adjectives.ToList().AsReadOnly();
         _secondAdjectiveList = Words.HyphenatedAdjectives.ToList().AsReadOnly();
         _nounList = Words.Nouns.ToList().AsReadOnly();
-
         Randomize();
     }
-
     public void Randomize()
     {
         FirstAdjective = _firstAdjectiveList.Random();
         SecondAdjective = _secondAdjectiveList.Random();
         Noun = _nounList.Random();
     }
-
     public string FirstAdjective
     {
         get { return _firstAdjective; }
@@ -995,13 +1115,11 @@ public class InsultModel : INotifyPropertyChanged
         {
             if ( _firstAdjective != value )
             {
-
                 _firstAdjective = value;
                 OnPropertyChanged( &quot;FirstAdjective&quot; );
             }
         }
     }
-
     public string SecondAdjective
     {
         get { return _secondAdjective; }
@@ -1009,7 +1127,6 @@ public class InsultModel : INotifyPropertyChanged
         {
             if ( _secondAdjective != value )
             {
-
                 _secondAdjective = value;
                 OnPropertyChanged( &quot;SecondAdjective&quot; );
             }
@@ -1023,25 +1140,20 @@ public class InsultModel : INotifyPropertyChanged
         {
             if ( _noun != value )
             {
-
                 _noun = value;
                 OnPropertyChanged( &quot;Noun&quot; );
             }
         }
     }
-
     public IEnumerable&lt;string&gt; FirstAdjectiveList { get { return _firstAdjectiveList; } }
     public IEnumerable&lt;string&gt; SecondAdjectiveList { get { return _secondAdjectiveList; } }
     public IEnumerable&lt;string&gt; NounList { get { return _nounList; } }
-
     public event PropertyChangedEventHandler PropertyChanged;
-
     protected virtual void OnPropertyChanged( string propertyName )
     {
         PropertyChangedEventHandler handler = PropertyChanged;
         if ( handler != null ) { handler( this, new PropertyChangedEventArgs( propertyName ) ); }
     }
-
     private string _firstAdjective;
     private string _secondAdjective;
     private string _noun;
@@ -1050,7 +1162,7 @@ public class InsultModel : INotifyPropertyChanged
     private readonly IEnumerable&lt;string&gt; _nounList;
 }
 </code></pre>
-                    
+
                     <aside class="notes">
                         <ul>
                             <li>In the code-behind we have a button handler that delegates to the model</li>
@@ -1060,33 +1172,29 @@ public class InsultModel : INotifyPropertyChanged
                         </ul>
                     </aside>
                 </section>
-                
+
                 <section>
                     <pre ng-non-bindable><code class="angular javascript" data-trim>
 codemash2014.controller('insultGeneratorCtrl', function($scope, insultWords) {
     $scope.firstAdjectives = insultWords.firstAdjectives;
     $scope.secondAdjectives = insultWords.secondAdjectives;
     $scope.nouns = insultWords.nouns;
-
     $scope.randomize = function() {
         $scope.firstAdjective = getRandomElement($scope.firstAdjectives);
         $scope.secondAdjective = getRandomElement($scope.secondAdjectives);
         $scope.noun = getRandomElement($scope.nouns);
     };
-
     function getRandomIndex(limit) {
         return Math.round(limit * Math.random() + 0.5);
     }
-
     function getRandomElement(array) {
         var index = getRandomIndex(array.length - 1);
         return array[index];
     }
-
     $scope.randomize();
 });
 </code></pre>
-                    
+
                     <aside class="notes">
                         <ul>
                             <li>Our code-behind</li>
@@ -1099,11 +1207,11 @@ codemash2014.controller('insultGeneratorCtrl', function($scope, insultWords) {
                         </ul>
                     </aside>
                 </section>
-                
+
                 <section>
                     <h2>Shakespearean Insult Generator</h2>
                     <insult-generator />
-                    
+
                     <aside class="notes">
                         <p>
                             We've looked at some of the more common elements of Silverlight and other XAML-based frameworks and seen how we might achieve the same thing using
@@ -1113,7 +1221,7 @@ codemash2014.controller('insultGeneratorCtrl', function($scope, insultWords) {
                 </section>
             </section>
 
-            <section>
+            <section data-background="#FFFFFF">
                 <section>
                     <img src="assets/silverlight-logo.png" class="noborder" style="min-width: 75%;" />
                     <h1>VS</h1>
@@ -1146,11 +1254,7 @@ codemash2014.controller('insultGeneratorCtrl', function($scope, insultWords) {
 
                 <section>
                     <h1>Questions</h1>
-                    2. Use visual states example earlier
                     3. More visual corrolations especially borrowing off Britishness
-                    7. Be clearer on which technology I am talking about
-                    9. Use class as Silverlight corollary to service in Angular
-                    10. Practise code edits
                 </section>
             </section>
         </div>
