@@ -5,17 +5,20 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:local="clr-namespace:ShakespeareanInsultGenerator"
     mc:Ignorable="d"
-    FontSize="24"         
+    FontSize="36"
+    FontFamily="Arial"
     d:DesignHeight="150" d:DesignWidth="400">
 
     <UserControl.Resources>
         <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#EEEEEE" />
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="TextAlignment" Value="Right" />
             <Setter Property="Margin" Value="3" />
+            <Setter Property="FontFamily" Value="Lato"/>
             <Setter Property="FontStyle" Value="Italic" />
         </Style>
-        
+
         <Style TargetType="ComboBox">
             <Setter Property="Margin" Value="3"/>
         </Style>
@@ -25,20 +28,28 @@
             <Setter Property="VerticalAlignment" Value="Top"/>
             <Setter Property="FontWeight" Value="Bold"/>
         </Style>
-        
+
         <Style TargetType="RichTextBox">
             <Setter Property="Margin" Value="3"/>
             <Setter Property="IsReadOnly" Value="True"/>
             <Setter Property="TextAlignment" Value="Left"/>
             <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="FontSize" Value="36"/>
+            <Setter Property="FontSize" Value="54"/>
             <Setter Property="FontFamily" Value="Courier New" />
+        </Style>
+
+        <Style TargetType="TextBlock" x:Key="HeaderStyle">
+            <Setter Property="Foreground" Value="#EEEEEE" />
+            <Setter Property="FontSize" Value="60"/>
+            <Setter Property="Margin" Value="3"/>
+            <Setter Property="FontFamily" Value="Impact"/>
+            <Setter Property="TextAlignment" Value="Center"/>
         </Style>
 
         <local:InsultModel x:Key="Model" />
     </UserControl.Resources>
 
-    <Grid x:Name="LayoutRoot" Background="White" DataContext="{Binding Source={StaticResource Model}}">
+    <Grid x:Name="LayoutRoot" Background="#203030" DataContext="{Binding Source={StaticResource Model}}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition />
@@ -48,20 +59,23 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition />
         </Grid.RowDefinitions>
 
-        <TextBlock Text="Adjective 1:" Grid.Column="0" Grid.Row="0" />
-        <ComboBox Grid.Column="1" Grid.Row="0" ItemsSource="{Binding FirstAdjectiveList}" SelectedValue="{Binding FirstAdjective, Mode=TwoWay}" />
+        <TextBlock Style="{StaticResource HeaderStyle}" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0">SHAKESPEAREAN INSULT GENERATOR</TextBlock>
 
-        <TextBlock Text="Adjective 2:" Grid.Column="0" Grid.Row="1" />
-        <ComboBox Grid.Column="1" Grid.Row="1" ItemsSource="{Binding SecondAdjectiveList}" SelectedValue="{Binding SecondAdjective, Mode=TwoWay}" />
+        <TextBlock Text="Adjective 1:" Grid.Column="0" Grid.Row="1" />
+        <ComboBox Grid.Column="1" Grid.Row="1" ItemsSource="{Binding FirstAdjectiveList}" SelectedValue="{Binding FirstAdjective, Mode=TwoWay}" />
 
-        <TextBlock Text="Noun:" Grid.Column="0" Grid.Row="2" />
-        <ComboBox Grid.Column="1" Grid.Row="2" ItemsSource="{Binding NounList}" SelectedValue="{Binding Noun, Mode=TwoWay}" />
+        <TextBlock Text="Adjective 2:" Grid.Column="0" Grid.Row="2" />
+        <ComboBox Grid.Column="1" Grid.Row="2" ItemsSource="{Binding SecondAdjectiveList}" SelectedValue="{Binding SecondAdjective, Mode=TwoWay}" />
 
-        <Button Grid.Column="0" Grid.Row="3" Content="Randomize" Click="OnClickRandomize" />
-        <RichTextBox  Grid.Column="1" Grid.Row="3">
+        <TextBlock Text="Noun:" Grid.Column="0" Grid.Row="3" />
+        <ComboBox Grid.Column="1" Grid.Row="3" ItemsSource="{Binding NounList}" SelectedValue="{Binding Noun, Mode=TwoWay}" />
+
+        <Button Grid.Column="0" Grid.Row="4" Content="Randomize" Click="OnClickRandomize" />
+        <RichTextBox  Grid.Column="1" Grid.Row="4">
             <RichTextBox.Blocks>
                 <Paragraph>
                     <Span>
