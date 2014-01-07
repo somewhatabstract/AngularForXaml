@@ -751,7 +751,20 @@ CriteriaTextBox.TextChanged +=
                     </aside>
                 </section>
 
-
+                <section>
+                    <div ng-init="britishness='notBritish'">
+                        <div>
+                            <input type="radio" value="notBritish" ng-model="britishness" name="isNotBritishRadio"/>
+                            <label for="isNotBritishRadio">Not British</label>
+                        </div>
+                        <div>
+                            <input type="radio" value="british" ng-model="britishness" name="isBritishRadio"/>
+                            <label for="isBritishRadio">British</label>
+                        </div>
+                        <img ng-show="britishness=='british'" src="assets/isBritish.gif" />
+                        <img ng-show="britishness=='notBritish'" src="assets/isNotBritish.gif" />
+                    </div>
+                </section>
 
                 <section>
                     <pre><code class="silverlight">&lt;CheckBox IsChecked=&quot;{Binding HasError, Mode=TwoWay}&quot;&gt;Has Error&lt;/CheckBox&gt;
