@@ -9,7 +9,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <link rel="stylesheet" href="css/reveal.min.css" />
-    <link rel="stylesheet" href="css/theme/default.css" id="theme" />
+    <link rel="stylesheet" href="css/theme/codemash.css" id="theme" />
     <!-- For syntax highlighting -->
     <link rel="stylesheet" href="lib/css/vs.css" />
     <!-- If the query includes 'print-pdf', use the PDF print sheet -->
@@ -25,7 +25,7 @@
     <div class="reveal">
         <!-- Any section element inside of this container is displayed as a slide -->
         <div class="slides">
-            <section data-background-color="#104070">
+            <section>
                 <section>
                     <h1>Windows to Web</h1>
                     <h3>AngularJS for XAML developers</h3>
@@ -46,7 +46,7 @@
                 </section>
                 <section>
                     <div>
-                        <div style="width:100%;background-color:darkslategray"><p>12 years</p></div>
+                        <div style="width:100%;background-color:sandybrown"><p>12 years</p></div>
                         <div class='fragment roll-in' style='float: left; width: 92%; background-color: #4B95FF; margin-right: 1%'><p style='padding: 2em 0 2em 0; -webkit-transform: rotate(-90deg); '>Windows</p></div>
                         <div class='fragment roll-in' style='float: right; width: 7%; background-color: #72E185; '><p style='padding: 2em 0 2em 0; -webkit-transform: rotate(-90deg); '>Web</p></div>
                     </div>
@@ -74,7 +74,7 @@
                 </section>
             </section>
 
-            <section data-background="#FFFFFF">
+            <section>
                 <section>
                     <img src="assets/silverlight-logo.png" class="noborder" style="min-width: 100%;" />
                     <aside class="notes">
@@ -110,7 +110,7 @@
                 </section>
             </section>
 
-            <section data-background="#203030">
+            <section>
                 <section data-background="assets/Application.jpg">
                     <h1>Application</h1>
                     <aside class="notes">
@@ -382,7 +382,7 @@ public class InsultModel : INotifyPropertyChanged
                 </section>
             </section>
 
-            <section data-background="#D0D0D0">
+            <section>
                 <section data-background="assets/DataBinding.jpg">
                     <h1>Data Binding</h1>
                     <aside ng-non-bindable class="notes">
@@ -451,7 +451,7 @@ public class InsultModel : INotifyPropertyChanged
                 </section>
             </section>
 
-            <section data-background="#107040">
+            <section>
                 <section data-background="assets/CodeBehind.jpg">
                     <h1>Code-behind</h1>
                 </section>
@@ -529,7 +529,7 @@ myApp.controller(&#39;myController&#39;, function ($scope) {
                 </section>
             </section>
 
-            <section data-background="#806040">
+            <section>
                 <section data-background="assets/ValueConverters.jpg">
                     <h1>Value Converters</h1>
 
@@ -627,8 +627,7 @@ myApp.controller(&#39;myController&#39;, function ($scope) {
                 </section>
             </section>
 
-            <section data-background="#E06090">
-                <!-- Use E06090 for power rangers, or C0A040 for pooh -->
+            <section>
                 <section data-background="assets/DataBindingCollections2.jpg">
                     <h1>Data Binding Collections</h1>
                     <aside class="notes">
@@ -760,7 +759,7 @@ CriteriaTextBox.TextChanged +=
                 </section>
             </section>
 
-            <section data-background="#701000">
+            <section>
                 <section data-background="assets/Style.jpg">
                     <h1>Style</h1>
 
@@ -818,8 +817,8 @@ CriteriaTextBox.TextChanged +=
                             <input type="radio" value="british" ng-model="britishness" name="isBritishRadio"/>
                             <label for="isBritishRadio">Very British</label>
                         </div>
-                        <img ng-show="britishness=='british'" src="assets/isBritish.gif" />
-                        <img ng-show="britishness=='notBritish'" src="assets/isNotBritish.gif" />
+                        <img ng-show="britishness=='british'" width="40%" src="assets/isBritish.gif" />
+                        <img ng-show="britishness=='notBritish'" width="40%" src="assets/isNotBritish.gif" />
                     </div>
                 </section>
 
@@ -915,7 +914,7 @@ CriteriaTextBox.TextChanged +=
                 </section>
             </section>
 
-            <section data-background="#B0A070">
+            <section>
                 <section data-background="assets/Controls.jpg">
                     <h1>Controls</h1>
 
@@ -1072,7 +1071,7 @@ codemash2014.directive(&#39;labelledCombo&#39;, function() {
                 </section>
             </section>
 
-            <section data-background="#203030">
+            <section>
                 <section data-background="assets/puttingitalltogether.jpg">
                     <h1>Putting It Together</h1>
 
@@ -1410,41 +1409,42 @@ codemash2014.value(&#39;insultWords&#39;, {
                 </section>
             </section>
 
-            <section data-background="#FFFFFF">
+            <section>
                 <section>
-                    <div class="questions-link">
-                        <div class="link-label">Presentation&nbsp;/</div>
-                        <a href="http://somewhatabstract.github.io/AngularForXaml/#/">somewhatabstract.github.io/AngularForXaml</a>
-                    </div>
                     <div class="fragment questions-link" data-fragment-index="0">
-                        <div class="link-label">Blog&nbsp;/</div>
-                        <a href="http://blog.somewhatabstract.com">blog.somewhatabstract.com</a>
-                    </div>
-                    <div class="fragment questions-link" data-fragment-index="1">
-                        <div class="link-label">Twitter&nbsp;/</div>
-                        <a href="http://twitter.com/jefftunes">@jefftunes</a>
-                    </div>
-                    <div class="fragment questions-link" data-fragment-index="2">
                         <div class="link-label">AngularJS&nbsp;/</div>
                         <a href="http://angularjs.org">angularjs.org</a>
                     </div>
-                    <h1 class="padtop hideonvisible fragment fade-out" data-fragment-index="7">Resources</h1>
-                    <h1 class="padtop highlight hideoninvisible fragment" data-fragment-index="7">Questions</h1>
-                    <div class="fragment questions-link" data-fragment-index="3">
-                        <div class="link-label">Egghead.io&nbsp;/</div>
+                    <div class="fragment questions-link" data-fragment-index="0">
+                        <div class="link-label"></div>
                         <a href="http://egghead.io">egghead.io</a>
                     </div>
-                    <div class="fragment questions-link" data-fragment-index="4">
-                        <div class="link-label">SideWaffle&nbsp;/</div>
+                    <div class="fragment questions-link" data-fragment-index="0">
+                        <div class="link-label"></div>
                         <a href="http://sidewaffle.com/">sidewaffle.com</a>
                     </div>
-                    <div class="fragment questions-link" data-fragment-index="5">
-                        <div class="link-label">Karma&nbsp;/</div>
-                        <a href="http://karma-runner.github.io/">karma-runner.github.io</a>
-                    </div>
-                    <div class="fragment questions-link" data-fragment-index="6">
-                        <div class="link-label">AngularJS Batarang&nbsp;/</div>
+                    <div class="fragment questions-link" data-fragment-index="0">
+                        <div class="link-label"></div>
                         <a href="http://bit.ly/batarang-extension">bit.ly/batarang-extension</a>
+                    </div>
+                    <h1 class="padtop hideonvisible fragment fade-out" data-fragment-index="7">Resources</h1>
+                    <h1 class="padtop highlight hideoninvisible fragment" data-fragment-index="7">Questions</h1>
+
+                    <div class="fragment questions-link" data-fragment-index="1">
+                        <div class="link-label">Presentation&nbsp;/</div>
+                        <a href="http://somewhatabstract.github.io/AngularForXaml/#/">somewhatabstract.github.io/AngularForXaml</a>
+                    </div>
+                    <div class="fragment questions-link" data-fragment-index="1">
+                        <div class="link-label"></div>
+                        <a href="https://github.com/somewhatabstract/AngularForXaml">github.com/somewhatabstract/AngularForXaml</a>
+                    </div>
+                    <div class="fragment questions-link" data-fragment-index="2">
+                        <div class="link-label">Me&nbsp;/</div>
+                        <a href="http://blog.somewhatabstract.com">blog.somewhatabstract.com</a>
+                    </div>
+                    <div class="fragment questions-link" data-fragment-index="2">
+                        <div class="link-label"></div>
+                        <a href="http://twitter.com/jefftunes">@jefftunes</a>
                     </div>
 
                     <aside class="notes">

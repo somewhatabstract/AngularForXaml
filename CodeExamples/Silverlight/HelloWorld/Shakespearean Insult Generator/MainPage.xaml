@@ -11,7 +11,6 @@
 
     <UserControl.Resources>
         <Style TargetType="TextBlock">
-            <Setter Property="Foreground" Value="#EEEEEE" />
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="TextAlignment" Value="Right" />
             <Setter Property="Margin" Value="3" />
@@ -39,7 +38,6 @@
         </Style>
 
         <Style TargetType="TextBlock" x:Key="HeaderStyle">
-            <Setter Property="Foreground" Value="#EEEEEE" />
             <Setter Property="FontSize" Value="60"/>
             <Setter Property="Margin" Value="3"/>
             <Setter Property="FontFamily" Value="Impact"/>
@@ -49,7 +47,7 @@
         <local:InsultModel x:Key="Model" />
     </UserControl.Resources>
 
-    <Grid x:Name="LayoutRoot" Background="#203030" DataContext="{Binding Source={StaticResource Model}}">
+    <Grid x:Name="LayoutRoot" Background="WhiteSmoke" DataContext="{Binding Source={StaticResource Model}}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition />
