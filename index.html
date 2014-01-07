@@ -1364,6 +1364,32 @@ codemash2014.controller('insultGeneratorCtrl', function($scope, insultWords) {
                             <li>An object defined using angular.value that just provides arrays of words</li>
                             <li>See how randomize funtion is defined on scope for binding to button</li>
                             <li>Other functions are private to the controller</li>
+                        </ul>
+                    </aside>
+                </section>
+                
+                <section>
+                    <pre ng-non-bindable><code class="angular javascript" data-trim>
+codemash2014.value(&#39;insultWords&#39;, {
+    firstAdjectives: [
+        &quot;artless&quot;,
+        &quot;bawdy&quot;,
+        ...],
+    secondAdjectives: [
+        &quot;base-court&quot;,
+        &quot;bat-fowling&quot;,
+        ...],
+    nouns: [
+        &quot;apple-john&quot;,
+        &quot;baggage&quot;,
+        ...]
+});
+</code></pre>
+                    <aside class="notes">
+                        <ul>
+                            <li>value is a provider</li>
+                            <li>Provides the object we pass to value</li>
+                            <li>Other providers include service,factory,controller and directive</li>
                             <li>Putting this altogether we get...</li>
                         </ul>
                     </aside>
