@@ -122,13 +122,13 @@
 
                 <section>
                     <h2>Silverlight</h2>
-                    <pre><code ng-non-bindable class="silverlight" data-trim>
+                    <pre><code ng-non-bindable class="silverlight" data-trim contenteditable>
 &lt;Application xmlns=&quot;http://schemas.microsoft.com/winfx/2006/xaml/presentation&quot;
          xmlns:x=&quot;http://schemas.microsoft.com/winfx/2006/xaml&quot; 
          x:Class=&quot;HelloWorld.App&quot;&gt;
 &lt;/Application&gt;
 </code></pre>
-                    <pre><code ng-non-bindable class="silverlight cs" data-trim>
+                    <pre><code ng-non-bindable class="silverlight cs" data-trim contenteditable>
 namespace HelloWorld
 {
   public partial class App : System.Windows.Application
@@ -142,7 +142,7 @@ namespace HelloWorld
   }
 }
 </code></pre>
-                    <pre><code ng-non-bindable class="silverlight" data-trim>
+                    <pre><code ng-non-bindable class="silverlight" data-trim contenteditable>
 &lt;object data=&quot;data:application/x-silverlight-2,&quot; width=&quot;100%&quot; type=&quot;application/x-silverlight-2&quot;&gt;
     &lt;param name=&quot;source&quot; value=&quot;Bin/Debug/HelloWorld.xap&quot;/&gt;
 &lt;/object&gt;
@@ -159,7 +159,7 @@ namespace HelloWorld
 
                 <section>
                     <h2>Angular</h2>
-                    <pre><code ng-non-bindable class="angular" data-trim>
+                    <pre><code ng-non-bindable class="angular" data-trim contenteditable>
 &lt;html ng-app&gt;
     &lt;head&gt;
         &lt;script src=&quot;https://ajax.googleapis.com/ajax/libs/angularjs/1.2.6/angular.min.js&quot;&gt;&lt;/script&gt;
@@ -189,7 +189,7 @@ namespace HelloWorld
                 </section>
 
                 <section>
-                    <pre ng-non-bindable><code class="silverlight" data-trim>
+                    <pre ng-non-bindable><code class="silverlight" data-trim contenteditable>
 &lt;UserControl x:Class=&quot;ShakespeareanInsultGenerator.MainPage&quot;
     xmlns=&quot;http://schemas.microsoft.com/winfx/2006/xaml/presentation&quot;
     xmlns:x=&quot;http://schemas.microsoft.com/winfx/2006/xaml&quot;
@@ -286,7 +286,7 @@ namespace HelloWorld
                 </section>
 
                 <section>
-                    <pre ng-non-bindable><code class="silverlight cs" data-trim>
+                    <pre ng-non-bindable><code class="silverlight cs" data-trim contenteditable>
 public partial class MainPage : UserControl
 {
     public MainPage()
@@ -302,7 +302,7 @@ public partial class MainPage : UserControl
                 </section>
 
                 <section>
-                    <pre ng-non-bindable><code class="silverlight cs" data-trim>
+                    <pre ng-non-bindable><code class="silverlight cs" data-trim contenteditable>
 public class InsultModel : INotifyPropertyChanged
 {
     public InsultModel()
@@ -397,11 +397,16 @@ public class InsultModel : INotifyPropertyChanged
                 </section>
 
                 <section>
-                    <pre><code class='silverlight'>&lt;StackPanel x:Name=&quot;LayoutRoot&quot;&gt;
+                    <div ng-controller="bindingDemoCtrl">
+                        <input ng-model="textStuff" />
+                        <div style="color: #101010">Hello {{textStuff}}</div>
+                        <input class="fragment" data-fragment-index="2" ng-model="textStuff" />
+                    </div>
+                    <pre class="fragment" data-fragment-index="0"><code class='silverlight' contenteditable ng-non-bindable>&lt;StackPanel x:Name=&quot;LayoutRoot&quot;&gt;
   &lt;TextBox x:Name=&quot;textStuff&quot; /&gt;
-  &lt;TextBlock Text=&quot;{Binding ElementName=textStuff, Path=Text}&quot; /&gt;
+  &lt;TextBlock Text=&quot;{Binding ElementName=textStuff, Path=Text, StringFormat='Hello {0}'}&quot; /&gt;
 &lt;/StackPanel&gt;</code></pre>
-                    <pre class="fragment"><code class='angular' ng-non-bindable>&lt;div ng-app&gt;
+                    <pre class="fragment" data-fragment-index="1"><code class='angular' ng-non-bindable contenteditable>&lt;div ng-app&gt;
   &lt;input ng-model=&quot;textStuff&quot; /&gt;
   &lt;div&gt;Hello {{textStuff}}&lt;/div&gt;
 &lt;/div&gt;</code></pre>
@@ -409,28 +414,9 @@ public class InsultModel : INotifyPropertyChanged
                     <aside ng-non-bindable class="notes">
                         <ul>
                             <li>Simple example</li>
-                            <li>Familiar to anyone doing XAML</li>
-                            <li>SPACE: Shows angular fragment</li>
+                            <li>FRAGMENT: Familiar to anyone doing XAML</li>
+                            <li>FRAGMENT: Shows angular fragment</li>
                             <li>Angular version very similar</li>
-                            <li>Let's take closer look</li>
-                        </ul>
-                    </aside>
-                </section>
-
-                <section>
-                    <pre><code class='angular' ng-non-bindable contenteditable>&lt;div ng-app&gt;
-  &lt;input ng-model=&quot;textStuff&quot; /&gt;
-  &lt;div&gt;Hello {{textStuff}}&lt;/div&gt;
-&lt;/div&gt;</code></pre>
-                    <div ng-controller="bindingDemoCtrl">
-                        <input ng-model="textStuff" />
-                        <div style="color: #101010">Hello {{textStuff}}</div>
-                        <input class="fragment" ng-model="textStuff" />
-                    </div>
-
-                    <aside class="notes">
-                        <ul>
-                            <li>Code and actual running example</li>
                             <li>ng-model indicates what textbox is bound to</li>
                             <li>ng-model is two-way binding</li>
                             <li>Moustaches evaluate binding value to string for display</li>
@@ -443,10 +429,10 @@ public class InsultModel : INotifyPropertyChanged
                 <section>
                     <pre><code class='silverlight' contenteditable>&lt;StackPanel x:Name=&quot;LayoutRoot&quot;&gt;
   &lt;TextBox x:Name=&quot;textStuff&quot; /&gt;
-  &lt;TextBlock Text=&quot;{Binding ElementName=textStuff, Path=Text}&quot; /&gt;
+  &lt;TextBlock Text=&quot;{Binding ElementName=textStuff, Path=Text, StringFormat='Hello {0}'}&quot; /&gt;
   &lt;TextBox Text=&quot;{Binding ElementName=textStuff, Path=Text}&quot; /&gt;
 &lt;/StackPanel&gt;</code></pre>
-                    <pre><code class='angular' ng-non-bindable>&lt;div ng-app&gt;
+                    <pre><code class='angular' ng-non-bindable contenteditable>&lt;div ng-app&gt;
   &lt;input ng-model=&quot;textStuff&quot; /&gt;
   &lt;div&gt;Hello {{textStuff}}&lt;/div&gt;
   &lt;input ng-model=&quot;textStuff&quot; /&gt;
@@ -472,11 +458,11 @@ public class InsultModel : INotifyPropertyChanged
 
                 <section>
                     <div>
-                        <pre><code class='silverlight' ng-non-bindable>&lt;UserControl x:Class="HelloWorld.MainPage"&gt;
+                        <pre><code class='silverlight' ng-non-bindable contenteditable>&lt;UserControl x:Class="HelloWorld.MainPage"&gt;
     xmlns:local="clr-namespace:HelloWorld"
 ...
               </code></pre>
-                        <pre class="fragment"><code class='angular' ng-non-bindable>&lt;div ng-app='helloWorld' ng-controller='myController'&gt;
+                        <pre class="fragment"><code class='angular' ng-non-bindable contenteditable>&lt;div ng-app='myApp' ng-controller='myController'&gt;
   ...</code></pre>
                     </div>
 
@@ -496,7 +482,7 @@ public class InsultModel : INotifyPropertyChanged
                 </section>
 
                 <section>
-                    <pre><code class='silverlight' ng-non-bindable>namespace HelloWorld
+                    <pre><code class='silverlight' ng-non-bindable contenteditable>namespace HelloWorld
 {
   public partial class MainPage : UserControl
   {
@@ -517,12 +503,12 @@ myApp.controller('myController', function ($scope) {
                 </section>
 
                 <section>
-                    <pre><code class='angular' ng-non-bindable>&lt;div ng-app='myApp' ng-controller='myController'&gt;
+                    <pre><code class='angular' ng-non-bindable contenteditable>&lt;div ng-app='myApp' ng-controller='myController'&gt;
   &lt;input ng-model=&quot;textStuff&quot; /&gt;
   &lt;div&gt;Hello {{textStuff}}&lt;/div&gt;
   &lt;input ng-model=&quot;textStuff&quot; /&gt;
 &lt;/div&gt;</code></pre>
-                    <pre class="fragment"><code class="javascript angular" ng-non-bindable>var myApp = angular.module(&#39;myApp&#39;, []);
+                    <pre class="fragment"><code class="javascript angular" ng-non-bindable contenteditable>var myApp = angular.module(&#39;myApp&#39;, []);
 myApp.controller(&#39;myController&#39;, function ($scope) {
   $scope.textStuff = &#39;World&#39;;
 });</code></pre>
@@ -560,49 +546,22 @@ myApp.controller(&#39;myController&#39;, function ($scope) {
                 </section>
 
                 <section>
-                    <pre><code class="cs silverlight">public class ReverseStringConverter : IValueConverter
-{
-  public object Convert( object value, Type targetType, object parameter, CultureInfo culture )
-  {
-    return new String(value.ToString().Reverse());
-  }
-  public object ConvertBack( object value, Type targetType, object parameter, CultureInfo culture )
-  {
-    throw new NotImplementedException();
-  }
-}</code></pre>
-                    <pre class="fragment"><code class="javascript angular">module('myApp').filter('reverse', function() {
-  return function (value){
-    return value.split("").reverse().join("");
-  };
-});</code></pre>
-                    <aside class="notes">
-                        <ul>
-                            <li>Contrived example to reverse a string</li>
-                            <li>ConvertBack not implemented as usual (;) )</li>
-                            <li>FRAGMENT: Angular declaration equivalent to Convert method</li>
-                            <li>No ConvertBack for a filter - different Angular concept exists for this and used just as much as ConvertBack</li>
-                            <li>Let's see how they're used</li>
-                        </ul>
-                    </aside>
-                </section>
+                    <div ng-controller="reverseCtrl">
+                        <input ng-model="stringToReverse" />
+                        <div>{{stringToReverse | reverse}}</div>
+                    </div>
 
-                <section>
-                    <pre><code class='silverlight'>&lt;StackPanel x:Name=&quot;LayoutRoot&quot;&gt;
+                    <pre class="fragment"><code class='silverlight' contenteditable ng-non-bindable>&lt;StackPanel x:Name=&quot;LayoutRoot&quot;&gt;
   &lt;StackPanel.Resources&gt;
-    &lt;myApp:ReverseStringConverter x:Name=&quot;ReverseStringConverter&quot; /&gt;
+    &lt;myApp:ReverseStringConverter x:Key=&quot;ReverseStringConverter&quot; /&gt;
   &lt;/StackPanel.Resources&gt;
   &lt;TextBox x:Name=&quot;textStuff&quot; /&gt;
   &lt;TextBlock Text=&quot;{Binding ElementName=textStuff, Path=Text, Converter={StaticResource ReverseStringConverter}}&quot; /&gt;
 &lt;/StackPanel&gt;</code></pre>
-                    <pre class="fragment"><code class='angular' ng-non-bindable>&lt;div ng-app&gt;
+                    <pre class="fragment"><code class='angular' ng-non-bindable contenteditable>&lt;div ng-app&gt;
   &lt;input ng-model=&quot;textStuff&quot; /&gt;
   &lt;div&gt;{{textStuff | reverse}}&lt;/div&gt;
 &lt;/div&gt;</code></pre>
-                    <div class="fragment" ng-controller="reverseCtrl">
-                        <input ng-model="stringToReverse" />
-                        <div>{{stringToReverse | reverse}}</div>
-                    </div>
 
                     <aside class="notes">
                         <ul>
@@ -619,15 +578,43 @@ myApp.controller(&#39;myController&#39;, function ($scope) {
                 </section>
 
                 <section>
-                    <pre><code class='angular' ng-non-bindable>&lt;div ng-app&gt;
-  &lt;input ng-model=&quot;textStuff&quot; /&gt;
-  &lt;div&gt;{{textStuff | reverse | uppercase}}&lt;/div&gt;
-&lt;/div&gt;</code></pre>
+                    <pre><code class="cs silverlight" contenteditable ng-non-bindable>public class ReverseStringConverter : IValueConverter
+{
+  public object Convert( object value, Type targetType, object parameter, CultureInfo culture )
+  {
+    return new String(value.ToString().Reverse());
+  }
+  public object ConvertBack( object value, Type targetType, object parameter, CultureInfo culture )
+  {
+    throw new NotImplementedException();
+  }
+}</code></pre>
+                    <pre class="fragment"><code class="javascript angular" contenteditable>module('myApp').filter('reverse', function() {
+  return function (value){
+    return value.split("").reverse().join("");
+  };
+});</code></pre>
+                    <aside class="notes">
+                        <ul>
+                            <li>Contrived example to reverse a string</li>
+                            <li>ConvertBack not implemented as usual (;) )</li>
+                            <li>FRAGMENT: Angular declaration equivalent to Convert method</li>
+                            <li>No ConvertBack for a filter - different Angular concept exists for this and used just as much as ConvertBack</li>
+                            <li>Let's see how they're used</li>
+                        </ul>
+                    </aside>
+                </section>
 
-                    <div class="fragment" ng-controller="reverseCtrl">
+                <section>
+                    <div ng-controller="reverseCtrl">
                         <input ng-model="stringToReverse" />
                         <div>{{stringToReverse | reverse | uppercase}}</div>
                     </div>
+
+                    <pre class="fragment"><code class='angular' ng-non-bindable contenteditable>&lt;div ng-app&gt;
+  &lt;input ng-model=&quot;textStuff&quot; /&gt;
+  &lt;div&gt;{{textStuff | reverse | uppercase}}&lt;/div&gt;
+&lt;/div&gt;</code></pre>
 
                     <aside class="notes">
                         <ul>
@@ -653,16 +640,19 @@ myApp.controller(&#39;myController&#39;, function ($scope) {
                 </section>
 
                 <section>
-                    <pre><code class='silverlight' ng-non-bindable>&lt;ItemsControl x:Name=&quot;List&quot;&gt;
+                    <div ng-controller="collectionBindingCtrl">
+                        <p ng-repeat="name in names">{{name}}</p>
+                    </div>
+                    <pre class="fragment"><code class='silverlight' ng-non-bindable contenteditable>&lt;ItemsControl x:Name=&quot;List&quot;&gt;
   &lt;ItemsControl.ItemTemplate&gt;
     &lt;DataTemplate&gt;
       &lt;TextBlock Text=&quot;{Binding}&quot;&gt;&lt;/TextBlock&gt;
     &lt;/DataTemplate&gt;
   &lt;/ItemsControl.ItemTemplate&gt;
 &lt;/ItemsControl&gt;</code></pre>
-                    <pre class="fragment"><code class='angular' ng-non-bindable>&lt;div ng-repeat=&quot;name in names&quot;&gt;
-  &lt;p&gt;{{name}}&lt;/p&gt;
-&lt;/div&gt;</code></pre>
+                    <pre class="fragment"><code class='angular' ng-non-bindable data-trim contenteditable>
+&lt;p ng-repeat=&quot;name in names&quot;&gt;{{name}}&lt;/p&gt;
+</code></pre>
 
                     <aside class="notes">
                         <ul>
@@ -675,11 +665,8 @@ myApp.controller(&#39;myController&#39;, function ($scope) {
                 </section>
 
                 <section>
-                    <pre><code class="cs silverlight" ng-non-bindable>List.ItemsSource = new[] { "Leprechaun", "Unicorn", "Bacon" }</code></pre>
-                    <pre class="fragment"><code ng-non-bindable class="javascript angular">$scope.names = [ 'Leprechaun', 'Unicorn', 'Bacon'];</code></pre>
-                    <div class="fragment" ng-controller="collectionBindingCtrl">
-                        <div ng-repeat="name in names"><p>{{name}}</p></div>
-                    </div>
+                    <pre><code class="cs silverlight" ng-non-bindable contenteditable>List.ItemsSource = new[] { "Leprechaun", "Unicorn", "Bacon" }</code></pre>
+                    <pre class="fragment"><code ng-non-bindable class="javascript angular" contenteditable>$scope.names = [ 'Leprechaun', 'Unicorn', 'Bacon'];</code></pre>
 
                     <aside class="notes">
                         <ul>
@@ -693,7 +680,20 @@ myApp.controller(&#39;myController&#39;, function ($scope) {
 
                 <section>
                     <h2>Sorting and filtering</h2>
-                    <pre><code class="cs silverlight" ng-non-bindable>var collectionView = new CollectionViewSource();
+                    <div ng-controller="collectionBindingCtrl">
+                        <input ng-model="criteria" />
+                        <p ng-repeat="name in names | filter:criteria | orderBy:'-toString()'">{{name}}</p>
+                    </div>
+                    
+                    <aside class="notes">
+                        <ul>
+                            <li>A list of items might need sorting or filtering by some criteria</li>
+                        </ul>
+                    </aside>
+                </section>
+
+                <section>
+                    <pre><code class="cs silverlight" ng-non-bindable contenteditable>var collectionView = new CollectionViewSource();
 collectionView.Source = new[] { &quot;Leprechaun&quot;, &quot;Unicorn&quot;, &quot;Bacon&quot; };
 collectionView.View.SortDescriptions.Add(
   new SortDescription { Direction = ListSortDirection.Descending } );
@@ -704,15 +704,12 @@ collectionView.View.Filter =
 List.ItemsSource = collectionView.View;
 CriteriaTextBox.TextChanged +=
   (sender, args) => ((ICollectionView)List.ItemsSource).Refresh();</code></pre>
-                    <pre class="fragment"><code class='angular' ng-non-bindable>&lt;div ng-controller=&quot;myController&quot;&gt;
+                    <pre class="fragment"><code class='angular' ng-non-bindable contenteditable>&lt;div ng-controller=&quot;myController&quot;&gt;
   &lt;input ng-model=&quot;criteria&quot;/&gt;
-  &lt;div ng-repeat=&quot;name in names | filter:criteria | orderBy:&#39;-toString()&#39;&quot;&gt;
-    &lt;p&gt;{{name}}&lt;/p&gt;
-  &lt;/div&gt;
+  &lt;p ng-repeat=&quot;name in names | filter:criteria | orderBy:&#39;-toString()&#39;&quot;&gt;{{name}}&lt;/p&gt;
 &lt;/div&gt;</code></pre>
                     <aside class="notes">
                         <ul>
-                            <li>A list of items might need sorting or filtering by some criteria</li>
                             <li>Silveright does this using a CollectionView from a CollectionViewSource</li>
                             <li>Here we are sorting in descending order</li>
                             <li>Adding filter handler to filter items by a value in a textbox</li>
@@ -736,29 +733,15 @@ CriteriaTextBox.TextChanged +=
                 </section>
 
                 <section>
-                    <div ng-controller="collectionBindingCtrl">
-                        <input ng-model="criteria" />
-                        <div ng-repeat="name in names | filter:criteria | orderBy:'-toString()'">
-                            <p>{{name}}</p>
-                        </div>
-                    </div>
-
-                    <aside class="notes">
-                        <ul>
-                            <li>Great. It works.</li>
-                        </ul>
-                    </aside>
-                </section>
-
-                <section>
                     <h2>ComboBox</h2>
-                    <pre><code class="silverlight" contenteditable>&lt;ComboBox ItemsSource=&quot;{Binding Words}&quot; SelectedValue=&quot;{Binding SelectedWord, Mode=TwoWay}&quot; /&gt;</code></pre>
-                    <pre class="fragment"><code class="angular">&lt;select ng-model=&quot;selectedWord&quot; ng-options=&quot;word for word in words&quot;&gt;&lt;/select&gt;</code></pre>
-
-                    <div class="fragment" ng-controller="collectionBindingCtrl">
+                    <div ng-controller="collectionBindingCtrl">
                         <input ng-model="criteria" />
                         <select ng-model="selectedItem" ng-options="name for name in names | filter:criteria | orderBy:'-toString()'"></select>
                     </div>
+
+                    <pre class="fragment"><code class="silverlight" contenteditable ng-non-bindable>&lt;ComboBox ItemsSource=&quot;{Binding Words}&quot; SelectedValue=&quot;{Binding SelectedWord, Mode=TwoWay}&quot; /&gt;</code></pre>
+                    <pre class="fragment"><code class="angular" contenteditable ng-non-bindable>&lt;select ng-options=&quot;word for word in words&quot; ng-model=&quot;selectedWord&quot;&gt;&lt;/select&gt;</code></pre>
+
                     <aside class="notes">
                         <ul>
                             <li>Demo app uses comboboxes</li>
@@ -793,24 +776,24 @@ CriteriaTextBox.TextChanged +=
                 </section>
 
                 <section>
-                    <pre><code class='silverlight' contenteditable>&lt;StackPanel x:Name=&quot;LayoutRoot&quot; Background=&quot;White&quot;&gt;
-  &lt;CheckBox
-    IsChecked=&quot;{Binding IsHelloWorldVisible, Mode=TwoWay}&quot;&gt;Show&lt;/CheckBox&gt;
-  &lt;TextBlock Text=&quot;SURPRISE!!!&quot;
-    Visibility=&quot;{Binding IsHelloWorldVisible, Converter={StaticResource VisibilityConverter}}&quot; /&gt;
-&lt;/StackPanel&gt;</code></pre>
-
-                    <pre class="fragment"><code class='angular' contenteditable ng-non-bindable>&lt;div ng-controller=&quot;MyController&quot;&gt;
-  &lt;input type=&quot;checkbox&quot; ng-model=&quot;isShowingSurprise&quot; /&gt;
-  &lt;div ng-show=&quot;isShowingSurprise&quot;&gt;SURPRISE!&lt;/div&gt;
-&lt;/div&gt;</code></pre>
-
-                    <div class="fragment" ng-controller="presentationBindingCtrl">
+                    <div ng-controller="presentationBindingCtrl">
                         <input type="checkbox" ng-model="isShowingSurprise" name="showSurpriseCheck" />
                         <label for="showSurpriseCheck">Show</label>
                         <div ng-show="isShowingSurprise">SURPRISE!</div>
-                        <div class="fragment" ng-hide="isShowingSurprise">No surprise :(</div>
+                        <div class="fragment" data-fragment-index="2" ng-hide="isShowingSurprise">No surprise :(</div>
                     </div>
+
+                    <pre class="fragment" data-fragment-index="0"><code class='silverlight' contenteditable>&lt;StackPanel x:Name=&quot;LayoutRoot&quot; Background=&quot;White&quot;&gt;
+  &lt;CheckBox
+    IsChecked=&quot;{Binding IsSurprise, Mode=TwoWay}&quot;&gt;Show&lt;/CheckBox&gt;
+  &lt;TextBlock Text=&quot;SURPRISE!&quot;
+    Visibility=&quot;{Binding IsSurprise, Converter={StaticResource VisibilityConverter}}&quot; /&gt;
+&lt;/StackPanel&gt;</code></pre>
+
+                    <pre class="fragment" data-fragment-index="1"><code class='angular' contenteditable ng-non-bindable>&lt;div&gt;
+  &lt;input type=&quot;checkbox&quot; ng-model=&quot;isShowingSurprise&quot; /&gt;
+  &lt;div ng-show=&quot;isShowingSurprise&quot;&gt;SURPRISE!&lt;/div&gt;
+&lt;/div&gt;</code></pre>
 
                     <aside class="notes">
                         <ul>
@@ -841,22 +824,24 @@ CriteriaTextBox.TextChanged +=
                 </section>
 
                 <section>
-                    <pre><code class="silverlight">&lt;CheckBox IsChecked=&quot;{Binding HasError, Mode=TwoWay}&quot;&gt;Has Error&lt;/CheckBox&gt;
-&lt;TextBlock Text=&quot;Some status message&quot; FontStyle=&quot;{Binding HasError, Converter={StaticResource FontStyleConverter}}&quot; /&gt;
-</code></pre>
-                    <pre class="fragment"><code class='angular' ng-non-bindable>&lt;input type=&quot;checkbox&quot; ng-model=&quot;hasError&quot; name=&quot;isErrorRadio&quot; /&gt;
-&lt;label for=&quot;isErrorRadio&quot;&gt;Has Error&lt;/label&gt;
-&lt;div ng-style=&quot;{&#39;font-style&#39;: hasError ? &#39;italic&#39; : &#39;normal&#39;}&quot;&gt;Some status message&lt;/div&gt;</code></pre>
-
-                    <div class="fragment" ng-controller="presentationBindingCtrl">
+                    <div ng-controller="presentationBindingCtrl">
                         <input type="checkbox" ng-model="hasError" name="isErrorRadio" />
                         <label for="isErrorRadio">Has Error</label>
                         <div ng-style="{'font-style': hasError ? 'italic' : ''}">Some status message</div>
                     </div>
 
+                    <pre class="fragment"><code class="silverlight" contenteditable ng-non-bindable>&lt;CheckBox IsChecked=&quot;{Binding HasError, Mode=TwoWay}&quot;&gt;Has Error&lt;/CheckBox&gt;
+&lt;TextBlock Text=&quot;Some status message&quot; FontStyle=&quot;{Binding HasError, Converter={StaticResource FontStyleConverter}}&quot; /&gt;
+</code></pre>
+                    <pre class="fragment"><code class='angular' ng-non-bindable contenteditable>&lt;input type=&quot;checkbox&quot; ng-model=&quot;hasError&quot; name=&quot;isErrorRadio&quot; /&gt;
+&lt;label for=&quot;isErrorRadio&quot;&gt;Has Error&lt;/label&gt;
+&lt;div ng-style=&quot;{&#39;font-style&#39;: hasError ? &#39;italic&#39; : &#39;normal&#39;}&quot;&gt;Some status message&lt;/div&gt;</code></pre>
+
+
                     <aside class="notes">
                         <ul>
-                            <li>Here we have a value converter to convert a bool to a font style</li>
+                            <li>Change font style based on boolean</li>
+                            <li>Value converter to convert a bool to a font style</li>
                             <li>FRAGMENT: ngStyle allows us to conditionally apply styles</li>
                             <li>Moves the presentation stuff into the presentation layer and out of code-behind</li>
                             <li>Generally should use ngClass instead of ngStyle to put all styling in CSS files</li>
@@ -865,7 +850,12 @@ CriteriaTextBox.TextChanged +=
                 </section>
 
                 <section>
-                    <pre><code class="silverlight" ng-non-bindable>&lt;VisualStateManager.VisualStateGroups&gt;
+                    <div ng-controller="presentationBindingCtrl">
+                        <input type="checkbox" ng-model="hasError" name="isErrorRadio" />
+                        <label for="isErrorRadio">Has Error</label>
+                        <div ng-class="{ 'status-error-noquirk': hasError, 'status-ok': !hasError }">Totally different status message</div>
+                    </div>
+                    <pre class="fragment"><code class="silverlight" ng-non-bindable contenteditable>&lt;VisualStateManager.VisualStateGroups&gt;
   &lt;VisualStateGroup x:Name=&quot;CommonStates&quot;&gt;
     &lt;VisualState x:Name=&quot;Error&quot;&gt;
       &lt;Storyboard&gt;
@@ -880,7 +870,7 @@ CriteriaTextBox.TextChanged +=
   &lt;/VisualStateGroup&gt;
 &lt;/VisualStateManager.VisualStateGroups&gt;</code></pre>
 
-                    <pre class="fragment"><code class="cs silverlight" ng-non-bindable>VisualStateManager.GoToState( this, &quot;Error&quot;, true );</code></pre>
+                    <pre class="fragment"><code class="cs silverlight" ng-non-bindable contenteditable>VisualStateManager.GoToState( this, &quot;Error&quot;, true );</code></pre>
 
                     <aside class="notes">
                         <ul>
@@ -893,19 +883,19 @@ CriteriaTextBox.TextChanged +=
                 </section>
 
                 <section>
-                    <pre><code ng-non-bindable class='angular'>&lt;div ng-class=&quot;{ 'status-error': hasError, 'status-ok': !hasError }&quot;&gt;
-  Totally different status message
-&lt;/div&gt;</code></pre>
-                    <pre class="fragment"><code class="css angular" contenteditable>.status-ok {
-  color: green; }
-.status-error {
-  color: red; }</code></pre>
-
-                    <div class="fragment" ng-controller="presentationBindingCtrl">
+                    <div ng-controller="presentationBindingCtrl">
                         <input type="checkbox" ng-model="hasError" name="isErrorRadio" />
                         <label for="isErrorRadio">Has Error</label>
                         <div ng-class="{ 'status-error': hasError, 'status-ok': !hasError }">Totally different status message</div>
                     </div>
+
+                    <pre><code class="css angular" contenteditable ng-non-bindable>.status-ok {
+  color: green; }
+.status-error {
+  color: red; }</code></pre>
+                    <pre class="fragment"><code ng-non-bindable class='angular' contenteditable>&lt;div ng-class=&quot;{ 'status-error': hasError, 'status-ok': !hasError }&quot;&gt;
+  Totally different status message
+&lt;/div&gt;</code></pre>
 
                     <aside class="notes">
                         <ul>
@@ -940,7 +930,7 @@ CriteriaTextBox.TextChanged +=
                 </section>
 
                 <section>
-                    <pre><code ng-non-bindable class='silverlight' data-trim>
+                    <pre><code ng-non-bindable class='silverlight' data-trim contenteditable>
 &lt;Style TargetType=&quot;myApp:StatusMessage&quot;&gt;
   &lt;Setter Property=&quot;Template&quot;&gt;
     &lt;Setter.Value&gt;
@@ -951,7 +941,7 @@ CriteriaTextBox.TextChanged +=
   &lt;/Setter&gt;
 &lt;/Style&gt;
 </code></pre>
-                    <pre><code ng-non-bindable class="cs silverlight">public class StatusMessage : Control
+                    <pre><code ng-non-bindable class="cs silverlight" contenteditable>public class StatusMessage : Control
 {
   public StatusMessage()
   {
@@ -987,7 +977,7 @@ CriteriaTextBox.TextChanged +=
                 </section>
 
                 <section>
-                    <pre><code ng-non-bindable class="silverlight">&lt;myApp:StatusMessage /&gt;</code></pre>
+                    <pre><code ng-non-bindable class="silverlight" contenteditable>&lt;myApp:StatusMessage /&gt;</code></pre>
                     <pre class="fragment" ng-non-bindable><code class='angular' contenteditable>&lt;status-message /&gt;</code></pre>
 
                     <aside class="notes">
@@ -1001,11 +991,11 @@ CriteriaTextBox.TextChanged +=
                 <section>
                     <h2>Dependency Properties</h2>
 
-                    <pre><code ng-non-bindable class='silverlight'>&lt;ControlTemplate TargetType=&quot;myApp:StatusMessage&quot;&gt;
-  &lt;TextBlock Text=&quot;Our status message&quot;/&gt;
+                    <pre><code ng-non-bindable class='silverlight' contenteditable>&lt;ControlTemplate TargetType=&quot;myApp:StatusMessage&quot;&gt;
+  &lt;TextBlock Text=&quot;{TemplateBinding Message}&quot; /&gt;
 &lt;/ControlTemplate&gt;</code></pre>
 
-                    <pre><code ng-non-bindable class="cs silverlight">public static readonly DependencyProperty MessageProperty =
+                    <pre><code ng-non-bindable class="cs silverlight" contenteditable>public static readonly DependencyProperty MessageProperty =
   DependencyProperty.Register( &quot;Message&quot;,
                  typeof ( string ),
                  typeof ( StatusMessage ),
@@ -1015,7 +1005,7 @@ public string Message
   get { return (string) GetValue( MessageProperty ); }
   set { SetValue( MessageProperty, value ); }
 }</code></pre>
-                    <pre ng-non-bindable class="fragment"><code class="javascript angular">codemash2014.directive(&#39;statusMessage&#39;, function() {
+                    <pre ng-non-bindable class="fragment"><code class="javascript angular" contenteditable>codemash2014.directive(&#39;statusMessage&#39;, function() {
   return {
     template: &#39;&lt;div&gt;{{message}}&lt;/div&gt;&#39;,
     restrict: &#39;E&#39;,
@@ -1037,8 +1027,8 @@ public string Message
                 </section>
 
                 <section>
-                    <pre><code class='silverlight' ng-non-bindable>&lt;myApp:StatusMessage Message=&quot;Now THIS is a status message. Exciting!&quot; /&gt;</code></pre>
-                    <pre class="fragment"><code class="angular" ng-non-bindable>&lt;status-message message=&quot;Now THIS is a status message. Exciting!&quot; /&gt;</code></pre>
+                    <pre><code class='silverlight' ng-non-bindable contenteditable>&lt;myApp:StatusMessage Message=&quot;Now THIS is a status message. Exciting!&quot; /&gt;</code></pre>
+                    <pre class="fragment"><code class="angular" ng-non-bindable contenteditable>&lt;status-message message=&quot;Now THIS is a status message. Exciting!&quot; /&gt;</code></pre>
 
                     <aside class="notes">
                         <ul>
@@ -1051,7 +1041,7 @@ public string Message
                 </section>
 
                 <section>
-                    <pre ng-non-bindable><code class="angular javascript" data-trim>
+                    <pre ng-non-bindable><code class="angular javascript" data-trim contenteditable>
 codemash2014.directive(&#39;labelledCombo&#39;, function() {
         return {
             template: &#39;&lt;div&gt;&lt;div class=&quot;label&quot;&gt;{{title}}&lt;/div&gt;&lt;select ng-model=&quot;selectedItem&quot; ng-options=&quot;item for item in items&quot;&gt;&lt;/select&gt;&lt;/div&gt;&#39;,
@@ -1066,7 +1056,7 @@ codemash2014.directive(&#39;labelledCombo&#39;, function() {
     });
 </code></pre>
 
-                    <pre ng-non-bindable class="fragment"><code class="angular">&lt;labelled-combo title=&quot;Adjective 1:&quot; items=&quot;firstAdjectives&quot; selected-item=&quot;firstAdjective&quot;&gt;&lt;/labelled-combo&gt;</code></pre>
+                    <pre ng-non-bindable class="fragment"><code class="angular" contenteditable>&lt;labelled-combo title=&quot;Adjective 1:&quot; items=&quot;firstAdjectives&quot; selected-item=&quot;firstAdjective&quot;&gt;&lt;/labelled-combo&gt;</code></pre>
 
                     <aside class="notes">
                         <ul>
@@ -1082,7 +1072,7 @@ codemash2014.directive(&#39;labelledCombo&#39;, function() {
                 </section>
             </section>
 
-            <section data-background="#353535">
+            <section data-background="#203030">
                 <section data-background="assets/puttingitalltogether.jpg">
                     <h1>Putting It Together</h1>
 
@@ -1091,6 +1081,23 @@ codemash2014.directive(&#39;labelledCombo&#39;, function() {
                             <li>We've covered almost all the bits we need to create our Angular insult generator</li>
                             <li>Let's put these concepts together and see what it looks like</li>
                         </ul>
+                    </aside>
+                </section>
+
+                <section>
+                    <object class="silverlight" data="data:application/x-silverlight-2," height="480px" width="90%" type="application/x-silverlight-2">
+                        <param name="source" value="assets/ShakespeareanInsultGenerator.xap" />
+                    </object>
+                </section>
+
+                <section>
+                    <insult-generator title="Shakespearean Insult Generator" />
+
+                    <aside class="notes">
+                        <p>
+                            We've looked at some of the more common elements of Silverlight and other XAML-based frameworks and seen how we might achieve the same thing using
+                            AngularJS, HTML and CSS. So, let's return to our Silverlight app I showed at the start and see that in AngularJS using the concepts we've learned.
+                        </p>
                     </aside>
                 </section>
 
@@ -1203,13 +1210,14 @@ codemash2014.directive(&#39;labelledCombo&#39;, function() {
                 </section>
 
                 <section>
-                    <pre ng-non-bindable><code class="angular javascript" data-trim>
+                    <pre ng-non-bindable><code class="angular javascript" data-trim contenteditable>
 codemash2014.directive(&#39;insultGenerator&#39;, function() {
     return {
         controller: &#39;insultGeneratorCtrl&#39;,
-        replace:true,
+        replace: true,
         template:
             &#39;&lt;div class=&quot;insult-generator&quot;&gt;&#39;
+            + &#39;&lt;h2&gt;{{title | uppercase}}&lt;/h2&gt;&#39;
             + &#39;&lt;labelled-combo title=&quot;Adjective 1:&quot; items=&quot;firstAdjectives&quot; selected-item=&quot;firstAdjective&quot;&gt;&lt;/labelled-combo&gt;&#39;
             + &#39;&lt;labelled-combo title=&quot;Adjective 2:&quot; items=&quot;secondAdjectives&quot; selected-item=&quot;secondAdjective&quot;&gt;&lt;/labelled-combo&gt;&#39;
             + &#39;&lt;labelled-combo title=&quot;Noun:&quot; items=&quot;nouns&quot; selected-item=&quot;noun&quot;&gt;&lt;/labelled-combo&gt;&#39;
@@ -1219,7 +1227,7 @@ codemash2014.directive(&#39;insultGenerator&#39;, function() {
             + &#39;&lt;/div&gt;&#39;
             + &#39;&lt;/div&gt;&#39;,
         restrict: &#39;E&#39;,
-        scope: {}
+        scope: { title: &#39;@&#39; }
     };
 });
 </code></pre>
@@ -1335,8 +1343,8 @@ public class InsultModel : INotifyPropertyChanged
                 </section>
 
                 <section>
-                    <pre ng-non-bindable><code class="angular javascript" data-trim>
-codemash2014.controller('insultGeneratorCtrl', function($scope, insultWords) {
+                    <pre ng-non-bindable><code class="angular javascript" data-trim contenteditable>
+codemash2014.controller(&#39;insultGeneratorCtrl&#39;, function($scope, insultWords) {
     $scope.firstAdjectives = insultWords.firstAdjectives;
     $scope.secondAdjectives = insultWords.secondAdjectives;
     $scope.nouns = insultWords.nouns;
@@ -1369,7 +1377,7 @@ codemash2014.controller('insultGeneratorCtrl', function($scope, insultWords) {
                 </section>
                 
                 <section>
-                    <pre ng-non-bindable><code class="angular javascript" data-trim>
+                    <pre ng-non-bindable><code class="angular javascript" data-trim contenteditable>
 codemash2014.value(&#39;insultWords&#39;, {
     firstAdjectives: [
         &quot;artless&quot;,
@@ -1394,38 +1402,15 @@ codemash2014.value(&#39;insultWords&#39;, {
                         </ul>
                     </aside>
                 </section>
-
+                
                 <section>
-                    <h2>Shakespearean Insult Generator</h2>
-                    <insult-generator />
-
-                    <aside class="notes">
-                        <p>
-                            We've looked at some of the more common elements of Silverlight and other XAML-based frameworks and seen how we might achieve the same thing using
-                            AngularJS, HTML and CSS. So, let's return to our Silverlight app I showed at the start and see that in AngularJS using the concepts we've learned.
-                        </p>
-                    </aside>
+                    <pre><code class="angular" ng-non-bindable contenteditable data-trim>
+&lt;insult-generator title=&#39;Shakespearean Insult Generator&#39; /&gt;
+</code></pre>
                 </section>
             </section>
 
             <section data-background="#FFFFFF">
-                <section>
-                    <img src="assets/silverlight-logo.png" class="noborder" style="min-width: 75%;" />
-                    <h1>VS</h1>
-                    <img src="assets/angularjs.jpeg" class="noborder" style="min-width: 75%;" />
-
-                    <aside class="notes">
-                        <p>I knew good reasons to use a framework like Angular over Silverlight</p>
-                        <ul>
-                            <li>No need for HTML bridge as we're already in HTML</li>
-                            <li>Cross-platform support, not just PC and Mac (and WP7, if you compile specifically for that platform)</li>
-                            <li>No plugin required - just use JavaScript</li>
-                            <li>Well supported and in active development</li>
-                            <li>Presentation in presentation layer, not code-behind</li>
-                        </ul>
-                    </aside>
-                </section>
-
                 <section>
                     <h1>Resources</h1>
                     <a class="fragment block-link" href="http://angularjs.org">AngularJS</a>
@@ -1459,6 +1444,23 @@ codemash2014.value(&#39;insultWords&#39;, {
                         <div class="link-label">Twitter&nbsp;/</div>
                         <a href="http://twitter.com/jefftunes">@jefftunes</a>
                     </div>
+
+                    <aside class="notes">
+                        <ul>
+                            <li>Slides on github at this location</li>
+                            <li>FRAGMENT: Contact me on twitter</li>
+                            <li>Read my blog</li>
+                            <li>FRAGMENT: Questions</li>
+                        </ul>
+                        <p>Good reasons to use a framework like Angular over Silverlight</p>
+                        <ul>
+                            <li>No need for HTML bridge as we're already in HTML</li>
+                            <li>Cross-platform support, not just PC and Mac (and WP7, if you compile specifically for that platform)</li>
+                            <li>No plugin required - just use JavaScript</li>
+                            <li>Well supported and in active development</li>
+                            <li>Presentation in presentation layer, not code-behind</li>
+                        </ul>
+                    </aside>
                 </section>
             </section>
         </div>

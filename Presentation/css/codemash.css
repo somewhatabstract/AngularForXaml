@@ -65,9 +65,17 @@ input, select, button {
     -webkit-transform: rotate(-45deg);
 }
 
+.status-error-noquirk{
+    color: red;
+}
+
 .insult-generator {
     text-align: left;
 }
+
+    .insult-generator h2 {
+        text-align: center;
+    }
 
     .insult-generator .label {
         width: 6em;
