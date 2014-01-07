@@ -1241,13 +1241,11 @@ codemash2014.controller('insultGeneratorCtrl', function($scope, insultWords) {
 
                 <section>
                     <h1>Resources</h1>
-                    <a class="fragment" href="http://angularjs.org">AngularJS</a>
-                    <a class="fragment" href="http://egghead.io">Egghead.io</a>
-                    <a class="fragment" href="https://chrome.google.com/webstore/detail/angularjs-batarang/ighdmehidhipcmcojjgiloacoafjmpfk?hl=en">Batarang</a>
-                    <a class="fragment" href="http://karma-runner.github.io/">karma</a>
-                    <a class="fragment" href="http://sidewaffle.com/">Side Waffle</a>
-                    <a class="fragment" href="http://lab.hakim.se/reveal-js/#/">revealJS</a>
-                    <a class="fragment" href="http://somewhatabstract.github.io/AngularForXaml/#/">This presentation</a>
+                    <a class="fragment block-link" href="http://angularjs.org">AngularJS</a>
+                    <a class="fragment block-link" href="http://egghead.io">Egghead.io</a>
+                    <a class="fragment block-link" href="https://chrome.google.com/webstore/detail/angularjs-batarang/ighdmehidhipcmcojjgiloacoafjmpfk?hl=en">Batarang</a>
+                    <a class="fragment block-link" href="http://karma-runner.github.io/">karma</a>
+                    <a class="fragment block-link" href="http://sidewaffle.com/">Side Waffle</a>
 
                     <aside class="notes">
                         <ul>
@@ -1255,16 +1253,25 @@ codemash2014.controller('insultGeneratorCtrl', function($scope, insultWords) {
                             <li>FRAGMENT: Egghead.io</li>
                             <li>FRAGMENT: Batarang</li>
                             <li>FRAGMENT: karma</li>
-                            <li>FRAGMENT: Side waffle</li>
-                            <li>FRAGMENT: revealJS</li>
-                            <li>FRAGMENT: presentation on GitHub</li>
+                            <li>FRAGMENT: Side Waffle</li>
                         </ul>
                     </aside>
                 </section>
 
                 <section>
-                    <h1>Questions</h1>
-                    3. More visual corrolations especially borrowing off Britishness
+                    <h1 class="fragment" data-fragment-index="1">Questions</h1>
+                    <div class="questions-link">
+                        <div class="link-label">Presentation&nbsp;/</div>
+                        <a href="http://somewhatabstract.github.io/AngularForXaml/#/">somewhatabstract.github.io/AngularForXaml</a>
+                    </div>
+                    <div class="fragment questions-link" data-fragment-index="0">
+                        <div class="link-label">Blog&nbsp;/</div>
+                        <a href="http://blog.somewhatabstract.com">blog.somewhatabstract.com</a>
+                    </div>
+                    <div class="fragment questions-link" data-fragment-index="0">
+                        <div class="link-label">Twitter&nbsp;/</div>
+                        <a href="http://twitter.com/jefftunes">@jefftunes</a>
+                    </div>
                 </section>
             </section>
         </div>
