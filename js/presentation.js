@@ -14,7 +14,6 @@
 	}]);
 
 	codemash2014.controller('presentationBindingCtrl', ['$scope', function($scope) {
-		$scope.isShowingSurprise = false;
 		$scope.hasError = false;
 
 		$scope.errorColor = $scope.hasError ? 'red' : 'green';
@@ -40,15 +39,6 @@
 			scope: { message: '@' }
 		};
 	});
-
-	codemash2014.value('errorColor', 'red');
-	codemash2014.value('okColor', 'green');
-
-	codemash2014.service('statusColorService', ['errorColor', 'okColor', function(errorColor, okColor) {
-		this.getTextColor = function(hasError) {
-			return hasError ? errorColor : okColor;
-		};
-	}]);
 
 	codemash2014.controller('colorBindingCtrl', ['$scope', 'statusColorService', function($scope, statusColorService) {
 		$scope.hasError = false;
@@ -255,6 +245,7 @@
 			replace:true,
 			template:
 				'<div class="insult-generator">'
+				+ '<h2>{{title | uppercase}}</h2>'
 				+ '<labelled-combo title="Adjective 1:" items="firstAdjectives" selected-item="firstAdjective"></labelled-combo>'
 				+ '<labelled-combo title="Adjective 2:" items="secondAdjectives" selected-item="secondAdjective"></labelled-combo>'
 				+ '<labelled-combo title="Noun:" items="nouns" selected-item="noun"></labelled-combo>'
@@ -264,7 +255,7 @@
 				+ '</div>'
 			  + '</div>',
 			restrict: 'E',
-			scope: {}
+			scope: { title: '@'}
 		};
 	});
 })();
