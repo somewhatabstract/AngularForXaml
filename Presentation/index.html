@@ -639,10 +639,7 @@ myApp.controller(&#39;myController&#39;, function ($scope) {
                 </section>
 
                 <section>
-                    <div ng-controller="collectionBindingCtrl">
-                        <p ng-repeat="name in names">{{name}}</p>
-                    </div>
-                    <pre class="fragment"><code class='silverlight' ng-non-bindable contenteditable>&lt;ItemsControl x:Name=&quot;List&quot;&gt;
+                    <pre><code class='silverlight' ng-non-bindable contenteditable>&lt;ItemsControl x:Name=&quot;List&quot;&gt;
   &lt;ItemsControl.ItemTemplate&gt;
     &lt;DataTemplate&gt;
       &lt;TextBlock Text=&quot;{Binding}&quot;&gt;&lt;/TextBlock&gt;
@@ -671,8 +668,7 @@ myApp.controller(&#39;myController&#39;, function ($scope) {
                         <ul>
                             <li>To use, we would set ItemsSource using XAML binding or code-behind</li>
                             <li>FRAGMENT: Angular, we use the code-behind to set a collection on the scope</li>
-                            <li>FRAGMENT: This really is Angular running - not very exciting</li>
-                            <li>Let's add some excitement</li>
+                            <li>What if we want to sort our items or filter them in some way</li>
                         </ul>
                     </aside>
                 </section>
