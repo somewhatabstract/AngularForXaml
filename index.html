@@ -639,10 +639,7 @@ myApp.controller(&#39;myController&#39;, function ($scope) {
                 </section>
 
                 <section>
-                    <div ng-controller="collectionBindingCtrl">
-                        <p ng-repeat="name in names">{{name}}</p>
-                    </div>
-                    <pre class="fragment"><code class='silverlight' ng-non-bindable contenteditable>&lt;ItemsControl x:Name=&quot;List&quot;&gt;
+                    <pre><code class='silverlight' ng-non-bindable contenteditable>&lt;ItemsControl x:Name=&quot;List&quot;&gt;
   &lt;ItemsControl.ItemTemplate&gt;
     &lt;DataTemplate&gt;
       &lt;TextBlock Text=&quot;{Binding}&quot;&gt;&lt;/TextBlock&gt;
@@ -671,8 +668,7 @@ myApp.controller(&#39;myController&#39;, function ($scope) {
                         <ul>
                             <li>To use, we would set ItemsSource using XAML binding or code-behind</li>
                             <li>FRAGMENT: Angular, we use the code-behind to set a collection on the scope</li>
-                            <li>FRAGMENT: This really is Angular running - not very exciting</li>
-                            <li>Let's add some excitement</li>
+                            <li>What if we want to sort our items or filter them in some way</li>
                         </ul>
                     </aside>
                 </section>
@@ -743,17 +739,17 @@ CriteriaTextBox.TextChanged +=
 
                     <aside class="notes">
                         <ul>
+                            <li>FRAGMENT: Silverlight for a combo without filtering/sorting</li>
                             <li>Demo app uses comboboxes</li>
                             <li>In Silveright, ComboBox is an ItemsControl</li>
                             <li>Might look a bit like this (it doesn't, but it might)</li>
                             <li>A more complex binding might use DisplayMemberPath and SelectedValuePath</li>
+                            
 
                             <li>FRAGMENT: Angular has special case for combos, using the HTML select element and ngOptions directive</li>
                             <li>ngModel indicates how selected item is bound</li>
                             <li>ngOptions indicates where display value and value come from in collection of items</li>
                             <li>The first part is the DisplayMemberPath equivalent</li>
-
-                            <li>FRAGMENT: We could combine this with previous example to get a filterable combo</li>
                         </ul>
                     </aside>
                 </section>
@@ -796,9 +792,9 @@ CriteriaTextBox.TextChanged +=
 
                     <aside class="notes">
                         <ul>
-                            <li>Basic example, we use a ValueConverter to change visibility</li>
+                            <li>DEMO</li>
+                            <li>FRAGMENT: Silverlight, use a ValueConverter to change visibility</li>
                             <li>FRAGMENT: In Angular, we use ng-show to bind to a condition</li>
-                            <li>FRAGMENT: DEMO</li>
                             <li>Can use ng-hide for opposite situation</li>
                             <li>Add ng-hide with "No surprise :("</li>
                             <li>FRAGMENT: DEMO</li>
@@ -904,8 +900,8 @@ CriteriaTextBox.TextChanged +=
                             <li>
                                 We could add:
                                 <textarea rows="12" cols="60">
-                                    ;
-                                    -webkit-transform: rotate(-45deg);
+;
+-webkit-transform: rotate(-45deg);
                                 </textarea>
                             </li>
                             <li>FRAGMENT: Tada! DEMO</li>
@@ -1450,12 +1446,12 @@ codemash2014.value(&#39;insultWords&#39;, {
                     <aside class="notes">
                         <ul>
                             <li>Slides on github at this location</li>
-                            <li>FRAGMENT: Contact me on twitter</li>
                             <li>FRAGMENT: AngularJS</li>
-                            <li>FRAGMENT: Egghead.io</li>
-                            <li>FRAGMENT: Side Waffle</li>
-                            <li>FRAGMENT: karma</li>
-                            <li>FRAGMENT: Batarang</li>
+                            <li>Egghead.io</li>
+                            <li>Side Waffle</li>
+                            <li>Batarang</li>
+                            <li>FRAGMENT: Presentation resources</li>
+                            <li>FRAGMENT: Me</li>
                         </ul>
                         <p>Good reasons to use a framework like Angular over Silverlight</p>
                         <ul>
