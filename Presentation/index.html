@@ -46,13 +46,13 @@
                 </section>
                 <section>
                     <div>
-                        <div style="width:100%;background-color:sandybrown"><p>12 years</p></div>
+                        <div style="width:100%;background-color:sandybrown"><p>13 years</p></div>
                         <div class='fragment roll-in' style='float: left; width: 92%; background-color: #4B95FF; margin-right: 1%'><p style='padding: 2em 0 2em 0; -webkit-transform: rotate(-90deg); '>Windows</p></div>
                         <div class='fragment roll-in' style='float: right; width: 7%; background-color: #72E185; '><p style='padding: 2em 0 2em 0; -webkit-transform: rotate(-90deg); '>Web</p></div>
                     </div>
                     <aside class="notes">
                         <ul>
-                            <li>Explain my background in context this talk</li>
+                            <li>Explain background in context this talk</li>
                             <li>Worked in motorsport 5 years (C++, COM, ATL, WTL)</li>
                             <li>Worked in engine diagnostic tools 5/6 years (C#, .NET, WinForms)</li>
                             <li>Side projects; timesheet entry using Silverlight to end-of-line testers and diagnostic tools using WPF</li>
@@ -64,7 +64,7 @@
                     </aside>
                 </section>
                 <section>
-                    <img src='assets/rv-f1.jpg' style="width:100%" />
+                    <img src='assets/rv-f1.jpg' style="width:60%" />
                     <aside class="notes">
                         <ul>
                             <li>Felt like the RV in this picture.</li>
@@ -100,7 +100,7 @@
                 </section>
 
                 <section>
-                    <img src="assets/languagebarrier.png" style="min-height:100%" />
+                    <img src="assets/languagebarrier.png" style="min-height:75%" />
                     <aside class="notes">
                         <ul>
                             <li>Needed to look for a way to translate between Angular and what I knew</li>
@@ -124,9 +124,8 @@
                     <h2>Silverlight</h2>
                     <pre><code ng-non-bindable class="silverlight" data-trim contenteditable>
 &lt;Application xmlns=&quot;http://schemas.microsoft.com/winfx/2006/xaml/presentation&quot;
-         xmlns:x=&quot;http://schemas.microsoft.com/winfx/2006/xaml&quot; 
-         x:Class=&quot;HelloWorld.App&quot;&gt;
-&lt;/Application&gt;
+             xmlns:x=&quot;http://schemas.microsoft.com/winfx/2006/xaml&quot; 
+             x:Class=&quot;HelloWorld.App&quot; /&gt;
 </code></pre>
                     <pre><code ng-non-bindable class="silverlight cs" data-trim contenteditable>
 namespace HelloWorld
@@ -200,7 +199,6 @@ namespace HelloWorld
     FontSize=&quot;36&quot;
     FontFamily=&quot;Arial&quot;
     d:DesignHeight=&quot;150&quot; d:DesignWidth=&quot;400&quot;&gt;
-
     &lt;UserControl.Resources&gt;
         &lt;Style TargetType=&quot;TextBlock&quot;&gt;
             &lt;Setter Property=&quot;Foreground&quot; Value=&quot;#EEEEEE&quot; /&gt;
@@ -210,17 +208,14 @@ namespace HelloWorld
             &lt;Setter Property=&quot;FontFamily&quot; Value=&quot;Lato&quot;/&gt;
             &lt;Setter Property=&quot;FontStyle&quot; Value=&quot;Italic&quot; /&gt;
         &lt;/Style&gt;
-
         &lt;Style TargetType=&quot;ComboBox&quot;&gt;
             &lt;Setter Property=&quot;Margin&quot; Value=&quot;3&quot;/&gt;
         &lt;/Style&gt;
-
         &lt;Style TargetType=&quot;Button&quot;&gt;
             &lt;Setter Property=&quot;Margin&quot; Value=&quot;3&quot;/&gt;
             &lt;Setter Property=&quot;VerticalAlignment&quot; Value=&quot;Top&quot;/&gt;
             &lt;Setter Property=&quot;FontWeight&quot; Value=&quot;Bold&quot;/&gt;
         &lt;/Style&gt;
-
         &lt;Style TargetType=&quot;RichTextBox&quot;&gt;
             &lt;Setter Property=&quot;Margin&quot; Value=&quot;3&quot;/&gt;
             &lt;Setter Property=&quot;IsReadOnly&quot; Value=&quot;True&quot;/&gt;
@@ -229,7 +224,6 @@ namespace HelloWorld
             &lt;Setter Property=&quot;FontSize&quot; Value=&quot;54&quot;/&gt;
             &lt;Setter Property=&quot;FontFamily&quot; Value=&quot;Courier New&quot; /&gt;
         &lt;/Style&gt;
-
         &lt;Style TargetType=&quot;TextBlock&quot; x:Key=&quot;HeaderStyle&quot;&gt;
             &lt;Setter Property=&quot;Foreground&quot; Value=&quot;#EEEEEE&quot; /&gt;
             &lt;Setter Property=&quot;FontSize&quot; Value=&quot;60&quot;/&gt;
@@ -237,16 +231,13 @@ namespace HelloWorld
             &lt;Setter Property=&quot;FontFamily&quot; Value=&quot;Impact&quot;/&gt;
             &lt;Setter Property=&quot;TextAlignment&quot; Value=&quot;Center&quot;/&gt;
         &lt;/Style&gt;
-
         &lt;local:InsultModel x:Key=&quot;Model&quot; /&gt;
     &lt;/UserControl.Resources&gt;
-
     &lt;Grid x:Name=&quot;LayoutRoot&quot; Background=&quot;#203030&quot; DataContext=&quot;{Binding Source={StaticResource Model}}&quot;&gt;
         &lt;Grid.ColumnDefinitions&gt;
             &lt;ColumnDefinition Width=&quot;Auto&quot; /&gt;
             &lt;ColumnDefinition /&gt;
         &lt;/Grid.ColumnDefinitions&gt;
-
         &lt;Grid.RowDefinitions&gt;
             &lt;RowDefinition Height=&quot;Auto&quot; /&gt;
             &lt;RowDefinition Height=&quot;Auto&quot; /&gt;
@@ -254,18 +245,13 @@ namespace HelloWorld
             &lt;RowDefinition Height=&quot;Auto&quot; /&gt;
             &lt;RowDefinition /&gt;
         &lt;/Grid.RowDefinitions&gt;
-
         &lt;TextBlock Style=&quot;{StaticResource HeaderStyle}&quot; Grid.Column=&quot;0&quot; Grid.ColumnSpan=&quot;2&quot; Grid.Row=&quot;0&quot;&gt;SHAKESPEAREAN INSULT GENERATOR&lt;/TextBlock&gt;
-
         &lt;TextBlock Text=&quot;Adjective 1:&quot; Grid.Column=&quot;0&quot; Grid.Row=&quot;1&quot; /&gt;
         &lt;ComboBox Grid.Column=&quot;1&quot; Grid.Row=&quot;1&quot; ItemsSource=&quot;{Binding FirstAdjectiveList}&quot; SelectedValue=&quot;{Binding FirstAdjective, Mode=TwoWay}&quot; /&gt;
-
         &lt;TextBlock Text=&quot;Adjective 2:&quot; Grid.Column=&quot;0&quot; Grid.Row=&quot;2&quot; /&gt;
         &lt;ComboBox Grid.Column=&quot;1&quot; Grid.Row=&quot;2&quot; ItemsSource=&quot;{Binding SecondAdjectiveList}&quot; SelectedValue=&quot;{Binding SecondAdjective, Mode=TwoWay}&quot; /&gt;
-
         &lt;TextBlock Text=&quot;Noun:&quot; Grid.Column=&quot;0&quot; Grid.Row=&quot;3&quot; /&gt;
         &lt;ComboBox Grid.Column=&quot;1&quot; Grid.Row=&quot;3&quot; ItemsSource=&quot;{Binding NounList}&quot; SelectedValue=&quot;{Binding Noun, Mode=TwoWay}&quot; /&gt;
-
         &lt;Button Grid.Column=&quot;0&quot; Grid.Row=&quot;4&quot; Content=&quot;Randomize&quot; Click=&quot;OnClickRandomize&quot; /&gt;
         &lt;RichTextBox  Grid.Column=&quot;1&quot; Grid.Row=&quot;4&quot;&gt;
             &lt;RichTextBox.Blocks&gt;
@@ -281,7 +267,6 @@ namespace HelloWorld
         &lt;/RichTextBox&gt;
     &lt;/Grid&gt;
 &lt;/UserControl&gt;
-
 </code></pre>
                 </section>
 
@@ -611,7 +596,7 @@ myApp.controller(&#39;myController&#39;, function ($scope) {
                         <div>{{stringToReverse | reverse | uppercase}}</div>
                     </div>
 
-                    <pre class="fragment"><code class='angular' ng-non-bindable contenteditable>&lt;div ng-app&gt;
+                    <pre><code class='angular' ng-non-bindable contenteditable>&lt;div ng-app&gt;
   &lt;input ng-model=&quot;textStuff&quot; /&gt;
   &lt;div&gt;{{textStuff | reverse | uppercase}}&lt;/div&gt;
 &lt;/div&gt;</code></pre>
@@ -621,7 +606,6 @@ myApp.controller(&#39;myController&#39;, function ($scope) {
                             <li>Requires a custom ValueConverter in Silverlight</li>
                             <li>Easy in Angular</li>
                             <li>Here, we pipe reverse value into uppercase filter</li>
-                            <li>FRAGMENT: Demo - now you know how to reverse and uppercase a string. Job done</li>
                         </ul>
                     </aside>
                 </section>
@@ -646,29 +630,20 @@ myApp.controller(&#39;myController&#39;, function ($scope) {
     &lt;/DataTemplate&gt;
   &lt;/ItemsControl.ItemTemplate&gt;
 &lt;/ItemsControl&gt;</code></pre>
-                    <pre class="fragment"><code class='angular' ng-non-bindable data-trim contenteditable>
+                    <pre><code class="cs silverlight" ng-non-bindable contenteditable>List.ItemsSource = new[] { "Leprechaun", "Unicorn", "Bacon" }</code></pre>
+
+                    <pre class="fragment" data-fragment-index="0"><code class='angular' ng-non-bindable data-trim contenteditable>
 &lt;p ng-repeat=&quot;name in names&quot;&gt;{{name}}&lt;/p&gt;
 </code></pre>
+                    <pre class="fragment" data-fragment-index="0"><code ng-non-bindable class="javascript angular" contenteditable>$scope.names = [ 'Leprechaun', 'Unicorn', 'Bacon'];</code></pre>
 
                     <aside class="notes">
                         <ul>
-                            <li>ItemsControls are used to display a collection of items</li>
-                            <li>Here we have a simple template for each item</li>
+                            <li>ItemsControls used to display a collection of items</li>
+                            <li>ListBox,ComboBox,etc.</li>
+                            <li>Basic ItemsControl with no extended behavior (like selection)</li>
                             <li>FRAGMENT: In Angular, we use the ngRepeat directive</li>
-                            <li>The element marked by ng-repeat is the item template</li>
-                        </ul>
-                    </aside>
-                </section>
-
-                <section>
-                    <pre><code class="cs silverlight" ng-non-bindable contenteditable>List.ItemsSource = new[] { "Leprechaun", "Unicorn", "Bacon" }</code></pre>
-                    <pre class="fragment"><code ng-non-bindable class="javascript angular" contenteditable>$scope.names = [ 'Leprechaun', 'Unicorn', 'Bacon'];</code></pre>
-
-                    <aside class="notes">
-                        <ul>
-                            <li>To use, we would set ItemsSource using XAML binding or code-behind</li>
-                            <li>FRAGMENT: Angular, we use the code-behind to set a collection on the scope</li>
-                            <li>What if we want to sort our items or filter them in some way</li>
+                            <li>Element adorned by ng-repeat is the item template</li>
                         </ul>
                     </aside>
                 </section>
@@ -679,7 +654,7 @@ myApp.controller(&#39;myController&#39;, function ($scope) {
                         <input ng-model="criteria" />
                         <p ng-repeat="name in names | filter:criteria | orderBy:'-toString()'">{{name}}</p>
                     </div>
-                    
+
                     <aside class="notes">
                         <ul>
                             <li>A list of items might need sorting or filtering by some criteria</li>
@@ -705,10 +680,11 @@ CriteriaTextBox.TextChanged +=
 &lt;/div&gt;</code></pre>
                     <aside class="notes">
                         <ul>
-                            <li>Silveright does this using a CollectionView from a CollectionViewSource</li>
-                            <li>Here we are sorting in descending order</li>
-                            <li>Adding filter handler to filter items by a value in a textbox</li>
-                            <li>TextChanged on textbox causes the collection view to be updated (reapplying the filter criteria)</li>
+                            <li>Silveright: CollectionViewSource</li>
+                            <li>Here sorting in descending order</li>
+                            <li>Filter event to filter based on string</li>
+                            <li>String provided by textbox</li>
+                            <li>TextChanged event to refresh collection view using edited criteria</li>
                             <li>XAML not shown for simplicity</li>
                             <li>FRAGMENT: Angular declares all this work in the presentation</li>
                             <li>Input bound to our criteria</li>
@@ -722,7 +698,6 @@ CriteriaTextBox.TextChanged +=
                                     <li>ValueConverter: date,currency,uppercase,lowercase,json,number</li>
                                 </ul>
                             </li>
-                            <li>Now our example is way more exciting - DEMO</li>
                         </ul>
                     </aside>
                 </section>
@@ -730,12 +705,12 @@ CriteriaTextBox.TextChanged +=
                 <section>
                     <h2>ComboBox</h2>
                     <div ng-controller="collectionBindingCtrl">
-                        <input ng-model="criteria" />
                         <select ng-model="selectedItem" ng-options="name for name in names | filter:criteria | orderBy:'-toString()'"></select>
+                        <input class="fragment" data-fragment-index="2" ng-model="criteria" />
                     </div>
 
-                    <pre class="fragment"><code class="silverlight" contenteditable ng-non-bindable>&lt;ComboBox ItemsSource=&quot;{Binding Words}&quot; SelectedValue=&quot;{Binding SelectedWord, Mode=TwoWay}&quot; /&gt;</code></pre>
-                    <pre class="fragment"><code class="angular" contenteditable ng-non-bindable>&lt;select ng-options=&quot;word for word in words&quot; ng-model=&quot;selectedWord&quot;&gt;&lt;/select&gt;</code></pre>
+                    <pre class="fragment" data-fragment-index="0"><code class="silverlight" contenteditable ng-non-bindable>&lt;ComboBox ItemsSource=&quot;{Binding Words}&quot; SelectedValue=&quot;{Binding SelectedWord, Mode=TwoWay}&quot; /&gt;</code></pre>
+                    <pre class="fragment" data-fragment-index="1"><code class="angular" contenteditable ng-non-bindable>&lt;select ng-options=&quot;word for word in words&quot; ng-model=&quot;selectedWord&quot;&gt;&lt;/select&gt;</code></pre>
 
                     <aside class="notes">
                         <ul>
@@ -744,12 +719,14 @@ CriteriaTextBox.TextChanged +=
                             <li>In Silveright, ComboBox is an ItemsControl</li>
                             <li>Might look a bit like this (it doesn't, but it might)</li>
                             <li>A more complex binding might use DisplayMemberPath and SelectedValuePath</li>
-                            
 
                             <li>FRAGMENT: Angular has special case for combos, using the HTML select element and ngOptions directive</li>
                             <li>ngModel indicates how selected item is bound</li>
                             <li>ngOptions indicates where display value and value come from in collection of items</li>
                             <li>The first part is the DisplayMemberPath equivalent</li>
+                            <li>Can still apply filters</li>
+                            <li>EDIT: Add <code>| filter:criteria | orderBy:'-toString()'</code> after "words"</li>
+                            <li>FRAGMENT: DEMO ability to sort and filter combo</li>
                         </ul>
                     </aside>
                 </section>
@@ -761,32 +738,50 @@ CriteriaTextBox.TextChanged +=
 
                     <aside class="notes">
                         <ul>
-                            <li>We can show data and manipulate data</li>
-                            <li>What about controlling appearance?</li>
-                            <li>In Silverlight we can use Style resources and bindings</li>
-                            <li>Angular we use CSS</li>
-                            <li>For dynamic style changes, we have to be a little more resourceful</li>
+                            <li>We can show and manipulate data</li>
+                            <li>Need to manipulate appearance</li>
+                            <li>In Silverlight we can use Style resources, property bindings</li>
+                            <li>Angular we use CSS styles and classes</li>
                         </ul>
                     </aside>
                 </section>
 
                 <section>
+                    <div>
+                        <div>
+                            <input type="checkbox" ng-model="moreBritish" name="moreBritishCheck" />
+                            <label for="moreBritishCheck"><span ng-show="moreBritish">More </span>British</label>
+                        </div>
+                        <img ng-hide="moreBritish" with="50%" src="assets/isBritish.gif" />
+                        <div ng-show="moreBritish">
+                            <img style="margin: 0;" width="25%" src="assets/brit5.jpg" />
+                            <img style="margin: 0;" width="25%" src="assets/brit4.jpg" />
+                            <img style="margin: 0;" width="25%" src="assets/brit1.jpg" />
+                            <img style="margin: 0;" src="assets/brit2.jpg" />
+                            <img style="margin: 0;" src="assets/brit3.jpg" />
+                            <img style="margin: 0;" src="assets/brit6.jpg" />
+                        </div>
+                    </div>
+                </section>
+
+                <section>
                     <div ng-controller="presentationBindingCtrl">
                         <input type="checkbox" ng-model="isShowingSurprise" name="showSurpriseCheck" />
-                        <label for="showSurpriseCheck">Show</label>
+                        <label for="showSurpriseCheck">Toggle surprise</label>
                         <div ng-show="isShowingSurprise">SURPRISE!</div>
                         <div class="fragment" data-fragment-index="2" ng-hide="isShowingSurprise">No surprise :(</div>
                     </div>
 
                     <pre class="fragment" data-fragment-index="0"><code class='silverlight' contenteditable>&lt;StackPanel x:Name=&quot;LayoutRoot&quot; Background=&quot;White&quot;&gt;
   &lt;CheckBox
-    IsChecked=&quot;{Binding IsSurprise, Mode=TwoWay}&quot;&gt;Show&lt;/CheckBox&gt;
+    IsChecked=&quot;{Binding IsSurprise, Mode=TwoWay}&quot;&gt;Toggle surprise&lt;/CheckBox&gt;
   &lt;TextBlock Text=&quot;SURPRISE!&quot;
     Visibility=&quot;{Binding IsSurprise, Converter={StaticResource VisibilityConverter}}&quot; /&gt;
 &lt;/StackPanel&gt;</code></pre>
 
                     <pre class="fragment" data-fragment-index="1"><code class='angular' contenteditable ng-non-bindable>&lt;div&gt;
-  &lt;input type=&quot;checkbox&quot; ng-model=&quot;isShowingSurprise&quot; /&gt;
+  &lt;input type=&quot;checkbox&quot; ng-model=&quot;isShowingSurprise&quot; name=&quot;showSurpriseCheck&quot; /&gt;
+  &lt;label for=&quot;showSurpriseCheck&quot;&gt;Toggle surprise&lt;/label&gt;
   &lt;div ng-show=&quot;isShowingSurprise&quot;&gt;SURPRISE!&lt;/div&gt;
 &lt;/div&gt;</code></pre>
 
@@ -801,21 +796,6 @@ CriteriaTextBox.TextChanged +=
                             <li>Note: ng-if also available. Similar to Visibility.Collapsed in WPF, but actually doesn't insert HTML into DOM</li>
                         </ul>
                     </aside>
-                </section>
-
-                <section>
-                    <div ng-init="britishness='notBritish'">
-                        <div>
-                            <input type="radio" value="notBritish" ng-model="britishness" name="isNotBritishRadio"/>
-                            <label for="isNotBritishRadio">Not British</label>
-                        </div>
-                        <div>
-                            <input type="radio" value="british" ng-model="britishness" name="isBritishRadio"/>
-                            <label for="isBritishRadio">Very British</label>
-                        </div>
-                        <img ng-show="britishness=='british'" width="40%" src="assets/isBritish.gif" />
-                        <img ng-show="britishness=='notBritish'" width="40%" src="assets/isNotBritish.gif" />
-                    </div>
                 </section>
 
                 <section>
@@ -839,6 +819,7 @@ CriteriaTextBox.TextChanged +=
                             <li>Value converter to convert a bool to a font style</li>
                             <li>FRAGMENT: ngStyle allows us to conditionally apply styles</li>
                             <li>Moves the presentation stuff into the presentation layer and out of code-behind</li>
+                            <li>Code is hard to maintain when this kind of styling is used</li>
                             <li>Generally should use ngClass instead of ngStyle to put all styling in CSS files</li>
                         </ul>
                     </aside>
@@ -850,7 +831,7 @@ CriteriaTextBox.TextChanged +=
                         <label for="isErrorRadio">Has Error</label>
                         <div ng-class="{ 'status-error-noquirk': hasError, 'status-ok': !hasError }">Totally different status message</div>
                     </div>
-                    <pre class="fragment"><code class="silverlight" ng-non-bindable contenteditable>&lt;VisualStateManager.VisualStateGroups&gt;
+                    <pre class="fragment" data-fragment-index="0"><code class="silverlight" ng-non-bindable contenteditable>&lt;VisualStateManager.VisualStateGroups&gt;
   &lt;VisualStateGroup x:Name=&quot;CommonStates&quot;&gt;
     &lt;VisualState x:Name=&quot;Error&quot;&gt;
       &lt;Storyboard&gt;
@@ -865,14 +846,15 @@ CriteriaTextBox.TextChanged +=
   &lt;/VisualStateGroup&gt;
 &lt;/VisualStateManager.VisualStateGroups&gt;</code></pre>
 
-                    <pre class="fragment"><code class="cs silverlight" ng-non-bindable contenteditable>VisualStateManager.GoToState( this, &quot;Error&quot;, true );</code></pre>
+                    <pre class="fragment" data-fragment-index="0"><code class="cs silverlight" ng-non-bindable contenteditable>VisualStateManager.GoToState( this, &quot;Error&quot;, true );</code></pre>
 
                     <aside class="notes">
                         <ul>
-                            <li>In fact, VisualStateManager more likely for real world XAML apps</li>
+                            <li>DEMO</li>
+                            <li>FRAGMENT:In fact, VisualStateManager more likely for real world XAML apps</li>
                             <li>Might define some colors somewhere in our theme</li>
                             <li>Then define some visual states that manipulate various values</li>
-                            <li>FRAGMENT: Use codebehind to initiate state transitions based on data changes</li>
+                            <li>Use codebehind to initiate state transitions based on data changes</li>
                         </ul>
                     </aside>
                 </section>
@@ -888,7 +870,7 @@ CriteriaTextBox.TextChanged +=
   color: green; }
 .status-error {
   color: red; }</code></pre>
-                    <pre class="fragment"><code ng-non-bindable class='angular' contenteditable>&lt;div ng-class=&quot;{ 'status-error': hasError, 'status-ok': !hasError }&quot;&gt;
+                    <pre><code ng-non-bindable class='angular' contenteditable>&lt;div ng-class=&quot;{ 'status-error': hasError, 'status-ok': !hasError }&quot;&gt;
   Totally different status message
 &lt;/div&gt;</code></pre>
 
@@ -900,11 +882,11 @@ CriteriaTextBox.TextChanged +=
                             <li>
                                 We could add:
                                 <textarea rows="12" cols="60">
-;
--webkit-transform: rotate(-45deg);
+                                    ;
+                                    -webkit-transform: rotate(-45deg);
                                 </textarea>
                             </li>
-                            <li>FRAGMENT: Tada! DEMO</li>
+                            <li>DEMO</li>
                         </ul>
                     </aside>
                 </section>
@@ -1022,7 +1004,7 @@ public string Message
 
                 <section>
                     <pre><code class='silverlight' ng-non-bindable contenteditable>&lt;myApp:StatusMessage Message=&quot;Now THIS is a status message. Exciting!&quot; /&gt;</code></pre>
-                    <pre class="fragment"><code class="angular" ng-non-bindable contenteditable>&lt;status-message message=&quot;Now THIS is a status message. Exciting!&quot; /&gt;</code></pre>
+                    <pre><code class="angular" ng-non-bindable contenteditable>&lt;status-message message=&quot;Now THIS is a status message. Exciting!&quot; /&gt;</code></pre>
 
                     <aside class="notes">
                         <ul>
@@ -1082,6 +1064,10 @@ codemash2014.directive(&#39;labelledCombo&#39;, function() {
                     <object class="silverlight" data="data:application/x-silverlight-2," height="480px" width="90%" type="application/x-silverlight-2">
                         <param name="source" value="assets/ShakespeareanInsultGenerator.xap" />
                     </object>
+                    
+                    <aside class="notes">
+                        Refresher of Silverlight app
+                    </aside>
                 </section>
 
                 <section>
@@ -1107,7 +1093,6 @@ codemash2014.directive(&#39;labelledCombo&#39;, function() {
     FontSize=&quot;36&quot;
     FontFamily=&quot;Arial&quot;
     d:DesignHeight=&quot;150&quot; d:DesignWidth=&quot;400&quot;&gt;
-
     &lt;UserControl.Resources&gt;
         &lt;Style TargetType=&quot;TextBlock&quot;&gt;
             &lt;Setter Property=&quot;Foreground&quot; Value=&quot;#EEEEEE&quot; /&gt;
@@ -1117,17 +1102,14 @@ codemash2014.directive(&#39;labelledCombo&#39;, function() {
             &lt;Setter Property=&quot;FontFamily&quot; Value=&quot;Lato&quot;/&gt;
             &lt;Setter Property=&quot;FontStyle&quot; Value=&quot;Italic&quot; /&gt;
         &lt;/Style&gt;
-
         &lt;Style TargetType=&quot;ComboBox&quot;&gt;
             &lt;Setter Property=&quot;Margin&quot; Value=&quot;3&quot;/&gt;
         &lt;/Style&gt;
-
         &lt;Style TargetType=&quot;Button&quot;&gt;
             &lt;Setter Property=&quot;Margin&quot; Value=&quot;3&quot;/&gt;
             &lt;Setter Property=&quot;VerticalAlignment&quot; Value=&quot;Top&quot;/&gt;
             &lt;Setter Property=&quot;FontWeight&quot; Value=&quot;Bold&quot;/&gt;
         &lt;/Style&gt;
-
         &lt;Style TargetType=&quot;RichTextBox&quot;&gt;
             &lt;Setter Property=&quot;Margin&quot; Value=&quot;3&quot;/&gt;
             &lt;Setter Property=&quot;IsReadOnly&quot; Value=&quot;True&quot;/&gt;
@@ -1136,7 +1118,6 @@ codemash2014.directive(&#39;labelledCombo&#39;, function() {
             &lt;Setter Property=&quot;FontSize&quot; Value=&quot;54&quot;/&gt;
             &lt;Setter Property=&quot;FontFamily&quot; Value=&quot;Courier New&quot; /&gt;
         &lt;/Style&gt;
-
         &lt;Style TargetType=&quot;TextBlock&quot; x:Key=&quot;HeaderStyle&quot;&gt;
             &lt;Setter Property=&quot;Foreground&quot; Value=&quot;#EEEEEE&quot; /&gt;
             &lt;Setter Property=&quot;FontSize&quot; Value=&quot;60&quot;/&gt;
@@ -1144,16 +1125,13 @@ codemash2014.directive(&#39;labelledCombo&#39;, function() {
             &lt;Setter Property=&quot;FontFamily&quot; Value=&quot;Impact&quot;/&gt;
             &lt;Setter Property=&quot;TextAlignment&quot; Value=&quot;Center&quot;/&gt;
         &lt;/Style&gt;
-
         &lt;local:InsultModel x:Key=&quot;Model&quot; /&gt;
     &lt;/UserControl.Resources&gt;
-
     &lt;Grid x:Name=&quot;LayoutRoot&quot; Background=&quot;#203030&quot; DataContext=&quot;{Binding Source={StaticResource Model}}&quot;&gt;
         &lt;Grid.ColumnDefinitions&gt;
             &lt;ColumnDefinition Width=&quot;Auto&quot; /&gt;
             &lt;ColumnDefinition /&gt;
         &lt;/Grid.ColumnDefinitions&gt;
-
         &lt;Grid.RowDefinitions&gt;
             &lt;RowDefinition Height=&quot;Auto&quot; /&gt;
             &lt;RowDefinition Height=&quot;Auto&quot; /&gt;
@@ -1161,18 +1139,13 @@ codemash2014.directive(&#39;labelledCombo&#39;, function() {
             &lt;RowDefinition Height=&quot;Auto&quot; /&gt;
             &lt;RowDefinition /&gt;
         &lt;/Grid.RowDefinitions&gt;
-
         &lt;TextBlock Style=&quot;{StaticResource HeaderStyle}&quot; Grid.Column=&quot;0&quot; Grid.ColumnSpan=&quot;2&quot; Grid.Row=&quot;0&quot;&gt;SHAKESPEAREAN INSULT GENERATOR&lt;/TextBlock&gt;
-
         &lt;TextBlock Text=&quot;Adjective 1:&quot; Grid.Column=&quot;0&quot; Grid.Row=&quot;1&quot; /&gt;
         &lt;ComboBox Grid.Column=&quot;1&quot; Grid.Row=&quot;1&quot; ItemsSource=&quot;{Binding FirstAdjectiveList}&quot; SelectedValue=&quot;{Binding FirstAdjective, Mode=TwoWay}&quot; /&gt;
-
         &lt;TextBlock Text=&quot;Adjective 2:&quot; Grid.Column=&quot;0&quot; Grid.Row=&quot;2&quot; /&gt;
         &lt;ComboBox Grid.Column=&quot;1&quot; Grid.Row=&quot;2&quot; ItemsSource=&quot;{Binding SecondAdjectiveList}&quot; SelectedValue=&quot;{Binding SecondAdjective, Mode=TwoWay}&quot; /&gt;
-
         &lt;TextBlock Text=&quot;Noun:&quot; Grid.Column=&quot;0&quot; Grid.Row=&quot;3&quot; /&gt;
         &lt;ComboBox Grid.Column=&quot;1&quot; Grid.Row=&quot;3&quot; ItemsSource=&quot;{Binding NounList}&quot; SelectedValue=&quot;{Binding Noun, Mode=TwoWay}&quot; /&gt;
-
         &lt;Button Grid.Column=&quot;0&quot; Grid.Row=&quot;4&quot; Content=&quot;Randomize&quot; Click=&quot;OnClickRandomize&quot; /&gt;
         &lt;RichTextBox  Grid.Column=&quot;1&quot; Grid.Row=&quot;4&quot;&gt;
             &lt;RichTextBox.Blocks&gt;
@@ -1188,7 +1161,6 @@ codemash2014.directive(&#39;labelledCombo&#39;, function() {
         &lt;/RichTextBox&gt;
     &lt;/Grid&gt;
 &lt;/UserControl&gt;
-
 </code></pre>
 
                     <aside class="notes">
@@ -1369,7 +1341,7 @@ codemash2014.controller(&#39;insultGeneratorCtrl&#39;, function($scope, insultWo
                         </ul>
                     </aside>
                 </section>
-                
+
                 <section>
                     <pre ng-non-bindable><code class="angular javascript" data-trim contenteditable>
 codemash2014.value(&#39;insultWords&#39;, {
@@ -1396,7 +1368,7 @@ codemash2014.value(&#39;insultWords&#39;, {
                         </ul>
                     </aside>
                 </section>
-                
+
                 <section>
                     <pre><code class="angular" ng-non-bindable contenteditable data-trim>
 &lt;insult-generator title=&#39;Shakespearean Insult Generator&#39; /&gt;
@@ -1406,6 +1378,7 @@ codemash2014.value(&#39;insultWords&#39;, {
 
             <section>
                 <section>
+                    <img class="noborder fragment" data-fragment-index="7" src="assets/theend.png" style="position: absolute; right: -200px; bottom: -200px;" />
                     <div class="fragment questions-link" data-fragment-index="0">
                         <div class="link-label">AngularJS&nbsp;/</div>
                         <a href="http://angularjs.org">angularjs.org</a>
